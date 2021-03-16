@@ -2073,7 +2073,7 @@ input, select, textarea {
 				border-radius: 0.35em;
 				border: solid 3px rgba(255, 255, 255, 0.5);
 				color: #fff;
-				content: 'View';
+				content: 'Veja mais';
 				display: inline-block;
 				font-size: 0.8em;
 				font-weight: 400;
@@ -3218,4 +3218,39 @@ input, select, textarea {
 				padding-left: 0;
 			}
 
+	}
+
+	#menu ul {
+		padding:0px;
+		margin:0px;
+		
+		list-style:none;
+		width: fit-content;
+		float: right;
+	}
+
+	#menu ul li { 
+		display: inline;
+	}
+
+	#menu ul li a {
+		padding: 2px 10px;
+		display: inline-block;
+	
+		/* visual do link */
+	
+		color: #333;
+		text-decoration: none;
+		border-bottom:3px solid #EDEDED;
+		
+		}
+
+	#menu ul li a:hover {
+		background-color:#D6D6D6;
+		color: #6D6D6D;
+		border-bottom:3px solid #48b998;
+	}
+
+	p {
+		text-align: justify;
 	}
