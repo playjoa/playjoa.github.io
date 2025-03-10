@@ -161,8 +161,10 @@ class PortfolioManager {
         // Update tagline
         const tagline = inner.querySelector('h1');
         if (tagline) {
-            tagline.innerHTML = `<strong>${this.data.header.tagline}</strong><br /><br />`;
-            console.log(`Updated header tagline to: ${this.data.header.tagline}`);
+            // Include both the tagline and title
+            tagline.innerHTML = `<strong>${this.data.header.tagline}</strong><br />
+                                <span>${this.data.intro.title}</span><br />`;
+            console.log(`Updated header tagline to: ${this.data.header.tagline} and title: ${this.data.intro.title}`);
         }
     }
 
@@ -220,50 +222,61 @@ class PortfolioManager {
      * Render the about section
      */
     renderAbout() {
-        // Find the about section title
-        const aboutSection = document.querySelector('#two h2:first-of-type');
+        // Find the about section container
+        const aboutSection = document.getElementById('about-section');
         if (!aboutSection) {
-            console.error('About section title not found');
+            console.error('About section container not found');
             return;
         }
 
         console.log('Rendering about section with title:', this.data.about.title);
         console.log('About content:', this.data.about.content);
 
-        // Update about title
-        aboutSection.textContent = this.data.about.title;
+        // Create the about section with title and content
+        aboutSection.innerHTML = `
+            <h2>${this.data.about.title}</h2>
+            <p>${this.data.about.content}</p>
+        `;
         
-        // Update about content
-        const aboutContent = aboutSection.nextElementSibling;
-        if (aboutContent && aboutContent.tagName === 'P') {
-            aboutContent.textContent = this.data.about.content;
-            // Ensure the font size matches the original
-            aboutContent.style.fontSize = '1em';
-            console.log('Updated existing about content paragraph');
-        } else {
-            console.error('About content paragraph not found');
-            // If the paragraph doesn't exist, create it
-            const newParagraph = document.createElement('p');
-            newParagraph.textContent = this.data.about.content;
-            newParagraph.style.fontSize = '1em';
-            aboutSection.after(newParagraph);
-            console.log('Created new about content paragraph');
-        }
+        console.log('Updated about section');
     }
 
     /**
      * Render the projects section
      */
     renderProjects() {
-        const projectsTitle = document.querySelector('#two h2:nth-of-type(2)');
-        if (!projectsTitle) return;
+        // Find all h2 elements in the #two section
+        const allH2s = document.querySelectorAll('#two h2');
+        let projectsTitle = null;
+        
+        // Look for the Games Portfolio heading
+        for (let i = 0; i < allH2s.length; i++) {
+            if (allH2s[i].textContent.includes('Games Portfolio') || 
+                allH2s[i].textContent.includes('Portfolio de Games')) {
+                projectsTitle = allH2s[i];
+                break;
+            }
+        }
+        
+        // If not found, use the second h2 as a fallback
+        if (!projectsTitle && allH2s.length >= 2) {
+            projectsTitle = allH2s[1];
+        }
+        
+        if (!projectsTitle) {
+            console.error('Projects title not found');
+            return;
+        }
 
         // Set projects section title
         projectsTitle.textContent = this.currentLanguage === 'pt' ? 'Portfolio de Games' : 'Games Portfolio';
         
         // Get the projects container
         const projectsContainer = projectsTitle.nextElementSibling;
-        if (!projectsContainer || !projectsContainer.classList.contains('row')) return;
+        if (!projectsContainer || !projectsContainer.classList.contains('row')) {
+            console.error('Projects container not found or does not have row class');
+            return;
+        }
         
         // Clear existing projects
         projectsContainer.innerHTML = '';
@@ -287,6 +300,8 @@ class PortfolioManager {
             `;
             projectsContainer.innerHTML += projectHTML;
         });
+        
+        console.log('Projects rendered successfully');
     }
 
     /**
