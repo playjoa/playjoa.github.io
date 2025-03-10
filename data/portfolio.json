@@ -1,0 +1,305 @@
+{
+  "meta": {
+    "title": "João Milone Portfolio",
+    "description": "Senior Game Engineer | Unity & Unreal",
+    "favicon": "images/icon.ico"
+  },
+  "header": {
+    "avatar": "images/avatar.jpg",
+    "tagline": "Unity Engine and Unreal Engine 5 experience."
+  },
+  "intro": {
+    "name": "João de Carvalho Milone",
+    "title": "Senior Game Engineer | Unity & Unreal",
+    "location": "São Paulo - Brazil"
+  },
+  "about": {
+    "title": "About Me",
+    "content": "I'm a Senior Game Engineer with +7 years in the game industry. My speciality is in Unity Engine (2D, 3D & AR), but I'm also experienced in Unreal Engine 5. My work spans from mobile games (Android & iOS) to larger cross platform multiplayer games (Mobile, Console & PC), with a strong focus on gameplay mechanics, scalable architecture, UI/UX, analytics, progression and AI systems. Throughout my career I've acquired expertise mainly in C# for Unity, but I'm also able to code in C++ and Blueprints (Unreal). I have solid experience in network APIs, such as Mirror Networking and Photon Network. To ensure player progression I use back-end services such as Firebase, Playfab and Accelbyte. On the AI side, I enjoy developing smarter NPCs and bots using GOAP (Goal-Oriented Action Planning) and Behavior Trees, adding depth and strategy to the gameplay."
+  },
+  "social": [
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/joao-milone/",
+      "icon": "fa-linkedin"
+    },
+    {
+      "name": "Github",
+      "url": "https://github.com/playjoa",
+      "icon": "fa-github"
+    },
+    {
+      "name": "AppStore",
+      "url": "https://apps.apple.com/br/developer/joao-milone/id1452749255",
+      "icon": "fa-app-store"
+    },
+    {
+      "name": "PlayStore",
+      "url": "https://play.google.com/store/apps/dev?id=6319868086173201401",
+      "icon": "fa-google-play"
+    },
+    {
+      "name": "Itch.io",
+      "url": "https://playjoa.itch.io/",
+      "icon": "fa-itch-io"
+    },
+    {
+      "name": "Unity Asset Store",
+      "url": "https://assetstore.unity.com/publishers/52979",
+      "icon": "fa-file-code",
+      "isRegular": true
+    },
+    {
+      "name": "Email",
+      "url": "mailto: joaocmil@hotmail.com",
+      "icon": "fa-envelope",
+      "isSolid": true
+    }
+  ],
+  "projects": [
+    {
+      "title": "Mystic Kingdoms - 5v5 MOBA",
+      "description": "5v5 crossplatform (Mobile, Console and PC) MOBA, 10-minute matches and strategic action. Team up, summon defenders, build power and take control of the Mystic Kingdoms!",
+      "image": "01",
+      "links": [
+        {
+          "text": "About",
+          "url": "https://venturebeat.com/games/playgig-raises-10-85m-for-cross-platform-game-studio/"
+        }
+      ]
+    },
+    {
+      "title": "Escape Room Game!",
+      "description": "Escape Room game where you are trapped inside a house and need to find tips and clues to solve the puzzles and escape! Available for PC and Mobile",
+      "image": "06",
+      "links": [
+        {
+          "text": "GitHub",
+          "url": "https://github.com/playjoa/Unity_EscapeRoomGame"
+        },
+        {
+          "text": "itch.io (PC)",
+          "url": "https://playjoa.itch.io/escape-room"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.EscapeRoom"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1567825003"
+        }
+      ]
+    },
+    {
+      "title": "Tornado.io 2 -The Game",
+      "description": "Casual Game, where you control a small tornado, which grows as it consumes bigger and bigger objects. It is also possible to compete with other tornadoes controlled by AI.",
+      "image": "03",
+      "links": [
+        {
+          "text": "Trailer",
+          "url": "https://youtu.be/c4BnbowW_p0"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.Tornadoio2"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1497471104"
+        }
+      ]
+    },
+    {
+      "title": "Virus - The Game",
+      "description": "2D arcade arena style game, the objective of which is to escape and destroy the viruses that will appear and chase you across the map. Make upgrades and collect different types of power ups to survive.",
+      "image": "04",
+      "links": [
+        {
+          "text": "Trailer",
+          "url": "https://youtu.be/8c1fyg1B-zo"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.Virus"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1452749256"
+        }
+      ]
+    },
+    {
+      "title": "Motor Mayhem! - Vehicle Warfare",
+      "description": "Arena style arcade game where your mission is to survive the different types of enemies. As the days go by, enemies get stronger and stronger.",
+      "image": "02",
+      "links": [
+        {
+          "text": "Trailer",
+          "url": "https://youtu.be/U3Yrm-fj4Gc"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.MotorMayhem"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1538345518"
+        }
+      ]
+    },
+    {
+      "title": "Zen Gems!",
+      "description": "Relaxing match 3 game! Available for Android and iOS!",
+      "image": "05",
+      "links": [
+        {
+          "text": "Trailer",
+          "url": "https://www.youtube.com/watch?v=TRwGkz3YZ9w"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.ZenGems"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1567242577"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Series Entretainment Inc.",
+      "url": "https://www.series.inc/",
+      "title": "Senior Game Engineer",
+      "period": "Jan/2025 - Current",
+      "location": "",
+      "description": "Working with LLMs alongside Unity to create immersive and interactive stories.",
+      "achievements": []
+    },
+    {
+      "company": "Playgig",
+      "url": "http://www.playgig.com/",
+      "title": "Senior Game Engineer",
+      "period": "March/2022 - Jan/2025",
+      "location": "",
+      "description": "Contributing as a Senior Game Engineer with implementations of new features and game mechanics for a new cross platform MOBA game (Android, iOS, PC & Consoles).",
+      "achievements": [
+        "Responsible for the architecture and optimization of the character skills system, reducing by 93% the time designers needed to prototype new characters. After the implementation we obtained a fully data driven system with networked gameplay using Unity (C#)",
+        "Developed server-authoritative gameplay systems to deliver smooth, responsive multiplayer experiences across platforms while maintaining good practices and clean code",
+        "Debug and optimization of complex logic in existing systems to ensure high quality code and bug free environment following design patterns",
+        "Architecturing and implementing UI/UX front-end systems along with designers with an emphasis on performance and memory usage for a smoother gameplay",
+        "Implementing physic based gameplay mechanics for characters to interact with in game items",
+        "Maintaining and improving AI systems such as GOAP and Behaviour Trees"
+      ]
+    },
+    {
+      "company": "Pipa Studios",
+      "url": "https://www.pipastudios.com/",
+      "title": "Unity Game Developer",
+      "period": "June/2021 - March/2022",
+      "location": "",
+      "description": "Contributing to the front-end gameplay features in live service bingo games using Unity 2D.",
+      "achievements": [
+        "System optimizations, improving the performance by around 20% in some slot machines ensuring an engaging and responsive gameplay experience",
+        "Implementing UI/UX systems with animations using DOTween",
+        "Designing meta systems with SQL databases for player progression and engagement",
+        "Code review and providing mentorship to junior team members"
+      ]
+    },
+    {
+      "company": "CrossBlack Studios",
+      "url": "https://play.google.com/store/apps/dev?id=6319868086173201401",
+      "title": "Indie Game Developer",
+      "period": "2017 - Current",
+      "location": "",
+      "description": "Development of casual games (+15 games) using Unity (C#) 2D and 3D, for iOS and Android.",
+      "achievements": [
+        "Through back-end solutions such as Firebase I was able to track player's needs and issues, obtaining +1.5M downloads around the world",
+        "Developed and integrated monetization systems including IAPs & AdMob, reaching +62M Ads impressions and +1.2M Clicks and over 5k purchases in IAPs"
+      ]
+    },
+    {
+      "company": "LADEPPE - Research and Educational Products Dev Lab",
+      "url": "",
+      "title": "Programmer and Developer",
+      "period": "2018 - 2020",
+      "location": "Bauru, São Paulo - Brazil",
+      "description": "Development of several applications for graduate students in Teaching for Basic Education at UNESP Bauru. The projects involved everything from educational games to applications to help the teacher in the classroom.",
+      "achievements": []
+    },
+    {
+      "company": "nG Solutions - Telecommunications Solutions",
+      "url": "",
+      "title": "Internship",
+      "period": "2015",
+      "location": "São José dos Campos, São Paulo - Brazil",
+      "description": "Remote antenna configuration to expand 4G coverage to different regions of Brazil.",
+      "achievements": []
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming (C#/Java/SQL)",
+      "level": "Advanced"
+    },
+    {
+      "name": "Game Development (Unity & Unreal)",
+      "level": "Advanced"
+    },
+    {
+      "name": "Publishing Apps & Games (iOS and Android)",
+      "level": "Advanced"
+    },
+    {
+      "name": "Version Control (Git & Perforce)",
+      "level": "Advanced"
+    },
+    {
+      "name": "Agile Methodology",
+      "level": "Advanced"
+    },
+    {
+      "name": "Sound Mixing",
+      "level": "Intermediate"
+    },
+    {
+      "name": "Video Editing",
+      "level": "Intermediate"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Unreal Fellowship: Games",
+      "url": "https://www.credential.net/205f846b-6fca-4947-b7f0-7d2f1395809b",
+      "degree": "Fellowship Certificate",
+      "period": "2024",
+      "location": "São Paulo, SP"
+    },
+    {
+      "institution": "UNESP - Bauru",
+      "url": "",
+      "degree": "Bachelor of Information Systems",
+      "period": "2017 - 2022",
+      "location": "Bauru, São Paulo - Brazil"
+    },
+    {
+      "institution": "ETEP - High school + Technical course",
+      "url": "",
+      "degree": "Computer IT Course",
+      "period": "2012 - 2015",
+      "location": "São José dos Campos, São Paulo - Brazil"
+    }
+  ],
+  "language": {
+    "current": "en",
+    "selector": {
+      "pt": {
+        "text": "Versão em Português",
+        "url": "index.html?lang=pt"
+      }
+    },
+    "available": ["en", "pt"]
+  }
+} 

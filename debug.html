@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Portfolio Debug</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        .debug-panel {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow: auto;
+            max-height: 400px;
+        }
+        .info {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Portfolio Debug Panel</h1>
+    
+    <div class="debug-panel">
+        <h2>Test Portfolio</h2>
+        <p>Click the buttons below to test the portfolio in different languages:</p>
+        <a href="index.html?lang=en" class="button" target="_blank">English Version</a>
+        <a href="index.html?lang=pt" class="button" target="_blank">Portuguese Version</a>
+        <a href="index.html" class="button" target="_blank">Auto-Detect Language</a>
+        
+        <div class="info">
+            <p><strong>Automatic Language Detection:</strong> Opening the portfolio without a language parameter will automatically detect your browser's preferred language.</p>
+            <p>Your browser's language settings: <span id="browser-language"></span></p>
+            <p>Supported languages: <span id="supported-languages">en, pt</span></p>
+        </div>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>JSON Data</h2>
+        <p>View the JSON data files:</p>
+        <a href="data/portfolio.json" class="button" target="_blank">English Data (portfolio.json)</a>
+        <a href="data/portfolio_pt.json" class="button" target="_blank">Portuguese Data (portfolio_pt.json)</a>
+    </div>
+    
+    <div class="debug-panel">
+        <h2>Console Output</h2>
+        <p>Open your browser's developer console (F12) to see debug messages.</p>
+        <div id="console-output">
+            <pre id="log-output">Waiting for logs...</pre>
+        </div>
+    </div>
+
+    <script>
+        // Display browser language
+        document.getElementById('browser-language').textContent = 
+            navigator.languages ? 
+            navigator.languages.join(', ') : 
+            (navigator.language || navigator.userLanguage || 'unknown');
+            
+        // Capture console.log output
+        (function() {
+            const oldLog = console.log;
+            const oldError = console.error;
+            const logOutput = document.getElementById('log-output');
+            
+            console.log = function(...args) {
+                oldLog.apply(console, args);
+                const message = args.map(arg => {
+                    if (typeof arg === 'object') {
+                        return JSON.stringify(arg, null, 2);
+                    } else {
+                        return arg;
+                    }
+                }).join(' ');
+                logOutput.textContent += '\n' + message;
+            };
+            
+            console.error = function(...args) {
+                oldError.apply(console, args);
+                const message = args.map(arg => {
+                    if (typeof arg === 'object') {
+                        return JSON.stringify(arg, null, 2);
+                    } else {
+                        return arg;
+                    }
+                }).join(' ');
+                logOutput.textContent += '\n[ERROR] ' + message;
+            };
+            
+            console.log('Debug panel initialized');
+        })();
+    </script>
+</body>
+
+</html> 

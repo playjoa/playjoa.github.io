@@ -1,0 +1,297 @@
+{
+  "meta": {
+    "title": "Portfólio João Milone",
+    "description": "Senior Game Engineer | Unity & Unreal",
+    "favicon": "images/icon.ico"
+  },
+  "header": {
+    "avatar": "images/avatar.jpg",
+    "tagline": "Unity, Unreal Engine 5, C#, Blueprints C++"
+  },
+  "intro": {
+    "name": "João de Carvalho Milone",
+    "title": "Senior Game Engineer | Unity & Unreal",
+    "location": "São Paulo - Brasil"
+  },
+  "about": {
+    "title": "Sobre Mim",
+    "content": "Sou um Senior Game Engineer com +7 anos de experiência na indústria de jogos. Minha extensa vivência profissional me proporcionou conhecimentos avançados em Unity Engine (2D, 3D e AR) e Unreal Engine 5. Meu trabalho abrange desde jogos mobile (Android e iOS) até jogos multiplayer maiores e multiplataforma (Mobile, Console e PC), com foco em mecânicas de gameplay, UI/UX, analytics, sistemas de progressão e de IA. Tenho habilidades em C#, em C++ e Blueprints (Unreal). Com relação a APIs de rede, faço uso de soluções como Mirror Networking e Photon Network."
+  },
+  "social": [
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/joao-milone/",
+      "icon": "fa-linkedin"
+    },
+    {
+      "name": "Github",
+      "url": "https://github.com/playjoa",
+      "icon": "fa-github"
+    },
+    {
+      "name": "AppStore",
+      "url": "https://apps.apple.com/br/developer/joao-milone/id1452749255",
+      "icon": "fa-app-store"
+    },
+    {
+      "name": "PlayStore",
+      "url": "https://play.google.com/store/apps/dev?id=6319868086173201401",
+      "icon": "fa-google-play"
+    },
+    {
+      "name": "Itch.io",
+      "url": "https://playjoa.itch.io/",
+      "icon": "fa-itch-io"
+    },
+    {
+      "name": "Unity Asset Store",
+      "url": "https://assetstore.unity.com/publishers/52979",
+      "icon": "fa-file-code",
+      "isRegular": true
+    },
+    {
+      "name": "Email",
+      "url": "mailto: joaocmil@hotmail.com",
+      "icon": "fa-envelope",
+      "isSolid": true
+    }
+  ],
+  "projects": [
+    {
+      "title": "Mystic Kingdoms - 5v5 MOBA",
+      "description": "5v5 crossplatform (Mobile, Console and PC) MOBA, O jogo de batalha de arena baseado em equipe com partidas rápidas de 10 minutos e ação estratégica. Junte-se, convoque defensores, aumente o poder e assuma o controle dos Reinos Místicos!",
+      "image": "01",
+      "links": [
+        {
+          "text": "Sobre",
+          "url": "https://venturebeat.com/games/playgig-raises-10-85m-for-cross-platform-game-studio/"
+        }
+      ]
+    },
+    {
+      "title": "Escape Room Game!",
+      "description": "Jogo de Escape Room onde você está preso em uma casa e precisa encontrar dicas e pistas para resolver puzzles e conseguir sair da casa! Portado para PC e Mobile!",
+      "image": "06",
+      "links": [
+        {
+          "text": "GitHub",
+          "url": "https://github.com/playjoa/Unity_EscapeRoomGame"
+        },
+        {
+          "text": "Jogar (PC)",
+          "url": "https://playjoa.itch.io/escape-room"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.EscapeRoom"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1567825003"
+        }
+      ]
+    },
+    {
+      "title": "Tornado.io 2 - O Jogo",
+      "description": "Casual Game, cujo objetivo é controlar um pequeno tornado, que cresce conforme consome o cenário por onde anda. É possível também, competir com outros tornados controlados por IA.",
+      "image": "03",
+      "links": [
+        {
+          "text": "Trailer",
+          "url": "https://youtu.be/c4BnbowW_p0"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.Tornadoio2"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1497471104"
+        }
+      ]
+    },
+    {
+      "title": "Virus - O Jogo",
+      "description": "Jogo estilo arcade arena 2D, cujo objetivo é fugir e destruir os virus que irão aparecer e te perseguir ao longo do mapa. Faça upgrades e colete diferentes tipos de power ups para conseguir sobreviver.",
+      "image": "04",
+      "links": [
+        {
+          "text": "Trailer",
+          "url": "https://youtu.be/8c1fyg1B-zo"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.Virus"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1452749256"
+        }
+      ]
+    },
+    {
+      "title": "Motor Mayhem! - Vehicle Warfare",
+      "description": "Jogo arcade no estilo arena onde sua missão é sobreviver aos diversos tipos de inimigos. Conforme os dias passam, os inimigos ficam cada vez mais fortes.",
+      "image": "02",
+      "links": [
+        {
+          "text": "Trailer",
+          "url": "https://youtu.be/U3Yrm-fj4Gc"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.MotorMayhem"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1538345518"
+        }
+      ]
+    },
+    {
+      "title": "Zen Gems!",
+      "description": "Jogo de combinação de 3 ou mais cristais! Disponível para Android e iOS",
+      "image": "05",
+      "links": [
+        {
+          "text": "Trailer",
+          "url": "https://www.youtube.com/watch?v=TRwGkz3YZ9w"
+        },
+        {
+          "text": "Android",
+          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.ZenGems"
+        },
+        {
+          "text": "iOS",
+          "url": "https://apps.apple.com/app/id1567242577"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "Series Entretainment Inc.",
+      "url": "https://www.series.inc/",
+      "title": "Senior Game Engineer",
+      "period": "Jan/2025 - Current",
+      "location": "",
+      "description": "Trabalhando com LLMs em conjunto com Unity para criar histórias imersivas e interativas.",
+      "achievements": []
+    },
+    {
+      "company": "Playgig",
+      "url": "http://www.playgig.com/",
+      "title": "Senior Game Engineer",
+      "period": "Março/2022 - Jan/2025",
+      "location": "",
+      "description": "Contribuindo como Senior Game Engineer com implementações de novas funcionalidades e mecânicas para um novo jogo multiplayer (Cross Plataform: Unity & Unreal).",
+      "achievements": [
+        "Mecânicas de Gameplay: Elaboração e implementação sistemas de habilidades e efeitos para diversos personagens, permitindo uma variedade de conjuntos de habilidades e estratégias de jogo",
+        "UI: Colaboração com designers e artistas para garantir a integração perfeita dos componentes de UI, melhorando a experiência do jogador",
+        "Sistemas Client/Server: Desenvolvimento e otimização de sistemas de gameplay cliente-servidor para oferecer experiências multiplayer suaves e responsivas em várias plataformas",
+        "Sistemas Meta: Criação de sistemas que impulsionam a progressão dos jogadores, recompensas no jogo e a economia, apoiando o engajamento a longo prazo",
+        "Contratação e Mentoria: Contribuição para o crescimento da equipe de engenharia, conduzindo entrevistas técnicas e orientando novos contratados",
+        "Revisão de Código"
+      ]
+    },
+    {
+      "company": "Pipa Studios",
+      "url": "https://www.pipastudios.com/",
+      "title": "Unity Game Developer",
+      "period": "Junho/2021 - Março/2022",
+      "location": "",
+      "description": "Contribuindo no time de desenvolvimento do Praia Bingo Tropical e Bingo Rex, auxiliando na criação de novas features e jogos novos para ambos os projetos.",
+      "achievements": []
+    },
+    {
+      "company": "CrossBlack Studios",
+      "url": "https://play.google.com/store/apps/dev?id=6319868086173201401",
+      "title": "Game Developer Independente",
+      "period": "2017 - Atual",
+      "location": "",
+      "description": "Desenvolvimento e publicação de jogos casuais (+15 jogos), 2D e 3D, para iOS e Android. Com +1 milhão de downloads ao redor do mundo. Monetização captada através da implementação do AdMob e da venda de itens digitais dentro dos jogos.",
+      "achievements": []
+    },
+    {
+      "company": "LADEPPE - Lab. de Dev. de Pesquisas e Produtos Educacionais",
+      "url": "",
+      "title": "Programador e Desenvolvedor",
+      "period": "2018 - 2020",
+      "location": "Bauru",
+      "description": "Desenvolvimento de diversas aplicações voltadas aos pós-graduandos(as) em Docência para a Educação Básica na UNESP Bauru. Os projetos envolviam desde jogos educativos até aplicações para auxiliar o professor em sala de aula.",
+      "achievements": []
+    },
+    {
+      "company": "nG Solutions – Soluções em Telecomunicações",
+      "url": "",
+      "title": "Estágio",
+      "period": "2015",
+      "location": "São José dos Campos",
+      "description": "Configuração remota de antenas para ampliar a cobertura de 4G para diversas regiões do Brasil.",
+      "achievements": []
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programação (C#/Java/SQL)",
+      "level": "Avançado"
+    },
+    {
+      "name": "Desenvolvimento de Games (Unity & Unreal)",
+      "level": "Avançado"
+    },
+    {
+      "name": "Publicação Apps & Games (iOS e Android)",
+      "level": "Avançado"
+    },
+    {
+      "name": "Plataformas de Versionamento (Git & Perforce)",
+      "level": "Avançado"
+    },
+    {
+      "name": "Metodologia Ágil",
+      "level": "Avançado"
+    },
+    {
+      "name": "Mixagem de Som",
+      "level": "Intermediário"
+    },
+    {
+      "name": "Edição de Vídeo",
+      "level": "Intermediário"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Unreal Fellowship: Games",
+      "url": "https://www.credential.net/205f846b-6fca-4947-b7f0-7d2f1395809b",
+      "degree": "Fellowship Certificate",
+      "period": "2024",
+      "location": "São Paulo, SP"
+    },
+    {
+      "institution": "UNESP",
+      "url": "",
+      "degree": "Bacharelado em Sistemas de Informação",
+      "period": "2017 - 2022",
+      "location": "Bauru, SP"
+    },
+    {
+      "institution": "ETEP - Ensino Médio + Técnico",
+      "url": "",
+      "degree": "Curso Técnico Informática",
+      "period": "2012 - 2015",
+      "location": "São José dos Campos, SP"
+    }
+  ],
+  "language": {
+    "current": "pt",
+    "selector": {
+      "en": {
+        "text": "English Version",
+        "url": "index.html?lang=en"
+      }
+    },
+    "available": ["en", "pt"]
+  }
+} 
