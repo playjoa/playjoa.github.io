@@ -9,6 +9,7 @@ class PortfolioManager {
         this.defaultLanguage = 'en';
         this.currentLanguage = this.defaultLanguage;
         this.supportedLanguages = ['en', 'pt']; // Add more languages here as needed
+        console.log(`Constructor: Setting default language to ${this.defaultLanguage}`);
         this.init();
     }
 
@@ -16,7 +17,13 @@ class PortfolioManager {
      * Initialize the portfolio manager
      */
     init() {
-        // First check URL parameter
+        console.log('Initializing portfolio manager...');
+        
+        // Always start with English as default
+        this.currentLanguage = this.defaultLanguage;
+        console.log(`Starting with default language: ${this.defaultLanguage}`);
+        
+        // Only check URL parameter for language override
         const urlParams = new URLSearchParams(window.location.search);
         const langParam = urlParams.get('lang');
         
@@ -24,57 +31,12 @@ class PortfolioManager {
             // If URL parameter is set and supported, use it
             this.currentLanguage = langParam;
             console.log(`Language set from URL parameter: ${this.currentLanguage}`);
-        } else {
-            // Otherwise, try to detect from browser settings
-            this.detectBrowserLanguage();
         }
+        
+        console.log(`Final language selection: ${this.currentLanguage}`);
         
         // Load data for the current language
         this.loadData();
-    }
-
-    /**
-     * Detect the user's preferred language from browser settings
-     */
-    detectBrowserLanguage() {
-        try {
-            // Get browser languages
-            const browserLanguages = navigator.languages || 
-                                    [navigator.language || 
-                                     navigator.userLanguage || 
-                                     this.defaultLanguage];
-            
-            console.log('Browser languages:', browserLanguages);
-            
-            // Find the first supported language
-            for (const browserLang of browserLanguages) {
-                // Get the language code (first 2 characters)
-                const langCode = browserLang.substring(0, 2).toLowerCase();
-                
-                if (this.supportedLanguages.includes(langCode)) {
-                    this.currentLanguage = langCode;
-                    console.log(`Language detected from browser: ${this.currentLanguage}`);
-                    
-                    // Update URL with the detected language
-                    if (!window.location.search.includes('lang=')) {
-                        const newUrl = new URL(window.location.href);
-                        newUrl.searchParams.set('lang', this.currentLanguage);
-                        window.history.replaceState({}, '', newUrl.toString());
-                        console.log(`Updated URL with detected language: ${newUrl.toString()}`);
-                    }
-                    
-                    return;
-                }
-            }
-            
-            // If no supported language found, use default
-            console.log(`No supported language detected, using default: ${this.defaultLanguage}`);
-            this.currentLanguage = this.defaultLanguage;
-            
-        } catch (error) {
-            console.error('Error detecting browser language:', error);
-            this.currentLanguage = this.defaultLanguage;
-        }
     }
 
     /**
@@ -85,16 +47,15 @@ class PortfolioManager {
             // Determine which data file to load based on the current language
             let dataFile;
             
-            // Check if we have a specific file for this language
+            // Only load Portuguese if explicitly set, otherwise default to English
             if (this.currentLanguage === 'pt') {
                 dataFile = 'data/portfolio_pt.json';
-            } else if (this.currentLanguage === 'en') {
-                dataFile = 'data/portfolio.json';
+                console.log('Loading Portuguese language file');
             } else {
-                // For any other language, default to English
+                // Default to English for any other case
                 dataFile = 'data/portfolio.json';
-                // Update current language to match the file we're loading
-                this.currentLanguage = 'en';
+                this.currentLanguage = 'en'; // Ensure currentLanguage is set to 'en'
+                console.log('Loading English language file');
             }
             
             console.log(`Loading data from: ${dataFile}`);
@@ -102,23 +63,27 @@ class PortfolioManager {
             
             if (!response.ok) {
                 throw new Error(`Failed to load data: ${response.status}`);
+                
+                // If Portuguese file fails to load, try English as fallback
+                if (this.currentLanguage === 'pt') {
+                    console.log('Falling back to English due to error loading Portuguese file');
+                    this.currentLanguage = 'en';
+                    this.loadData();
+                    return;
+                }
             }
             
             this.data = await response.json();
+            console.log(`Successfully loaded ${this.currentLanguage} language data`);
             
-            // Ensure the role is properly set
-            if (!this.data.intro.title || this.data.intro.title.trim() === '') {
-                this.data.intro.title = 'Senior Game Engineer | Unity & Unreal';
-                console.log('Role was missing, set default value');
-            }
-            
-            console.log('Data loaded successfully:', this.data);
             this.renderPortfolio();
         } catch (error) {
             console.error('Error loading portfolio data:', error);
-            // Fallback to default language if there's an error
-            if (this.currentLanguage !== this.defaultLanguage) {
-                this.currentLanguage = this.defaultLanguage;
+            
+            // Fallback to English if there's an error with Portuguese
+            if (this.currentLanguage === 'pt') {
+                console.log('Falling back to English due to error');
+                this.currentLanguage = 'en';
                 this.loadData();
             }
         }
@@ -453,19 +418,30 @@ class PortfolioManager {
         const experienceSection = document.querySelector('#three');
         if (!experienceSection) return;
         
-        // Get the other language
-        const otherLang = Object.keys(this.data.language.selector)[0];
-        const langSelector = this.data.language.selector[otherLang];
+        // Create the appropriate language selector based on current language
+        let selectorText, selectorUrl;
+        
+        if (this.currentLanguage === 'en') {
+            // If current language is English, show option for Portuguese
+            selectorText = 'Versão em Português';
+            selectorUrl = 'index.html?lang=pt';
+        } else {
+            // If current language is Portuguese, show option for English
+            selectorText = 'English Version';
+            selectorUrl = 'index.html';  // Default URL without parameters for English
+        }
         
         // Add language selector
         const langLink = document.createElement('a');
-        langLink.href = langSelector.url;
-        langLink.innerHTML = `<span class="image fit thumb">${langSelector.text}</span>`;
+        langLink.href = selectorUrl;
+        langLink.innerHTML = `<span class="image fit thumb">${selectorText}</span>`;
         experienceSection.appendChild(langLink);
         
         // Add spacing
         const spacing = document.createElement('br');
         experienceSection.appendChild(spacing);
+        
+        console.log(`Language selector rendered for ${this.currentLanguage} with link to ${selectorUrl}`);
     }
 
     /**
