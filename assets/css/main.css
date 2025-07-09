@@ -352,6 +352,20 @@ section {
     padding: var(--spacing-lg);
     box-shadow: var(--shadow-md);
     border: 1px solid var(--bg-tertiary);
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    bottom: -4px;
+    right: -4px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-xl);
+    opacity: 1;
+    z-index: -1;
 }
 
 /* Hero Section */
@@ -586,12 +600,14 @@ section {
 .experience-item::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
+    left: -4px;
+    top: -4px;
+    bottom: -4px;
+    right: -4px;
     background: var(--gradient-primary);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-xl);
+    opacity: 1;
+    z-index: -1;
 }
 
 .experience-header {
@@ -718,6 +734,20 @@ section {
     padding: var(--spacing-lg);
     box-shadow: var(--shadow-md);
     border: 1px solid var(--bg-tertiary);
+    position: relative;
+}
+
+.education-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    bottom: -4px;
+    right: -4px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-xl);
+    opacity: 1;
+    z-index: -1;
 }
 
 .education-school {
