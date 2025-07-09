@@ -174,8 +174,8 @@
       "url": "https://www.series.inc/",
       "title": "Senior Game Engineer",
       "period": "Jan/2025 - Current",
-      "location": "",
-      "description": "Trabalhando com LLMs em conjunto com Unity para criar histórias imersivas e interativas.",
+      "location": "San Francisco - USA (Remoto)",
+      "description": "Trabalhando em um novo título junto com a Netflix com LLMs e Unity para criar histórias imersivas e interativas em tempo real com personagens envolventes.",
       "achievements": []
     },
     {
@@ -183,7 +183,7 @@
       "url": "http://www.playgig.com/",
       "title": "Senior Game Engineer",
       "period": "Março/2022 - Jan/2025",
-      "location": "",
+      "location": "Los Angeles - USA (Remoto)",
       "description": "Contribuindo como Senior Game Engineer com implementações de novas funcionalidades e mecânicas para um novo jogo multiplayer (Cross Plataform: Unity & Unreal).",
       "achievements": [
         "Mecânicas de Gameplay: Elaboração e implementação sistemas de habilidades e efeitos para diversos personagens, permitindo uma variedade de conjuntos de habilidades e estratégias de jogo",
@@ -199,7 +199,7 @@
       "url": "https://www.pipastudios.com/",
       "title": "Unity Game Developer",
       "period": "Junho/2021 - Março/2022",
-      "location": "",
+      "location": "São Paulo - Brasil",
       "description": "Contribuindo no time de desenvolvimento do Praia Bingo Tropical e Bingo Rex, auxiliando na criação de novas features e jogos novos para ambos os projetos.",
       "achievements": []
     },
@@ -208,7 +208,7 @@
       "url": "https://play.google.com/store/apps/dev?id=6319868086173201401",
       "title": "Game Developer Independente",
       "period": "2017 - Atual",
-      "location": "",
+      "location": "São Paulo - Brasil",
       "description": "Desenvolvimento e publicação de jogos casuais (+15 jogos), 2D e 3D, para iOS e Android. Com +1 milhão de downloads ao redor do mundo. Monetização captada através da implementação do AdMob e da venda de itens digitais dentro dos jogos.",
       "achievements": []
     },
@@ -217,7 +217,7 @@
       "url": "",
       "title": "Programador e Desenvolvedor",
       "period": "2018 - 2020",
-      "location": "Bauru",
+      "location": "Bauru - Brasil",
       "description": "Desenvolvimento de diversas aplicações voltadas aos pós-graduandos(as) em Docência para a Educação Básica na UNESP Bauru. Os projetos envolviam desde jogos educativos até aplicações para auxiliar o professor em sala de aula.",
       "achievements": []
     },
@@ -226,7 +226,7 @@
       "url": "",
       "title": "Estágio",
       "period": "2015",
-      "location": "São José dos Campos",
+      "location": "São José dos Campos - Brasil",
       "description": "Configuração remota de antenas para ampliar a cobertura de 4G para diversas regiões do Brasil.",
       "achievements": []
     }

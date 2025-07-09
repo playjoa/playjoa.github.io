@@ -174,8 +174,8 @@
       "url": "https://www.series.inc/",
       "title": "Senior Game Engineer",
       "period": "Jan/2025 - Current",
-      "location": "",
-      "description": "Working with LLMs alongside Unity to create immersive and interactive stories.",
+      "location": "San Francisco - USA (Remote)",
+      "description": "Working in a new title along side Netflix with LLMs and Unity to create immersive and interactive storie in realtime with engaging characters.",
       "achievements": []
     },
     {
@@ -183,7 +183,7 @@
       "url": "http://www.playgig.com/",
       "title": "Senior Game Engineer",
       "period": "March/2022 - Jan/2025",
-      "location": "",
+      "location": "Los Angeles - USA (Remote)",
       "description": "Contributing as a Senior Game Engineer with implementations of new features and game mechanics for a new cross platform MOBA game (Android, iOS, PC & Consoles).",
       "achievements": [
         "Responsible for the architecture and optimization of the character skills system, reducing by 93% the time designers needed to prototype new characters. After the implementation we obtained a fully data driven system with networked gameplay using Unity (C#)",
@@ -199,7 +199,7 @@
       "url": "https://www.pipastudios.com/",
       "title": "Unity Game Developer",
       "period": "June/2021 - March/2022",
-      "location": "",
+      "location": "São Paulo - Brazil",
       "description": "Contributing to the front-end gameplay features in live service bingo games using Unity 2D.",
       "achievements": [
         "System optimizations, improving the performance by around 20% in some slot machines ensuring an engaging and responsive gameplay experience",
@@ -213,7 +213,7 @@
       "url": "https://play.google.com/store/apps/dev?id=6319868086173201401",
       "title": "Indie Game Developer",
       "period": "2017 - Current",
-      "location": "",
+      "location": "São Paulo - Brazil",
       "description": "Development of casual games (+15 games) using Unity (C#) 2D and 3D, for iOS and Android.",
       "achievements": [
         "Through back-end solutions such as Firebase I was able to track player's needs and issues, obtaining +1.5M downloads around the world",
