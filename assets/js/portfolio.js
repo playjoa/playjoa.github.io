@@ -12,6 +12,7 @@ class ModernPortfolioManager {
         this.projectImages = [];
         this.currentImageIndex = 0;
         this.currentTheme = 'dark'; // Default to dark mode
+        this.scrollPosition = 0; // Store scroll position when modal opens
         
         console.log('🚀 Initializing Modern Portfolio Manager...');
         this.init();
@@ -499,11 +500,28 @@ class ModernPortfolioManager {
         this.currentImageIndex = index;
         const image = this.projectImages[index];
         
-        modalImage.src = image.full;
-        modalImage.alt = image.title;
+        // Show loading state
+        modalImage.style.opacity = '0';
+        
+        // Load image
+        const img = new Image();
+        img.onload = () => {
+            modalImage.src = img.src;
+            modalImage.alt = image.title;
+            modalImage.style.opacity = '1';
+        };
+        img.src = image.full;
         
         modal.classList.add('active');
+        
+        // Save current scroll position
+        this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Prevent page scrolling on mobile and maintain scroll position
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${this.scrollPosition}px`;
+        document.body.style.width = '100%';
     }
 
     /**
@@ -513,7 +531,15 @@ class ModernPortfolioManager {
         const modal = document.getElementById('image-modal');
         if (modal) {
             modal.classList.remove('active');
+            
+            // Restore body styles and scroll position
             document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            
+            // Restore scroll position
+            window.scrollTo(0, this.scrollPosition);
         }
     }
 
@@ -540,8 +566,17 @@ class ModernPortfolioManager {
         const modalImage = document.getElementById('modal-image');
         if (modalImage) {
             const image = this.projectImages[this.currentImageIndex];
-            modalImage.src = image.full;
-            modalImage.alt = image.title;
+            
+            // Smooth loading transition
+            modalImage.style.opacity = '0.5';
+            
+            const img = new Image();
+            img.onload = () => {
+                modalImage.src = img.src;
+                modalImage.alt = image.title;
+                modalImage.style.opacity = '1';
+            };
+            img.src = image.full;
         }
     }
 
