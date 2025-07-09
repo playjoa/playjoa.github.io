@@ -126,7 +126,10 @@
         <div class="nav-container">
             <h1 class="nav-title" id="nav-title">Portfolio Debug - João Milone</h1>
             <div class="nav-actions">
-                <button class="icon-button" id="language-toggle">
+                <button class="icon-button" id="theme-toggle" title="Toggle theme">
+                    <span class="icon">🌙</span>
+                </button>
+                <button class="icon-button" id="language-toggle" title="Toggle language">
                     <span class="icon">🌐</span>
                 </button>
             </div>
@@ -244,6 +247,7 @@
         <div class="debug-section">
             <h3 class="debug-title">🎛️ Debug Controls</h3>
             <div class="debug-controls">
+                <button class="debug-button" onclick="debugTest.testThemeToggle()">Test Theme Toggle</button>
                 <button class="debug-button" onclick="debugTest.testLanguageSwitch()">Test Language Switch</button>
                 <button class="debug-button" onclick="debugTest.testImageModal()">Test Image Modal</button>
                 <button class="debug-button" onclick="debugTest.simulateLoading()">Simulate Loading</button>
@@ -271,6 +275,10 @@
                     <div class="debug-stat-value" id="layout-mode">--</div>
                     <div class="debug-stat-label">Layout</div>
                 </div>
+                <div class="debug-stat">
+                    <div class="debug-stat-value" id="current-theme">--</div>
+                    <div class="debug-stat-label">Theme</div>
+                </div>
             </div>
         </div>
 
@@ -296,6 +304,17 @@
     <script>
         // Debug Testing Functions
         const debugTest = {
+            testThemeToggle() {
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.click();
+                    const currentTheme = window.portfolioManager?.currentTheme || 'unknown';
+                    this.log(`🎨 Theme toggle triggered - Current: ${currentTheme}`);
+                } else {
+                    this.log('❌ Theme toggle button not found');
+                }
+            },
+            
             testLanguageSwitch() {
                 const languageToggle = document.getElementById('language-toggle');
                 if (languageToggle) {
@@ -353,10 +372,12 @@
                 document.getElementById('project-count').textContent = projects.length;
                 document.getElementById('experience-count').textContent = experiences.length;
                 
-                // Update language
+                // Update language and theme
                 if (window.portfolioManager) {
                     document.getElementById('current-language').textContent = 
                         window.portfolioManager.currentLanguage.toUpperCase();
+                    document.getElementById('current-theme').textContent = 
+                        window.portfolioManager.currentTheme.toUpperCase();
                 }
                 
                 // Update layout mode

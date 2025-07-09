@@ -7,7 +7,7 @@
 
 /* Design System Variables */
 :root {
-    /* Colors */
+    /* Dark Mode Colors (Default) */
     --bg-primary: #1a1a1a;
     --bg-secondary: #2a2a2a;
     --bg-tertiary: #333333;
@@ -29,7 +29,76 @@
     --gradient-secondary: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%);
     --gradient-warm: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
     --gradient-cool: linear-gradient(135deg, #2196f3 0%, #9c27b0 100%);
+}
+
+/* Light Mode Variables */
+[data-theme="light"] {
+    /* Light Mode Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-card: #ffffff;
+    --bg-overlay: rgba(255, 255, 255, 0.9);
     
+    --text-primary: #1a1a1a;
+    --text-secondary: #495057;
+    --text-tertiary: #6c757d;
+    --text-muted: #868e96;
+    
+    /* Keep the same vibrant accent colors for consistency */
+    --accent-primary: #ff4081;
+    --accent-secondary: #9c27b0;
+    --accent-tertiary: #ff9800;
+    --accent-success: #4caf50;
+    --accent-warning: #ff5722;
+    
+    /* Adjust gradients for light mode */
+    --gradient-primary: linear-gradient(135deg, #ff4081 0%, #9c27b0 100%);
+    --gradient-secondary: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%);
+    --gradient-warm: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+    --gradient-cool: linear-gradient(135deg, #2196f3 0%, #9c27b0 100%);
+    
+    /* Light mode shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.2);
+    --shadow-glow: 0 0 20px rgba(255, 64, 129, 0.2);
+}
+
+/* Light Mode Specific Adjustments */
+[data-theme="light"] .nav-header {
+    border-bottom-color: var(--bg-tertiary);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="light"] .card {
+    border: 1px solid var(--bg-tertiary);
+}
+
+[data-theme="light"] .project-card,
+[data-theme="light"] .experience-item,
+[data-theme="light"] .education-item {
+    border: 1px solid var(--bg-tertiary);
+}
+
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .skill-item:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+[data-theme="light"] .hero-card::before {
+    background: var(--gradient-primary);
+    opacity: 0.1;
+}
+
+[data-theme="light"] .tag {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--bg-tertiary);
+}
+
+:root {
     /* Typography */
     --font-primary: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     --font-secondary: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -98,6 +167,12 @@ body {
     background-color: var(--bg-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Transition for all elements */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Status Bar Spacer */
