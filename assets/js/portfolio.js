@@ -1,479 +1,595 @@
 /**
- * Portfolio Data Manager
- * Handles loading and rendering of portfolio data based on selected language
+ * Modern Portfolio Manager
+ * Handles loading and rendering of portfolio data with localization support
+ * Following the GamerDesign dark theme system
  */
 
-class PortfolioManager {
+class ModernPortfolioManager {
     constructor() {
         this.data = null;
-        this.defaultLanguage = 'en';
-        this.currentLanguage = this.defaultLanguage;
-        this.supportedLanguages = ['en', 'pt']; // Add more languages here as needed
-        console.log(`Constructor: Setting default language to ${this.defaultLanguage}`);
+        this.currentLanguage = 'en'; // Default to English
+        this.supportedLanguages = ['en', 'pt'];
+        this.projectImages = [];
+        this.currentImageIndex = 0;
+        
+        console.log('🚀 Initializing Modern Portfolio Manager...');
         this.init();
     }
 
     /**
      * Initialize the portfolio manager
      */
-    init() {
-        console.log('Initializing portfolio manager...');
-        
-        // Always start with English as default
-        this.currentLanguage = this.defaultLanguage;
-        console.log(`Starting with default language: ${this.defaultLanguage}`);
-        
-        // Only check URL parameter for language override
+    async init() {
+        try {
+            // Show loading indicator
+            this.showLoading();
+            
+            // Initialize language
+            this.initializeLanguage();
+            
+            // Load portfolio data
+            await this.loadData();
+            
+            // Initialize UI
+            this.initializeUI();
+            
+            // Hide loading indicator
+            this.hideLoading();
+            
+            console.log('✅ Portfolio initialized successfully');
+        } catch (error) {
+            console.error('❌ Failed to initialize portfolio:', error);
+            this.hideLoading();
+        }
+    }
+
+    /**
+     * Initialize language settings
+     */
+    initializeLanguage() {
+        // Check URL parameter first
         const urlParams = new URLSearchParams(window.location.search);
         const langParam = urlParams.get('lang');
         
         if (langParam && this.supportedLanguages.includes(langParam)) {
-            // If URL parameter is set and supported, use it
             this.currentLanguage = langParam;
-            console.log(`Language set from URL parameter: ${this.currentLanguage}`);
+            console.log(`🌐 Language set from URL: ${this.currentLanguage}`);
+        } else {
+            // Default to English
+            this.currentLanguage = 'en';
+            console.log(`🌐 Using default language: ${this.currentLanguage}`);
         }
-        
-        console.log(`Final language selection: ${this.currentLanguage}`);
-        
-        // Load data for the current language
-        this.loadData();
     }
 
     /**
-     * Load portfolio data for the current language
+     * Load portfolio data for current language
      */
     async loadData() {
         try {
-            // Determine which data file to load based on the current language
-            let dataFile;
+            const dataFile = this.currentLanguage === 'pt' ? 'data/portfolio_pt.json' : 'data/portfolio.json';
+            console.log(`📂 Loading data from: ${dataFile}`);
             
-            // Only load Portuguese if explicitly set, otherwise default to English
-            if (this.currentLanguage === 'pt') {
-                dataFile = 'data/portfolio_pt.json';
-                console.log('Loading Portuguese language file');
-            } else {
-                // Default to English for any other case
-                dataFile = 'data/portfolio.json';
-                this.currentLanguage = 'en'; // Ensure currentLanguage is set to 'en'
-                console.log('Loading English language file');
-            }
-            
-            console.log(`Loading data from: ${dataFile}`);
             const response = await fetch(dataFile);
-            
             if (!response.ok) {
-                throw new Error(`Failed to load data: ${response.status}`);
-                
-                // If Portuguese file fails to load, try English as fallback
-                if (this.currentLanguage === 'pt') {
-                    console.log('Falling back to English due to error loading Portuguese file');
-                    this.currentLanguage = 'en';
-                    this.loadData();
-                    return;
-                }
+                throw new Error(`Failed to load ${dataFile}: ${response.status}`);
             }
             
             this.data = await response.json();
-            console.log(`Successfully loaded ${this.currentLanguage} language data`);
+            console.log(`✅ Successfully loaded ${this.currentLanguage} data`);
             
-            this.renderPortfolio();
+            // Initialize project images array
+            this.projectImages = this.data.projects.map(project => ({
+                full: `images/fulls/${project.image}.jpg`,
+                thumb: `images/thumbs/${project.image}.jpg`,
+                title: project.title,
+                description: project.description
+            }));
+            
         } catch (error) {
-            console.error('Error loading portfolio data:', error);
-            
-            // Fallback to English if there's an error with Portuguese
+            console.error('❌ Error loading data:', error);
+            // Fallback to English if Portuguese fails
             if (this.currentLanguage === 'pt') {
-                console.log('Falling back to English due to error');
+                console.log('🔄 Falling back to English...');
                 this.currentLanguage = 'en';
-                this.loadData();
+                return this.loadData();
             }
+            throw error;
         }
     }
 
     /**
-     * Render the entire portfolio based on loaded data
+     * Initialize UI components and event listeners
      */
-    renderPortfolio() {
-        if (!this.data) {
-            console.error('No data available for rendering');
-            return;
-        }
-
-        console.log('Rendering portfolio...');
-        this.updateMetadata();
-        this.renderHeader();
-        this.renderIntro();
-        this.renderAbout();
-        this.renderProjects();
-        this.renderExperience();
-        this.renderSkills();
-        this.renderEducation();
-        this.renderLanguageSelector();
-        this.renderFooter();
+    initializeUI() {
+        // Render all sections
+        this.renderAllSections();
         
-        // Initialize lightbox gallery after rendering projects
-        this.initLightboxGallery();
-        console.log('Portfolio rendering complete');
+        // Initialize event listeners
+        this.initializeEventListeners();
+        
+        // Initialize image modal
+        this.initializeImageModal();
     }
 
     /**
-     * Update page metadata (title, description, favicon)
+     * Render all portfolio sections
      */
-    updateMetadata() {
+    renderAllSections() {
+        this.renderHeroSection();
+        this.renderSocialLinks();
+        this.renderAboutSection();
+        this.renderProjectsSection();
+        this.renderExperienceSection();
+        this.renderSkillsSection();
+        this.renderEducationSection();
+    }
+
+    /**
+     * Render hero section
+     */
+    renderHeroSection() {
+        const heroName = document.getElementById('hero-name');
+        const heroTitle = document.getElementById('hero-title');
+        const heroLocation = document.getElementById('hero-location');
+        const navTitle = document.getElementById('nav-title');
+        
+        if (heroName) heroName.textContent = this.data.intro.name;
+        if (heroTitle) heroTitle.textContent = this.data.intro.title;
+        if (heroLocation) heroLocation.textContent = this.data.intro.location;
+        
+        // Update navigation title
+        if (navTitle) {
+            const portfolioText = this.currentLanguage === 'pt' ? 'Portfólio' : 'Portfolio';
+            navTitle.textContent = `${this.data.intro.name} - ${portfolioText}`;
+        }
+        
+        // Update page title
         document.title = this.data.meta.title;
-        console.log(`Updated page title to: ${document.title}`);
-        
-        // Update favicon
-        const faviconLink = document.querySelector('link[rel="favicon"]');
-        if (faviconLink) {
-            faviconLink.setAttribute('src', this.data.meta.favicon);
-        }
-        
-        // Update meta description if it exists
-        const metaDescription = document.querySelector('meta[name="description"]');
-        if (metaDescription) {
-            metaDescription.setAttribute('content', this.data.meta.description);
-        }
     }
 
     /**
-     * Render the header section
-     */
-    renderHeader() {
-        const header = document.getElementById('header');
-        if (!header) {
-            console.error('Header element not found');
-            return;
-        }
-
-        const inner = header.querySelector('.inner');
-        if (!inner) {
-            console.error('Header inner element not found');
-            return;
-        }
-
-        // Update avatar
-        const avatar = inner.querySelector('.avatar img');
-        if (avatar) {
-            avatar.setAttribute('src', this.data.header.avatar);
-            avatar.setAttribute('alt', this.data.intro.name);
-        }
-
-        // Update tagline
-        const tagline = inner.querySelector('h1');
-        if (tagline) {
-            // Include both the tagline and title
-            tagline.innerHTML = `<strong>${this.data.header.tagline}</strong><br />
-                                <span>${this.data.intro.title}</span><br />`;
-            console.log(`Updated header tagline to: ${this.data.header.tagline} and title: ${this.data.intro.title}`);
-        }
-    }
-
-    /**
-     * Render the introduction section
-     */
-    renderIntro() {
-        const introSection = document.querySelector('#two header.major');
-        if (!introSection) {
-            console.error('Intro section not found');
-            return;
-        }
-
-        // Log the intro data to verify it's correct
-        console.log('Rendering intro section with:', {
-            name: this.data.intro.name,
-            title: this.data.intro.title,
-            location: this.data.intro.location
-        });
-
-        // Ensure the intro section has the correct order: name, role, location, social links
-        introSection.innerHTML = `
-            <h1><strong>${this.data.intro.name}</strong></h1>
-            <h2><em>${this.data.intro.title}</em></h2>
-            <h3><em>${this.data.intro.location}</em></h3>
-            <div id="menu">
-                <ul>
-                    ${this.renderSocialLinks()}
-                </ul>
-            </div>
-            <br>
-        `;
-        
-        // Verify the HTML was set correctly
-        console.log('Intro HTML set:', introSection.innerHTML);
-    }
-
-    /**
-     * Generate HTML for social links
+     * Render social links
      */
     renderSocialLinks() {
-        return this.data.social.map(item => {
-            const iconClass = item.isRegular ? 'icon regular' : (item.isSolid ? 'icon solid' : 'icon brands');
-            return `
-                <li>
-                    <a href="${item.url}" target="_blank" class="${iconClass} ${item.icon}">
-                        <span class="label">${item.name}</span>
-                    </a>
-                </li>
-            `;
-        }).join('');
+        const socialContainer = document.getElementById('social-links');
+        if (!socialContainer) return;
+        
+        const socialHTML = this.data.social.map(social => `
+            <a href="${social.url}" target="_blank" rel="noopener noreferrer" class="social-link">
+                <div class="social-icon">${this.getSocialIcon(social.icon)}</div>
+                <div class="social-name">${social.name}</div>
+            </a>
+        `).join('');
+        
+        socialContainer.innerHTML = socialHTML;
     }
 
     /**
-     * Render the about section
+     * Get social media icon
      */
-    renderAbout() {
-        // Find the about section container
-        const aboutSection = document.getElementById('about-section');
-        if (!aboutSection) {
-            console.error('About section container not found');
-            return;
-        }
-
-        console.log('Rendering about section with title:', this.data.about.title);
-        console.log('About content:', this.data.about.content);
-
-        // Create the about section with title and content
-        aboutSection.innerHTML = `
-            <h2>${this.data.about.title}</h2>
-            <p>${this.data.about.content}</p>
-        `;
-        
-        console.log('Updated about section');
+    getSocialIcon(iconName) {
+        const icons = {
+            'fa-linkedin': '💼',
+            'fa-github': '🐙',
+            'fa-app-store': '📱',
+            'fa-google-play': '🎮',
+            'fa-itch-io': '🎯',
+            'fa-file-code': '💻',
+            'fa-envelope': '✉️'
+        };
+        return icons[iconName] || '🔗';
     }
 
     /**
-     * Render the projects section
+     * Render about section
      */
-    renderProjects() {
-        // Find all h2 elements in the #two section
-        const allH2s = document.querySelectorAll('#two h2');
-        let projectsTitle = null;
+    renderAboutSection() {
+        const aboutTitle = document.getElementById('about-title');
+        const aboutContent = document.getElementById('about-content');
         
-        // Look for the Games Portfolio heading
-        for (let i = 0; i < allH2s.length; i++) {
-            if (allH2s[i].textContent.includes('Games Portfolio') || 
-                allH2s[i].textContent.includes('Portfolio de Games')) {
-                projectsTitle = allH2s[i];
-                break;
-            }
-        }
-        
-        // If not found, use the second h2 as a fallback
-        if (!projectsTitle && allH2s.length >= 2) {
-            projectsTitle = allH2s[1];
-        }
-        
-        if (!projectsTitle) {
-            console.error('Projects title not found');
-            return;
-        }
+        if (aboutTitle) aboutTitle.textContent = this.data.about.title;
+        if (aboutContent) aboutContent.textContent = this.data.about.content;
+    }
 
-        // Set projects section title
-        projectsTitle.textContent = this.currentLanguage === 'pt' ? 'Portfolio de Games' : 'Games Portfolio';
+    /**
+     * Render projects section
+     */
+    renderProjectsSection() {
+        const projectsTitle = document.getElementById('projects-title');
+        const projectsGrid = document.getElementById('projects-grid');
         
-        // Get the projects container
-        const projectsContainer = projectsTitle.nextElementSibling;
-        if (!projectsContainer || !projectsContainer.classList.contains('row')) {
-            console.error('Projects container not found or does not have row class');
-            return;
+        if (projectsTitle) {
+            projectsTitle.textContent = this.currentLanguage === 'pt' ? 'Portfólio de Jogos' : 'Games Portfolio';
         }
         
-        // Clear existing projects
-        projectsContainer.innerHTML = '';
+        if (!projectsGrid) return;
         
-        // Add projects
-        this.data.projects.forEach(project => {
-            const projectHTML = `
-                <article class="col-6 col-12-xsmall work-item">
-                    <a href="images/fulls/${project.image}.jpg" class="image fit thumb">
-                        <img src="images/thumbs/${project.image}.jpg" alt="${project.title}" />
-                    </a>
-                    <h3>${project.title}</h3>
-                    <p>${project.description}</p>
-                    <strong>
-                        ${project.links.map((link, index) => `
-                            ${index > 0 ? ' | ' : ''}
-                            <a href='${link.url}' target="_blank">${link.text}</a>
+        const projectsHTML = this.data.projects.map((project, index) => `
+            <div class="project-card">
+                <img 
+                    src="images/thumbs/${project.image}.jpg" 
+                    alt="${project.title}"
+                    class="project-image"
+                    data-index="${index}"
+                >
+                <div class="project-content">
+                    <h3 class="project-title">${project.title}</h3>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-links">
+                        ${project.links.map(link => `
+                            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="project-link">
+                                ${link.text}
+                            </a>
                         `).join('')}
-                    </strong><br>
-                </article>
-            `;
-            projectsContainer.innerHTML += projectHTML;
-        });
+                    </div>
+                </div>
+            </div>
+        `).join('');
         
-        console.log('Projects rendered successfully');
+        projectsGrid.innerHTML = projectsHTML;
     }
 
     /**
-     * Initialize the lightbox gallery for project images
+     * Render experience section
      */
-    initLightboxGallery() {
-        // Wait for DOM to be fully updated
-        setTimeout(() => {
-            if (window.jQuery && jQuery.fn.poptrox) {
-                jQuery('#two').poptrox({
-                    caption: function($a) { return $a.next('h3').text(); },
-                    overlayColor: '#2c2c2c',
-                    overlayOpacity: 0.85,
-                    popupCloserText: '',
-                    popupLoaderText: '',
-                    selector: '.work-item a.image',
-                    usePopupCaption: true,
-                    usePopupDefaultStyling: false,
-                    usePopupEasyClose: false,
-                    usePopupNav: true,
-                    windowMargin: (window.breakpoints && breakpoints.active('<=small') ? 0 : 50)
-                });
-            }
-        }, 100);
-    }
-
-    /**
-     * Render the experience section
-     */
-    renderExperience() {
-        const experienceSection = document.querySelector('#three');
-        if (!experienceSection) return;
+    renderExperienceSection() {
+        const experienceTitle = document.getElementById('experience-title');
+        const experienceList = document.getElementById('experience-list');
         
-        // Clear existing content
-        experienceSection.innerHTML = '';
-        
-        // Add experience title
-        const experienceTitle = document.createElement('h2');
-        experienceTitle.textContent = this.currentLanguage === 'pt' ? 'Experiência Profissional' : 'Professional Experience';
-        experienceSection.appendChild(experienceTitle);
-        
-        // Add experience content
-        const experienceContent = document.createElement('p');
-        
-        // Build experience HTML
-        let experienceHTML = '';
-        this.data.experience.forEach(exp => {
-            experienceHTML += `
-                <strong>${exp.title} - ${exp.url ? `<a href='${exp.url}' target="_blank">${exp.company}</a>` : exp.company}:</strong>
-                (${exp.period})
-                ${exp.location ? `<br>${exp.location}` : ''}
-                <br>
-                ${exp.description}
-                <br>
-            `;
-            
-            // Add achievements if any
-            if (exp.achievements && exp.achievements.length > 0) {
-                exp.achievements.forEach(achievement => {
-                    experienceHTML += `- ${achievement}<br>`;
-                });
-            }
-            
-            experienceHTML += '<br>';
-        });
-        
-        experienceContent.innerHTML = experienceHTML;
-        experienceSection.appendChild(experienceContent);
-    }
-
-    /**
-     * Render the skills section
-     */
-    renderSkills() {
-        const experienceSection = document.querySelector('#three');
-        if (!experienceSection) return;
-        
-        // Add skills title
-        const skillsTitle = document.createElement('h2');
-        skillsTitle.textContent = this.currentLanguage === 'pt' ? 'Habilidades' : 'Skills';
-        experienceSection.appendChild(skillsTitle);
-        
-        // Add skills content
-        const skillsContent = document.createElement('p');
-        
-        // Build skills HTML
-        let skillsHTML = '';
-        this.data.skills.forEach(skill => {
-            skillsHTML += `<strong>- ${skill.name}</strong> - ${skill.level}<br>`;
-        });
-        
-        skillsContent.innerHTML = skillsHTML;
-        experienceSection.appendChild(skillsContent);
-    }
-
-    /**
-     * Render the education section
-     */
-    renderEducation() {
-        const experienceSection = document.querySelector('#three');
-        if (!experienceSection) return;
-        
-        // Add education title
-        const educationTitle = document.createElement('h2');
-        educationTitle.textContent = this.currentLanguage === 'pt' ? 'Educação' : 'Education';
-        experienceSection.appendChild(educationTitle);
-        
-        // Add education content
-        const educationContent = document.createElement('p');
-        
-        // Build education HTML
-        let educationHTML = '';
-        this.data.education.forEach(edu => {
-            educationHTML += `
-                <strong>- ${edu.institution}: ${edu.url ? `<a href='${edu.url}' target="_blank">${edu.degree}</a>` : edu.degree}</strong>, 
-                (${edu.period}) - ${edu.location}
-                <br>
-            `;
-        });
-        
-        educationContent.innerHTML = educationHTML;
-        experienceSection.appendChild(educationContent);
-    }
-
-    /**
-     * Render the language selector
-     */
-    renderLanguageSelector() {
-        const experienceSection = document.querySelector('#three');
-        if (!experienceSection) return;
-        
-        // Create the appropriate language selector based on current language
-        let selectorText, selectorUrl;
-        
-        if (this.currentLanguage === 'en') {
-            // If current language is English, show option for Portuguese
-            selectorText = 'Versão em Português';
-            selectorUrl = 'index.html?lang=pt';
-        } else {
-            // If current language is Portuguese, show option for English
-            selectorText = 'English Version';
-            selectorUrl = 'index.html';  // Default URL without parameters for English
+        if (experienceTitle) {
+            experienceTitle.textContent = this.currentLanguage === 'pt' ? 'Experiência' : 'Experience';
         }
         
-        // Add language selector
-        const langLink = document.createElement('a');
-        langLink.href = selectorUrl;
-        langLink.innerHTML = `<span class="image fit thumb">${selectorText}</span>`;
-        experienceSection.appendChild(langLink);
+        if (!experienceList || !this.data.experience) return;
         
-        // Add spacing
-        const spacing = document.createElement('br');
-        experienceSection.appendChild(spacing);
+        const experienceHTML = this.data.experience.map(exp => `
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div class="experience-company">
+                        ${exp.url ? `<a href="${exp.url}" target="_blank" rel="noopener noreferrer">${exp.company}</a>` : exp.company}
+                    </div>
+                    <div class="experience-title">${exp.title}</div>
+                    <div class="experience-meta">
+                        <span class="experience-period">${exp.period}</span>
+                        ${exp.location ? `<span class="experience-location">${exp.location}</span>` : ''}
+                    </div>
+                </div>
+                <div class="experience-description">${exp.description}</div>
+                ${exp.achievements && exp.achievements.length > 0 ? `
+                    <ul class="experience-achievements">
+                        ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
+                    </ul>
+                ` : ''}
+            </div>
+        `).join('');
         
-        console.log(`Language selector rendered for ${this.currentLanguage} with link to ${selectorUrl}`);
+        experienceList.innerHTML = experienceHTML;
     }
 
     /**
-     * Render the footer section
+     * Render skills section
      */
-    renderFooter() {
-        const footer = document.getElementById('footer');
-        if (!footer) return;
+    renderSkillsSection() {
+        const skillsTitle = document.getElementById('skills-title');
+        const skillsGrid = document.getElementById('skills-grid');
         
-        const socialIcons = footer.querySelector('ul.icons');
-        if (socialIcons) {
-            socialIcons.innerHTML = this.renderSocialLinks();
+        if (skillsTitle) {
+            skillsTitle.textContent = this.currentLanguage === 'pt' ? 'Habilidades' : 'Skills';
+        }
+        
+        if (!skillsGrid || !this.data.skills) return;
+        
+        const skillsHTML = this.data.skills.map(skill => `
+            <div class="skill-item">
+                <div class="skill-icon">${this.getSkillIcon(skill.name)}</div>
+                <div class="skill-name">${skill.name}</div>
+            </div>
+        `).join('');
+        
+        skillsGrid.innerHTML = skillsHTML;
+    }
+
+    /**
+     * Get skill icon
+     */
+    getSkillIcon(skillName) {
+        const icons = {
+            'Unity': '🎮',
+            'Unreal Engine': '🚀',
+            'C#': '💻',
+            'C++': '⚡',
+            'JavaScript': '🌐',
+            'Python': '🐍',
+            'Git': '📦',
+            'Firebase': '🔥',
+            'Networking': '🌐',
+            'AI': '🤖',
+            'Mobile': '📱',
+            'PC': '🖥️',
+            'Console': '🎮'
+        };
+        return icons[skillName] || '⚙️';
+    }
+
+    /**
+     * Render education section
+     */
+    renderEducationSection() {
+        const educationTitle = document.getElementById('education-title');
+        const educationList = document.getElementById('education-list');
+        
+        if (educationTitle) {
+            educationTitle.textContent = this.currentLanguage === 'pt' ? 'Educação' : 'Education';
+        }
+        
+        if (!educationList || !this.data.education) return;
+        
+        const educationHTML = this.data.education.map(edu => `
+            <div class="education-item">
+                <div class="education-school">
+                    ${edu.url ? `<a href="${edu.url}" target="_blank" rel="noopener noreferrer">${edu.institution}</a>` : edu.institution}
+                </div>
+                <div class="education-degree">${edu.degree}</div>
+                <div class="education-meta">
+                    <span class="education-period">${edu.period}</span>
+                    ${edu.location ? `<span class="education-location">${edu.location}</span>` : ''}
+                </div>
+            </div>
+        `).join('');
+        
+        educationList.innerHTML = educationHTML;
+    }
+
+    /**
+     * Initialize event listeners
+     */
+    initializeEventListeners() {
+        // Language toggle
+        const languageToggle = document.getElementById('language-toggle');
+        if (languageToggle) {
+            languageToggle.addEventListener('click', () => this.toggleLanguage());
+        }
+        
+        // Project image clicks
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('project-image')) {
+                const index = parseInt(e.target.dataset.index);
+                this.openImageModal(index);
+            }
+        });
+        
+        // Smooth scroll for internal links
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(e.target.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    }
+
+    /**
+     * Initialize image modal
+     */
+    initializeImageModal() {
+        const modal = document.getElementById('image-modal');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalClose = document.getElementById('modal-close');
+        const modalPrev = document.getElementById('modal-prev');
+        const modalNext = document.getElementById('modal-next');
+        
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', () => this.closeImageModal());
+        }
+        
+        if (modalClose) {
+            modalClose.addEventListener('click', () => this.closeImageModal());
+        }
+        
+        if (modalPrev) {
+            modalPrev.addEventListener('click', () => this.previousImage());
+        }
+        
+        if (modalNext) {
+            modalNext.addEventListener('click', () => this.nextImage());
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal?.classList.contains('active')) {
+                switch (e.key) {
+                    case 'Escape':
+                        this.closeImageModal();
+                        break;
+                    case 'ArrowLeft':
+                        this.previousImage();
+                        break;
+                    case 'ArrowRight':
+                        this.nextImage();
+                        break;
+                }
+            }
+        });
+    }
+
+    /**
+     * Open image modal
+     */
+    openImageModal(index) {
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        
+        if (!modal || !modalImage) return;
+        
+        this.currentImageIndex = index;
+        const image = this.projectImages[index];
+        
+        modalImage.src = image.full;
+        modalImage.alt = image.title;
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    /**
+     * Close image modal
+     */
+    closeImageModal() {
+        const modal = document.getElementById('image-modal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    /**
+     * Navigate to previous image
+     */
+    previousImage() {
+        this.currentImageIndex = (this.currentImageIndex - 1 + this.projectImages.length) % this.projectImages.length;
+        this.updateModalImage();
+    }
+
+    /**
+     * Navigate to next image
+     */
+    nextImage() {
+        this.currentImageIndex = (this.currentImageIndex + 1) % this.projectImages.length;
+        this.updateModalImage();
+    }
+
+    /**
+     * Update modal image
+     */
+    updateModalImage() {
+        const modalImage = document.getElementById('modal-image');
+        if (modalImage) {
+            const image = this.projectImages[this.currentImageIndex];
+            modalImage.src = image.full;
+            modalImage.alt = image.title;
+        }
+    }
+
+    /**
+     * Toggle language
+     */
+    async toggleLanguage() {
+        const newLanguage = this.currentLanguage === 'en' ? 'pt' : 'en';
+        
+        try {
+            this.showLoading();
+            
+            // Update URL without refreshing page
+            const url = new URL(window.location);
+            url.searchParams.set('lang', newLanguage);
+            window.history.pushState({}, '', url);
+            
+            // Update current language
+            this.currentLanguage = newLanguage;
+            
+            // Reload data and re-render
+            await this.loadData();
+            this.renderAllSections();
+            
+            this.hideLoading();
+            
+            console.log(`🌐 Language switched to: ${newLanguage}`);
+        } catch (error) {
+            console.error('❌ Failed to switch language:', error);
+            this.hideLoading();
+        }
+    }
+
+    /**
+     * Show loading indicator
+     */
+    showLoading() {
+        const loadingIndicator = document.getElementById('loading-indicator');
+        if (loadingIndicator) {
+            loadingIndicator.classList.add('active');
+        }
+    }
+
+    /**
+     * Hide loading indicator
+     */
+    hideLoading() {
+        const loadingIndicator = document.getElementById('loading-indicator');
+        if (loadingIndicator) {
+            loadingIndicator.classList.remove('active');
         }
     }
 }
 
-// Initialize the portfolio manager when the DOM is loaded
+// Initialize portfolio when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    window.portfolioManager = new PortfolioManager();
-}); 
+    new ModernPortfolioManager();
+});
+
+// Handle page visibility for performance
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        console.log('📱 Page hidden - pausing animations');
+        // Pause any heavy animations or processes
+    } else {
+        console.log('📱 Page visible - resuming animations');
+        // Resume animations or refresh data if needed
+    }
+});
+
+// Handle online/offline status
+window.addEventListener('online', () => {
+    console.log('🌐 Back online');
+    // Could refresh data or show notification
+});
+
+window.addEventListener('offline', () => {
+    console.log('📴 Gone offline');
+    // Could show offline notification
+});
+
+// Add touch gesture support for mobile
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+});
+
+document.addEventListener('touchend', (e) => {
+    const modal = document.getElementById('image-modal');
+    if (!modal?.classList.contains('active')) return;
+    
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    
+    // Horizontal swipe detection
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+        if (deltaX > 0) {
+            // Swipe right - previous image
+            const portfolioManager = window.portfolioManager;
+            if (portfolioManager) portfolioManager.previousImage();
+        } else {
+            // Swipe left - next image
+            const portfolioManager = window.portfolioManager;
+            if (portfolioManager) portfolioManager.nextImage();
+        }
+    }
+});
+
+// Performance monitoring
+const observer = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+        if (entry.entryType === 'navigation') {
+            console.log(`⚡ Page loaded in ${entry.loadEventEnd - entry.loadEventStart}ms`);
+        }
+    }
+});
+
+observer.observe({ entryTypes: ['navigation'] }); 

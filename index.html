@@ -1,105 +1,135 @@
-<!DOCTYPE HTML>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<link rel="favicon" src="images/icon.ico">
-	<title>João Milone Portfolio</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<meta name="description" content="Senior Game Engineer | Unity & Unreal" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<style>
-		/* Custom styles to ensure consistent appearance */
-		#two header.major h1 {
-			margin-bottom: 0.5em;
-		}
-		#two header.major h2 {
-			margin-bottom: 0.5em;
-			font-size: 1.25em;
-		}
-		#two header.major h3 {
-			margin-bottom: 1em;
-			font-size: 1em;
-		}
-		#two p {
-			font-size: 1em;
-			line-height: 1.65;
-		}
-		#menu {
-			margin-top: 1em;
-		}
-		#menu ul {
-			display: flex;
-			flex-wrap: wrap;
-			list-style: none;
-			padding-left: 0;
-		}
-		#menu ul li {
-			margin-right: 1em;
-			margin-bottom: 0.5em;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Milone - Senior Game Engineer</title>
+    <meta name="description" content="Senior Game Engineer | Unity & Unreal Engine Developer">
+    <link rel="icon" href="images/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/main.css">
 </head>
+<body>
+    <!-- Status Bar Spacer -->
+    <div class="status-bar-spacer"></div>
+    
+    <!-- Navigation Header -->
+    <header class="nav-header">
+        <div class="nav-container">
+            <h1 class="nav-title" id="nav-title">Joao de Carvalho Milone - Portfolio</h1>
+            <div class="nav-actions">
+                <button class="icon-button" id="language-toggle">
+                    <span class="icon">🌐</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-<body class="is-preload">
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Sidebar (Desktop) -->
+        <aside class="sidebar">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-card">
+                    <div class="avatar-container">
+                        <img src="images/avatar.jpg" alt="João Milone" class="avatar-large">
+                        <div class="avatar-status"></div>
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-name" id="hero-name">João de Carvalho Milone</h1>
+                        <p class="hero-title" id="hero-title">Senior Game Engineer | Unity & Unreal</p>
+                        <p class="hero-location" id="hero-location">São Paulo - Brazil</p>
+                        <div class="hero-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">Unreal Engine</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">C++</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-	<!-- Header -->
-	<header id="header">
-		<div class="inner">
-			<a href="#" class="image avatar"><img src="images/avatar.jpg" alt="" /></a>
-			<h1><strong>Unity Engine and Unreal Engine 5 experience.</strong><br />
-				<br />
-		</div>
-	</header>
+            <!-- Social Links -->
+            <section class="social-section">
+                <div class="social-grid" id="social-links">
+                    <!-- Social links will be populated by JavaScript -->
+                </div>
+            </section>
 
-	<!-- Main -->
-	<div id="main">
+            <!-- About Section -->
+            <section class="about-section">
+                <div class="card">
+                    <h2 class="section-title" id="about-title">About Me</h2>
+                    <p class="about-content" id="about-content">
+                        <!-- About content will be populated by JavaScript -->
+                    </p>
+                </div>
+            </section>
+        </aside>
 
-		<!-- One -->
-		<section id="two">
-			<header class="major">
-				<!-- Intro content will be dynamically inserted here -->
-			</header>
-			
-			<!-- About section -->
-			<!-- The About Me heading will be dynamically inserted by portfolio.js -->
-			<div id="about-section">
-				<!-- About content will be dynamically inserted here -->
-			</div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Projects Section -->
+            <section class="projects-section">
+                <div class="section-header">
+                    <h2 class="section-title" id="projects-title">Games Portfolio</h2>
+                </div>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Projects will be populated by JavaScript -->
+                </div>
+            </section>
 
-			<!-- Projects section -->
-			<h2>Games Portfolio</h2>
-			<div class="row">
-				<!-- Project items will be dynamically inserted here -->
-			</div>
-		</section>
+            <!-- Experience Section -->
+            <section class="experience-section">
+                <div class="section-header">
+                    <h2 class="section-title" id="experience-title">Experience</h2>
+                </div>
+                <div class="experience-list" id="experience-list">
+                    <!-- Experience items will be populated by JavaScript -->
+                </div>
+            </section>
 
-		<section id="three">
-			<!-- Experience, Skills, and Education will be dynamically inserted here -->
-		</section>
-	</div>
+            <!-- Skills Section -->
+            <section class="skills-section">
+                <div class="section-header">
+                    <h2 class="section-title" id="skills-title">Skills</h2>
+                </div>
+                <div class="skills-grid" id="skills-grid">
+                    <!-- Skills will be populated by JavaScript -->
+                </div>
+            </section>
 
-	<!-- Footer -->
-	<footer id="footer">
-		<div class="inner">
-			<ul class="icons">
-				<!-- Social icons will be dynamically inserted here -->
-			</ul>
-			<ul class="copyright">
-				<li>&copy; JoaoMilone</li>
-			</ul>
-		</div>
-	</footer>
+            <!-- Education Section -->
+            <section class="education-section">
+                <div class="section-header">
+                    <h2 class="section-title" id="education-title">Education</h2>
+                </div>
+                <div class="education-list" id="education-list">
+                    <!-- Education items will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
 
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.poptrox.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/portfolio.js"></script>
+    <!-- Image Modal -->
+    <div class="modal" id="image-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <img id="modal-image" src="" alt="">
+            <div class="modal-nav">
+                <button class="modal-nav-btn" id="modal-prev">‹</button>
+                <button class="modal-nav-btn" id="modal-next">›</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- Loading Indicator -->
+    <div class="loading-indicator" id="loading-indicator">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/portfolio.js"></script>
 </body>
-
-</html>
+</html> 

@@ -1,127 +1,418 @@
-<!DOCTYPE HTML>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Portfolio Debug</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Debug Panel - João Milone</title>
+    <meta name="description" content="Debug panel for testing the modern portfolio">
+    <link rel="icon" href="images/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/main.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-        }
-        h1 {
-            color: #333;
-        }
+        /* Debug Panel Styles */
         .debug-panel {
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100vh;
+            background: var(--bg-card);
+            border-left: 2px solid var(--accent-primary);
+            padding: var(--spacing-lg);
+            z-index: 1000;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
         }
-        .button {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-right: 10px;
-            margin-bottom: 10px;
+        
+        .debug-panel.active {
+            transform: translateX(0);
         }
-        .button:hover {
-            background-color: #45a049;
+        
+        .debug-toggle {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background: var(--accent-primary);
+            color: var(--text-primary);
+            border: none;
+            padding: var(--spacing-lg) var(--spacing-sm);
+            border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+            cursor: pointer;
+            z-index: 1001;
+            font-weight: var(--font-weight-semibold);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
         }
-        pre {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 10px;
-            overflow: auto;
-            max-height: 400px;
+        
+        .debug-toggle:hover {
+            background: var(--accent-secondary);
         }
-        .info {
-            background-color: #e7f3fe;
-            border-left: 6px solid #2196F3;
-            padding: 10px;
-            margin: 10px 0;
+        
+        .debug-section {
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .debug-title {
+            color: var(--accent-primary);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-md);
+            font-size: var(--font-size-lg);
+        }
+        
+        .debug-controls {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+        
+        .debug-button {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--accent-primary);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            transition: all 0.2s ease;
+        }
+        
+        .debug-button:hover {
+            background: var(--accent-primary);
+        }
+        
+        .debug-info {
+            background: var(--bg-secondary);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            font-family: monospace;
+            line-height: 1.4;
+        }
+        
+        .debug-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-sm);
+            font-size: var(--font-size-xs);
+        }
+        
+        .debug-stat {
+            background: var(--bg-secondary);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+        
+        .debug-stat-value {
+            color: var(--accent-primary);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+        }
+        
+        .debug-stat-label {
+            color: var(--text-tertiary);
+            font-size: var(--font-size-xs);
         }
     </style>
 </head>
-
 <body>
-    <h1>Portfolio Debug Panel</h1>
+    <!-- Status Bar Spacer -->
+    <div class="status-bar-spacer"></div>
     
-    <div class="debug-panel">
-        <h2>Test Portfolio</h2>
-        <p>Click the buttons below to test the portfolio in different languages:</p>
-        <a href="index.html?lang=en" class="button" target="_blank">English Version</a>
-        <a href="index.html?lang=pt" class="button" target="_blank">Portuguese Version</a>
-        <a href="index.html" class="button" target="_blank">Auto-Detect Language</a>
-        
-        <div class="info">
-            <p><strong>Automatic Language Detection:</strong> Opening the portfolio without a language parameter will automatically detect your browser's preferred language.</p>
-            <p>Your browser's language settings: <span id="browser-language"></span></p>
-            <p>Supported languages: <span id="supported-languages">en, pt</span></p>
+    <!-- Navigation Header -->
+    <header class="nav-header">
+        <div class="nav-container">
+            <h1 class="nav-title" id="nav-title">Portfolio Debug - João Milone</h1>
+            <div class="nav-actions">
+                <button class="icon-button" id="language-toggle">
+                    <span class="icon">🌐</span>
+                </button>
+            </div>
         </div>
-    </div>
-    
-    <div class="debug-panel">
-        <h2>JSON Data</h2>
-        <p>View the JSON data files:</p>
-        <a href="data/portfolio.json" class="button" target="_blank">English Data (portfolio.json)</a>
-        <a href="data/portfolio_pt.json" class="button" target="_blank">Portuguese Data (portfolio_pt.json)</a>
-    </div>
-    
-    <div class="debug-panel">
-        <h2>Console Output</h2>
-        <p>Open your browser's developer console (F12) to see debug messages.</p>
-        <div id="console-output">
-            <pre id="log-output">Waiting for logs...</pre>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Sidebar (Desktop) -->
+        <aside class="sidebar">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-card">
+                    <div class="avatar-container">
+                        <img src="images/avatar.jpg" alt="João Milone" class="avatar-large">
+                        <div class="avatar-status"></div>
+                    </div>
+                    <div class="hero-content">
+                        <h1 class="hero-name" id="hero-name">João de Carvalho Milone</h1>
+                        <p class="hero-title" id="hero-title">Senior Game Engineer | Unity & Unreal</p>
+                        <p class="hero-location" id="hero-location">São Paulo - Brazil</p>
+                        <div class="hero-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">Unreal Engine</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">C++</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Social Links -->
+            <section class="social-section">
+                <div class="social-grid" id="social-links">
+                    <!-- Social links will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="about-section">
+                <div class="card">
+                    <h2 class="section-title" id="about-title">About Me</h2>
+                    <p class="about-content" id="about-content">
+                        <!-- About content will be populated by JavaScript -->
+                    </p>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Projects Section -->
+            <section class="projects-section">
+                <div class="section-header">
+                    <h2 class="section-title" id="projects-title">Games Portfolio</h2>
+                </div>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Projects will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section class="experience-section">
+                <div class="section-header">
+                    <h2 class="section-title" id="experience-title">Experience</h2>
+                </div>
+                <div class="experience-list" id="experience-list">
+                    <!-- Experience items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section class="skills-section">
+                <div class="section-header">
+                    <h2 class="section-title" id="skills-title">Skills</h2>
+                </div>
+                <div class="skills-grid" id="skills-grid">
+                    <!-- Skills will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section class="education-section">
+                <div class="section-header">
+                    <h2 class="section-title" id="education-title">Education</h2>
+                </div>
+                <div class="education-list" id="education-list">
+                    <!-- Education items will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Image Modal -->
+    <div class="modal" id="image-modal">
+        <div class="modal-overlay" id="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <img id="modal-image" src="" alt="">
+            <div class="modal-nav">
+                <button class="modal-nav-btn" id="modal-prev">‹</button>
+                <button class="modal-nav-btn" id="modal-next">›</button>
+            </div>
         </div>
     </div>
 
+    <!-- Loading Indicator -->
+    <div class="loading-indicator" id="loading-indicator">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Debug Panel -->
+    <button class="debug-toggle" id="debug-toggle">DEBUG</button>
+    <div class="debug-panel" id="debug-panel">
+        <div class="debug-section">
+            <h3 class="debug-title">🎛️ Debug Controls</h3>
+            <div class="debug-controls">
+                <button class="debug-button" onclick="debugTest.testLanguageSwitch()">Test Language Switch</button>
+                <button class="debug-button" onclick="debugTest.testImageModal()">Test Image Modal</button>
+                <button class="debug-button" onclick="debugTest.simulateLoading()">Simulate Loading</button>
+                <button class="debug-button" onclick="debugTest.logData()">Log Portfolio Data</button>
+                <button class="debug-button" onclick="debugTest.testResponsive()">Test Responsive</button>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h3 class="debug-title">📊 Stats</h3>
+            <div class="debug-stats" id="debug-stats">
+                <div class="debug-stat">
+                    <div class="debug-stat-value" id="project-count">--</div>
+                    <div class="debug-stat-label">Projects</div>
+                </div>
+                <div class="debug-stat">
+                    <div class="debug-stat-value" id="experience-count">--</div>
+                    <div class="debug-stat-label">Experience</div>
+                </div>
+                <div class="debug-stat">
+                    <div class="debug-stat-value" id="current-language">--</div>
+                    <div class="debug-stat-label">Language</div>
+                </div>
+                <div class="debug-stat">
+                    <div class="debug-stat-value" id="layout-mode">--</div>
+                    <div class="debug-stat-label">Layout</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h3 class="debug-title">🖥️ Viewport</h3>
+            <div class="debug-info" id="viewport-info">
+                Window: <span id="window-size">--</span><br>
+                Device: <span id="device-type">--</span><br>
+                Layout: <span id="layout-type">--</span>
+            </div>
+        </div>
+
+        <div class="debug-section">
+            <h3 class="debug-title">🐛 Console</h3>
+            <div class="debug-info" id="debug-console">
+                Debug panel ready...
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/portfolio.js"></script>
     <script>
-        // Display browser language
-        document.getElementById('browser-language').textContent = 
-            navigator.languages ? 
-            navigator.languages.join(', ') : 
-            (navigator.language || navigator.userLanguage || 'unknown');
+        // Debug Testing Functions
+        const debugTest = {
+            testLanguageSwitch() {
+                const languageToggle = document.getElementById('language-toggle');
+                if (languageToggle) {
+                    languageToggle.click();
+                    this.log('🌐 Language switch triggered');
+                }
+            },
             
-        // Capture console.log output
-        (function() {
-            const oldLog = console.log;
-            const oldError = console.error;
-            const logOutput = document.getElementById('log-output');
+            testImageModal() {
+                const projectImages = document.querySelectorAll('.project-image');
+                if (projectImages.length > 0) {
+                    projectImages[0].click();
+                    this.log('🖼️ Image modal opened');
+                } else {
+                    this.log('❌ No project images found');
+                }
+            },
             
-            console.log = function(...args) {
-                oldLog.apply(console, args);
-                const message = args.map(arg => {
-                    if (typeof arg === 'object') {
-                        return JSON.stringify(arg, null, 2);
-                    } else {
-                        return arg;
-                    }
-                }).join(' ');
-                logOutput.textContent += '\n' + message;
-            };
+            simulateLoading() {
+                const loadingIndicator = document.getElementById('loading-indicator');
+                if (loadingIndicator) {
+                    loadingIndicator.classList.add('active');
+                    setTimeout(() => {
+                        loadingIndicator.classList.remove('active');
+                        this.log('⏳ Loading simulation complete');
+                    }, 2000);
+                    this.log('⏳ Simulating loading...');
+                }
+            },
             
-            console.error = function(...args) {
-                oldError.apply(console, args);
-                const message = args.map(arg => {
-                    if (typeof arg === 'object') {
-                        return JSON.stringify(arg, null, 2);
-                    } else {
-                        return arg;
-                    }
-                }).join(' ');
-                logOutput.textContent += '\n[ERROR] ' + message;
-            };
+            logData() {
+                console.log('📊 Portfolio Data:', window.portfolioManager?.data || 'Not available');
+                this.log('📊 Portfolio data logged to console');
+            },
             
-            console.log('Debug panel initialized');
-        })();
+            testResponsive() {
+                this.log('📱 Check different screen sizes to test responsive layout');
+            },
+            
+            log(message) {
+                const debugConsole = document.getElementById('debug-console');
+                if (debugConsole) {
+                    const time = new Date().toLocaleTimeString();
+                    debugConsole.innerHTML += `<br>${time}: ${message}`;
+                    debugConsole.scrollTop = debugConsole.scrollHeight;
+                }
+                console.log(message);
+            },
+            
+            updateStats() {
+                // Update project and experience counts
+                const projects = document.querySelectorAll('.project-card');
+                const experiences = document.querySelectorAll('.experience-item');
+                
+                document.getElementById('project-count').textContent = projects.length;
+                document.getElementById('experience-count').textContent = experiences.length;
+                
+                // Update language
+                if (window.portfolioManager) {
+                    document.getElementById('current-language').textContent = 
+                        window.portfolioManager.currentLanguage.toUpperCase();
+                }
+                
+                // Update layout mode
+                const width = window.innerWidth;
+                document.getElementById('layout-mode').textContent = width >= 1024 ? 'Sidebar' : 'Stacked';
+            },
+            
+            updateViewport() {
+                const windowSizeEl = document.getElementById('window-size');
+                const deviceTypeEl = document.getElementById('device-type');
+                const layoutTypeEl = document.getElementById('layout-type');
+                
+                if (windowSizeEl) {
+                    windowSizeEl.textContent = `${window.innerWidth}×${window.innerHeight}`;
+                }
+                
+                if (deviceTypeEl) {
+                    const width = window.innerWidth;
+                    let device = 'Desktop';
+                    if (width <= 480) device = 'Mobile';
+                    else if (width <= 768) device = 'Tablet';
+                    else if (width <= 1024) device = 'Small Desktop';
+                    deviceTypeEl.textContent = device;
+                }
+                
+                if (layoutTypeEl) {
+                    const width = window.innerWidth;
+                    layoutTypeEl.textContent = width >= 1024 ? 'Sidebar' : 'Stacked';
+                }
+            }
+        };
+        
+        // Initialize debug panel
+        document.addEventListener('DOMContentLoaded', () => {
+            const debugToggle = document.getElementById('debug-toggle');
+            const debugPanel = document.getElementById('debug-panel');
+            
+            if (debugToggle && debugPanel) {
+                debugToggle.addEventListener('click', () => {
+                    debugPanel.classList.toggle('active');
+                });
+            }
+            
+            // Update stats and viewport info
+            setTimeout(() => {
+                debugTest.updateStats();
+                debugTest.updateViewport();
+                debugTest.log('🚀 Debug panel initialized');
+            }, 1000);
+            
+            // Update viewport info on resize
+            window.addEventListener('resize', () => {
+                debugTest.updateViewport();
+                debugTest.updateStats();
+            });
+        });
     </script>
 </body>
-
 </html> 
