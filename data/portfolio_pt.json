@@ -58,6 +58,29 @@
   ],
   "projects": [
     {
+      "title": "Tornado.io 3 - Battle Arena",
+      "description": "Uma arena de batalha de tornados explosiva apresentando múltiplos tipos únicos de tornados com habilidades especiais. Desenvolvido com Unity e backend Firebase, o jogo simula batalhas competitivas de arena usando um sofisticado sistema de IA GOAP para comportamento dinâmico dos oponentes. Inclui sistemas abrangentes de conquistas e placares para engajamento dos jogadores, e um sistema completo de economia com upgrades e progressão de habilidades. Os jogadores enfrentam oponentes controlados por IA em partidas rápidas através de ambientes destrutíveis vibrantes, utilizando um sistema de habilidades baseado em dados que permite diversas estratégias de gameplay.",
+      "image": "tornado3",
+      "imageThumb": "tornado3_thumb",
+      "imageFull": "tornado3_full",
+      "imageExtension": "jpeg",
+      "featured": true,
+      "links": [
+        {
+          "text": "YouTube",
+          "url": "https://www.youtube.com/@CrossBlackStudios"
+        },
+        {
+          "text": "AppStore",
+          "url": "https://apps.apple.com/br/developer/joao-milone/id1452749255"
+        },
+        {
+          "text": "PlayStore",
+          "url": "https://play.google.com/store/apps/dev?id=6319868086173201401"
+        }
+      ]
+    },
+    {
       "title": "Mystic Kingdoms - 5v5 MOBA",
       "description": "5v5 crossplatform (Mobile, Console and PC) MOBA, O jogo de batalha de arena baseado em equipe com partidas rápidas de 10 minutos e ação estratégica. Junte-se, convoque defensores, aumente o poder e assuma o controle dos Reinos Místicos!",
       "image": "01",

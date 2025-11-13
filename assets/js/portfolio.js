@@ -146,12 +146,20 @@ class ModernPortfolioManager {
             console.log(`✅ Successfully loaded ${this.currentLanguage} data`);
             
             // Initialize project images array
-            this.projectImages = this.data.projects.map(project => ({
-                full: `images/fulls/${project.image}.jpg`,
-                thumb: `images/thumbs/${project.image}.jpg`,
-                title: project.title,
-                description: project.description
-            }));
+            this.projectImages = this.data.projects.map(project => {
+                const ext = project.imageExtension || 'jpg';
+                const thumbImage = project.imageThumb || project.image;
+                const fullImage = project.imageFull || project.image;
+                
+                return {
+                    full: `images/fulls/${fullImage}.${ext}`,
+                    thumb: `images/thumbs/${thumbImage}.${ext}`,
+                    title: project.title,
+                    description: project.description
+                };
+            });
+            
+            console.log('📚 Project images initialized:', this.projectImages);
             
         } catch (error) {
             console.error('❌ Error loading data:', error);
@@ -272,27 +280,33 @@ class ModernPortfolioManager {
         
         if (!projectsGrid) return;
         
-        const projectsHTML = this.data.projects.map((project, index) => `
-            <div class="project-card">
-                <img 
-                    src="images/thumbs/${project.image}.jpg" 
-                    alt="${project.title}"
-                    class="project-image"
-                    data-index="${index}"
-                >
-                <div class="project-content">
-                    <h3 class="project-title">${project.title}</h3>
-                    <p class="project-description">${project.description}</p>
-                    <div class="project-links">
-                        ${project.links.map(link => `
-                            <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="project-link">
-                                ${link.text}
-                            </a>
-                        `).join('')}
+        const projectsHTML = this.data.projects.map((project, index) => {
+            const ext = project.imageExtension || 'jpg';
+            const thumbImage = project.imageThumb || project.image;
+            const featuredClass = project.featured ? ' featured' : '';
+            
+            return `
+                <div class="project-card${featuredClass}">
+                    <img 
+                        src="images/thumbs/${thumbImage}.${ext}" 
+                        alt="${project.title}"
+                        class="project-image"
+                        data-index="${index}"
+                    >
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-links">
+                            ${project.links.map(link => `
+                                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    ${link.text}
+                                </a>
+                            `).join('')}
+                        </div>
                     </div>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
         
         projectsGrid.innerHTML = projectsHTML;
     }
@@ -428,6 +442,7 @@ class ModernPortfolioManager {
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('project-image')) {
                 const index = parseInt(e.target.dataset.index);
+                console.log(`🖼️ Opening image modal for project ${index}:`, this.projectImages[index]);
                 this.openImageModal(index);
             }
         });
@@ -495,10 +510,15 @@ class ModernPortfolioManager {
         const modal = document.getElementById('image-modal');
         const modalImage = document.getElementById('modal-image');
         
-        if (!modal || !modalImage) return;
+        if (!modal || !modalImage) {
+            console.error('❌ Modal elements not found');
+            return;
+        }
         
         this.currentImageIndex = index;
         const image = this.projectImages[index];
+        
+        console.log(`📸 Loading full image: ${image.full}`);
         
         // Show loading state
         modalImage.style.opacity = '0';
@@ -506,9 +526,13 @@ class ModernPortfolioManager {
         // Load image
         const img = new Image();
         img.onload = () => {
+            console.log('✅ Image loaded successfully');
             modalImage.src = img.src;
             modalImage.alt = image.title;
             modalImage.style.opacity = '1';
+        };
+        img.onerror = () => {
+            console.error(`❌ Failed to load image: ${image.full}`);
         };
         img.src = image.full;
         
