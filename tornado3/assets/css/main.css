@@ -244,13 +244,15 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
-    background: var(--bg-card);
+    width: 44px;
+    height: 44px;
+    background: transparent;
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all var(--transition-normal);
     padding: 0;
+    position: relative;
+    z-index: 1001;
 }
 
 .nav-toggle:hover {
@@ -259,28 +261,31 @@ button {
 
 .nav-toggle-icon {
     position: relative;
-    width: 24px;
+    width: 22px;
     height: 2px;
     background: var(--text-primary);
     transition: all var(--transition-normal);
+    border-radius: 2px;
 }
 
 .nav-toggle-icon::before,
 .nav-toggle-icon::after {
     content: '';
     position: absolute;
-    width: 24px;
+    width: 22px;
     height: 2px;
     background: var(--text-primary);
     transition: all var(--transition-normal);
+    border-radius: 2px;
+    left: 0;
 }
 
 .nav-toggle-icon::before {
-    top: -8px;
+    top: -7px;
 }
 
 .nav-toggle-icon::after {
-    top: 8px;
+    top: 7px;
 }
 
 .nav-toggle.active .nav-toggle-icon {
@@ -290,11 +295,13 @@ button {
 .nav-toggle.active .nav-toggle-icon::before {
     top: 0;
     transform: rotate(45deg);
+    background: var(--color-primary);
 }
 
 .nav-toggle.active .nav-toggle-icon::after {
     top: 0;
     transform: rotate(-45deg);
+    background: var(--color-primary);
 }
 
 /* Language Selector Dropdown */
@@ -564,23 +571,35 @@ button {
 
 .store-buttons {
     display: flex;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
 
 .store-button {
-    transition: transform var(--transition-normal);
-    display: block;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .store-button:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
 }
 
 .store-badge {
-    height: 60px;
+    height: 56px;
     width: auto;
+    display: block;
 }
 
 .scroll-indicator {
@@ -1451,6 +1470,25 @@ section {
 
 /* === Responsive Design === */
 @media (max-width: 1024px) {
+    .nav-container {
+        position: relative;
+    }
+    
+    .nav-toggle {
+        display: flex;
+        order: -1; /* Move to the left */
+    }
+    
+    .brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .language-selector {
+        margin-left: auto;
+    }
+    
     .nav-menu {
         display: none;
         position: absolute;
@@ -1463,13 +1501,10 @@ section {
         gap: var(--spacing-md);
         box-shadow: var(--shadow-large);
         border-top: 2px solid var(--color-border);
+        z-index: 1000;
     }
     
     .nav-menu.active {
-        display: flex;
-    }
-    
-    .nav-toggle {
         display: flex;
     }
     
@@ -1482,6 +1517,10 @@ section {
     
     .nav-link:hover {
         background: var(--bg-elevated);
+    }
+    
+    .nav-link::after {
+        display: none;
     }
     
     .hero-tagline,
@@ -1530,6 +1569,16 @@ section {
 }
 
 @media (max-width: 768px) {
+    /* Additional mobile-specific styles */
+    .brand-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .brand-name {
+        font-size: 1rem;
+    }
+    
     .hero-title-main {
         font-size: 3rem;
     }
@@ -1548,21 +1597,23 @@ section {
         padding: 0 var(--spacing-sm);
     }
     
-    /* Hide video background on mobile for performance */
-    .hero-video-background {
-        display: none;
+    /* Keep video background on mobile for immersion */
+    .hero-video-background iframe {
+        /* Force full coverage on mobile */
+        width: 177.77vh; /* 16:9 = width must be 16/9 of height */
+        height: 100vh;
+        min-width: 100vw;
+        min-height: 56.25vw; /* 9:16 = height must be 9/16 of width */
     }
     
-    /* Add gradient background for mobile */
-    .hero-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--gradient-hero);
-        z-index: 0;
+    .hero-video-overlay {
+        /* Stronger overlay on mobile for better text readability */
+        background: linear-gradient(
+            to bottom,
+            rgba(26, 29, 41, 0.75) 0%,
+            rgba(26, 29, 41, 0.88) 50%,
+            rgba(26, 29, 41, 0.95) 100%
+        );
     }
     
     .section-title {
@@ -1599,14 +1650,19 @@ section {
     }
     
     .store-buttons {
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
+        gap: var(--spacing-md);
+    }
+    
+    .store-button {
+        flex: 1;
+        max-width: 180px;
     }
     
     .store-badge {
         width: 100%;
         height: auto;
-        max-width: 200px;
     }
     
     .social-links {
@@ -1725,25 +1781,33 @@ section {
         padding: var(--spacing-xl);
     }
     
+    .store-buttons {
+        flex-direction: column;
+    }
+    
+    .store-button {
+        max-width: 200px;
+    }
+    
     .store-badge {
-        height: 50px;
+        height: auto;
     }
     
     .nav-container {
         padding: var(--spacing-sm) var(--spacing-md);
     }
     
-    .brand-name {
-        font-size: 0.9rem;
+    .language-button {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8rem;
     }
     
-    .language-button {
-        padding: var(--spacing-xs) var(--spacing-md);
-        font-size: 0.85rem;
+    .language-current {
+        display: inline;
     }
     
     .language-dropdown {
-        min-width: 150px;
+        min-width: 140px;
         right: 0;
         left: auto;
     }
