@@ -1,0 +1,290 @@
+{
+    "designSystem": {
+      "name": "Buzz Gaming Design System",
+      "category": "Gaming/Mobile Gaming Company",
+      "styleKeywords": ["bold", "vibrant", "modern", "youthful", "energetic", "playful"],
+      
+      "colorPalette": {
+        "primary": {
+          "neonYellow": "#D7FF00",
+          "hotPink": "#FF0080",
+          "electricBlue": "#0080FF",
+          "purple": "#8000FF"
+        },
+        "neutral": {
+          "black": "#000000",
+          "white": "#FFFFFF",
+          "lightGray": "#F5F5F7"
+        },
+        "gradients": {
+          "heroPattern": {
+            "type": "organic-waves",
+            "colors": ["#FF0080", "#0080FF"],
+            "style": "flowing, abstract, zebra-stripe-like patterns",
+            "usage": "backgrounds, dividers, decorative elements"
+          }
+        }
+      },
+  
+      "typography": {
+        "headingFont": {
+          "family": "Sans-serif, extra-bold weight",
+          "characteristics": "extremely heavy, impactful, uppercase or mixed case",
+          "sizes": {
+            "h1": "60-80px",
+            "h2": "40-60px",
+            "h3": "32-40px"
+          }
+        },
+        "bodyFont": {
+          "family": "Sans-serif, medium-bold weight",
+          "size": "16-18px",
+          "lineHeight": "1.5-1.6"
+        },
+        "emphasis": {
+          "style": "highlight key phrases with solid color backgrounds",
+          "implementation": "underline-style block backgrounds in neon yellow, hot pink, or electric blue"
+        },
+        "hierarchy": {
+          "pattern": "mix of all-caps and sentence case",
+          "weight": "heavy use of 700-900 font weights",
+          "contrast": "high contrast between heading and body weights"
+        }
+      },
+  
+      "layoutStructure": {
+        "grid": {
+          "type": "12-column responsive grid",
+          "breakpoints": {
+            "mobile": "< 768px",
+            "tablet": "768px - 1024px",
+            "desktop": "> 1024px"
+          }
+        },
+        "spacing": {
+          "sections": "80-120px vertical padding",
+          "elements": "24-48px between major elements",
+          "cards": "16-24px internal padding"
+        },
+        "containerMaxWidth": "1400px"
+      },
+  
+      "components": {
+        "buttons": {
+          "primary": {
+            "background": "neonYellow (#D7FF00)",
+            "color": "black",
+            "padding": "16px 32px",
+            "borderRadius": "50px (pill-shaped)",
+            "fontWeight": "800",
+            "fontSize": "14-16px",
+            "textTransform": "uppercase",
+            "hoverEffect": "slight scale or color shift"
+          },
+          "secondary": {
+            "background": "hotPink (#FF0080)",
+            "color": "white",
+            "styling": "same as primary but different color"
+          },
+          "withArrow": {
+            "includeIcon": "right arrow (→) after text",
+            "iconSpacing": "8px"
+          }
+        },
+  
+        "cards": {
+          "gameCards": {
+            "aspectRatio": "3:4 or 1:1",
+            "borderRadius": "16-24px",
+            "overlay": "gradient overlay on hover",
+            "imageStyle": "vibrant, colorful game artwork",
+            "titlePosition": "bottom, white text, bold",
+            "hoverEffect": "scale up slightly (1.05)"
+          },
+          "contentCards": {
+            "background": "white or light gray",
+            "borderRadius": "16-24px",
+            "shadow": "subtle, soft shadow",
+            "imagePosition": "full-width top or left side"
+          }
+        },
+  
+        "navigation": {
+          "header": {
+            "position": "fixed top",
+            "background": "white with subtle transparency or shadow",
+            "height": "80-100px",
+            "logoPosition": "left",
+            "menuAlignment": "center or right",
+            "menuStyle": "horizontal, uppercase, bold",
+            "socialIcons": "right aligned, black or brand colors"
+          }
+        },
+  
+        "badges": {
+          "appStoreBadges": {
+            "style": "standard Google Play and App Store badges",
+            "placement": "grouped together, prominent in hero and footer",
+            "spacing": "12-16px gap between badges"
+          }
+        }
+      },
+  
+      "sections": {
+        "hero": {
+          "layout": "split-screen or centered",
+          "backgroundStyle": "bold gradient pattern with organic waves",
+          "contentPlacement": "left-aligned text, right-aligned character/visual",
+          "ctaPlacement": "below headline, horizontal button group",
+          "characterStyle": "3D rendered game character, large scale",
+          "textHierarchy": [
+            "Large background text (semi-transparent, huge scale)",
+            "Main headline with colored highlight",
+            "Supporting text (medium weight)",
+            "CTA buttons (neon yellow + hot pink)"
+          ]
+        },
+  
+        "aboutSection": {
+          "layout": "two-column: image left, content right",
+          "background": "solid black or dark color",
+          "textColor": "white",
+          "imageStyle": "rounded corners, modern office/workspace photo",
+          "accentColor": "neon yellow for highlights"
+        },
+  
+        "gamesShowcase": {
+          "layout": "grid layout (2x2 or 1x4)",
+          "background": "hot pink",
+          "cardStyle": "rounded, with game artwork",
+          "spacing": "24-32px gap between cards",
+          "bottomPattern": "organic wave pattern as divider"
+        },
+  
+        "benefits": {
+          "layout": "grid of icons with text (3-5 columns)",
+          "iconStyle": "simple line icons in hot pink",
+          "iconSize": "48-64px",
+          "textBelow": "bold headline + description",
+          "background": "white or light gray"
+        },
+  
+        "blog": {
+          "layout": "vertical list with left-aligned images",
+          "cardStructure": [
+            "Featured image (rounded corners)",
+            "Author avatar + name",
+            "Date + read time",
+            "Headline (bold, large)",
+            "Excerpt (2-3 lines)",
+            "Read more link with arrow"
+          ],
+          "spacing": "48-64px between articles"
+        }
+      },
+  
+      "designPatterns": {
+        "colorBlocking": {
+          "description": "Large blocks of solid, vibrant colors for section backgrounds",
+          "examples": ["full-width pink sections", "black sections", "white sections"],
+          "transition": "clean hard edges or organic wave transitions"
+        },
+  
+        "textTreatments": {
+          "backgroundText": {
+            "style": "huge semi-transparent text behind main content",
+            "purpose": "add depth and visual interest",
+            "opacity": "10-15%",
+            "fontSize": "200-400px"
+          },
+          "highlightedText": {
+            "style": "solid color block behind key phrases",
+            "colors": ["neon yellow", "hot pink", "electric blue"],
+            "padding": "2-4px horizontal"
+          }
+        },
+  
+        "organicShapes": {
+          "wavePatterns": {
+            "style": "flowing, irregular wave patterns",
+            "colors": "gradient between hot pink and electric blue",
+            "usage": "section dividers, background patterns",
+            "feel": "energetic, dynamic, fluid"
+          }
+        },
+  
+        "imagery": {
+          "style": "3D rendered, cartoon-like, vibrant colors",
+          "characterDesign": "stylized, approachable, with personality",
+          "colorSaturation": "high saturation, bold colors",
+          "composition": "dynamic poses, engaging expressions"
+        }
+      },
+  
+      "visualHierarchy": {
+        "principles": [
+          "Use color contrast to draw attention",
+          "Scale: very large headings (3-4x body text size)",
+          "White space: generous spacing between sections",
+          "Alignment: strong grid-based alignment",
+          "Repetition: consistent use of rounded corners, pill buttons"
+        ]
+      },
+  
+      "interactionDesign": {
+        "animations": {
+          "buttons": "subtle scale on hover (1.05-1.1)",
+          "cards": "scale and shadow increase on hover",
+          "transitions": "smooth 0.3s ease-in-out",
+          "scrollEffects": "potential parallax or fade-in on scroll"
+        },
+        "microinteractions": {
+          "links": "color change or underline on hover",
+          "arrows": "slide right on hover",
+          "icons": "slight bounce or scale"
+        }
+      },
+  
+      "accessibility": {
+        "colorContrast": "ensure sufficient contrast despite vibrant colors",
+        "focusStates": "clear focus indicators for keyboard navigation",
+        "textSize": "minimum 16px for body text",
+        "buttonSize": "minimum 44x44px touch target"
+      },
+  
+      "brandVoice": {
+        "tone": ["energetic", "youthful", "ambitious", "confident", "friendly"],
+        "language": {
+          "headlines": "bold statements, action-oriented",
+          "body": "clear, direct, enthusiastic",
+          "ctas": "command form, exciting (JOIN, EXPLORE, PLAY)"
+        }
+      },
+  
+      "implementationNotes": {
+        "cssFramework": "likely custom CSS or utility-based (Tailwind-style)",
+        "keyTechniques": [
+          "CSS Grid and Flexbox for layouts",
+          "CSS custom properties for color system",
+          "Transform and transition for animations",
+          "SVG for icons and patterns",
+          "Background gradients with multiple color stops",
+          "Border-radius for rounded elements",
+          "Box-shadow for depth"
+        ],
+        "responsiveStrategy": [
+          "Stack columns on mobile",
+          "Reduce text sizes proportionally",
+          "Adjust spacing for smaller screens",
+          "Maintain visual hierarchy across breakpoints"
+        ]
+      },
+  
+      "contentStrategy": {
+        "headlineFormula": "BOLD STATEMENT with HIGHLIGHTED KEYWORDS",
+        "supportingText": "Clear value proposition in 2-3 sentences",
+        "ctaPattern": "Primary action + Secondary action",
+        "socialProof": "Numbers (100M+ players, 20+ years) prominently displayed"
+      }
+    }
+  }

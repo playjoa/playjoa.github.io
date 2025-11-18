@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "Tornado.io 3 - Battle Arena | Página Oficial del Juego",
+    "description": "¡Entra en la batalla definitiva de tornados! Controla tornados poderosos, destruye todo y domina la arena. Disponible para iOS y Android.",
+    "keywords": "juego de tornado, arena de batalla, juego móvil, juego ios, juego android, juego de destrucción, juego casual",
+    "favicon": "/images/icon.ico",
+    "ogImage": "/tornado3/assets/images/Main.jpg"
+  },
+  "hero": {
+    "title": "Tornado.io 3",
+    "subtitle": "Battle Arena",
+    "tagline": "¡Entra en la batalla definitiva de tornados!",
+    "description": "¡Controla un tornado poderoso, hazte más fuerte y destruye a todos en batallas explosivas en la arena!",
+    "trailerUrl": "https://www.youtube.com/embed/OJDynpSvKDU?si=3WB9bbaObvCCGSFe",
+    "appStoreUrl": "https://apps.apple.com/us/app/id6753775427",
+    "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.CrossBlack.Tornado3",
+    "watchTrailerText": "Ver Tráiler"
+  },
+  "features": {
+    "title": "Características Explosivas",
+    "subtitle": "Todo lo que necesitas para la destrucción total",
+    "items": [
+      {
+        "icon": "🌪️",
+        "title": "Tipos Únicos de Tornados",
+        "description": "Elige entre Viento, Fuego, Hielo y más tipos de tornados, cada uno con habilidades especiales que cambian tu estilo de juego"
+      },
+      {
+        "icon": "🗺️",
+        "title": "Mapas Diversos",
+        "description": "Batalla en entornos vibrantes incluyendo calles, granjas, playas y bosques llenos de objetos destructibles"
+      },
+      {
+        "icon": "⚡",
+        "title": "Sistema de Crecimiento Dinámico",
+        "description": "Absorbe objetos para crecer más grande, más rápido y más fuerte. Cuanto más consumes, más poderoso te vuelves"
+      },
+      {
+        "icon": "🎮",
+        "title": "Múltiples Modos de Juego",
+        "description": "Compite en Destrucción Total, Knockout Solo, Deathmatch y más desafíos emocionantes"
+      },
+      {
+        "icon": "📈",
+        "title": "Sistema de Progresión",
+        "description": "Desbloquea nuevos tornados, domina habilidades poderosas, sube de nivel y escala las clasificaciones de la arena"
+      },
+      {
+        "icon": "🎨",
+        "title": "Visuales Vibrantes",
+        "description": "Disfruta de gráficos brillantes y coloridos con efectos de destrucción satisfactorios y animaciones suaves"
+      },
+      {
+        "icon": "🤖",
+        "title": "Oponentes con IA Inteligente",
+        "description": "Enfrenta a oponentes controlados por IA desafiante usando un sofisticado sistema GOAP para batallas dinámicas"
+      }
+    ]
+  },
+  "gameModes": {
+    "title": "Modos de Juego",
+    "subtitle": "Elige tu camino hacia la victoria",
+    "modes": [
+      {
+        "name": "Destrucción Total",
+        "icon": "💥",
+        "type": "Multijugador Competitivo",
+        "description": "¡Destruye la mayor cantidad de objetos mientras compites contra otros tornados. ¡Sé el que más destruya para ganar!",
+        "highlight": "Más Popular"
+      },
+      {
+        "name": "Destrucción Solo",
+        "icon": "🎯",
+        "type": "Un Jugador",
+        "description": "¡El mapa es tu patio de juegos sin nadie que te moleste. Destruye todo lo que puedas y maximiza tus ganancias!",
+        "highlight": "Relajante"
+      },
+      {
+        "name": "Deathmatch",
+        "icon": "⚔️",
+        "type": "Batalla PvP",
+        "description": "¡Busca y destruye otros tornados en una lucha total por la supervivencia. ¡Elimina a tantos oponentes como sea posible para ganar!",
+        "highlight": "Intenso"
+      }
+    ]
+  },
+  "about": {
+    "title": "Acerca de Tornado.io 3",
+    "description": "¡Tornado.io 3 – Battle Arena te lanza a partidas explosivas y rápidas donde controlas un tornado poderoso con un objetivo: crecer, evolucionar y destruir a todos en la arena! Elige entre una lista de tipos únicos de tornados — Viento, Fuego, Hielo, y muchos más próximamente — cada uno con habilidades especiales que cambian el flujo de la batalla. Destruye calles, granjas, playas, bosques y otros mapas vibrantes llenos de cosas para consumir. ¡Cuanto más absorbes, más grande, más rápido y más fuerte se vuelve tu tornado!",
+    "highlights": [
+      "Compite en intensas batallas de arena contra oponentes desafiantes",
+      "Desbloquea logros y escala las clasificaciones",
+      "Mejora tu tornado y domina nuevas habilidades poderosas",
+      "Descubre múltiples tipos de tornados con estilos de juego únicos",
+      "Disfruta de partidas rápidas perfectas para sesiones de juego cortas"
+    ]
+  },
+  "screenshots": {
+    "title": "Capturas de Pantalla",
+    "subtitle": "Experimenta el caos",
+    "images": [
+      {
+        "src": "/tornado3/assets/images/Main.jpg",
+        "alt": "Juego principal de Tornado.io 3",
+        "title": "Batallas Épicas de Tornados"
+      },
+      {
+        "src": "/tornado3/assets/images/Screenshot_2_Raw.jpg",
+        "alt": "Tornado destruyendo ciudad",
+        "title": "Destrucción Urbana"
+      },
+      {
+        "src": "/tornado3/assets/images/Screenshot_3_Raw.jpg",
+        "alt": "Habilidad de tornado de fuego",
+        "title": "Poderes Elementales"
+      },
+      {
+        "src": "/tornado3/assets/images/Screenshot_4_Raw.jpg",
+        "alt": "Batalla de múltiples tornados",
+        "title": "Competencia Intensa"
+      },
+      {
+        "src": "/tornado3/assets/images/Screenshot_5_Raw.jpg",
+        "alt": "Sistema de crecimiento del tornado",
+        "title": "Hazte Más Fuerte"
+      },
+      {
+        "src": "/tornado3/assets/images/Screenshot_6_Raw.jpg",
+        "alt": "Destrucción en el mapa de playa",
+        "title": "Entornos Diversos"
+      }
+    ]
+  },
+  "social": {
+    "title": "Únete a Nuestra Comunidad",
+    "subtitle": "Síguenos para actualizaciones y noticias",
+    "links": [
+      {
+        "name": "Instagram",
+        "url": "https://www.instagram.com/crossblackstudios/",
+        "icon": "instagram"
+      },
+      {
+        "name": "YouTube",
+        "url": "https://www.youtube.com/@CrossBlackStudios",
+        "icon": "youtube"
+      }
+    ],
+    "contact": {
+      "title": "Contáctanos",
+      "description": "¿Tienes preguntas o comentarios? ¡Nos encantaría saber de ti!",
+      "email": "crossblackstudios@gmail.com",
+      "buttonText": "Enviar Email"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 CrossBlack Studios. Todos los derechos reservados.",
+    "developer": "Desarrollado por João de Carvalho Milone",
+    "links": [
+      {
+        "text": "Política de Privacidad",
+        "url": "/privacy-tornado-io-3.html"
+      },
+      {
+        "text": "Términos de Servicio",
+        "url": "/terms-tornado-io-3.html"
+      },
+      {
+        "text": "Portafolio",
+        "url": "/index.html"
+      }
+    ]
+  },
+  "navigation": {
+    "brandName": "Tornado.io 3",
+    "languageToggle": {
+      "text": "ES",
+      "title": "Cambiar a Español"
+    }
+  },
+  "language": {
+    "current": "es",
+    "available": ["en", "pt", "es"]
+  }
+}
+
