@@ -212,9 +212,9 @@ class Tornado3GamePage {
         if (featuresTrack) {
             const featuresHTML = this.data.features.items.map((feature, index) => `
                 <div class="feature-card ${index === 0 ? 'center' : ''}" data-index="${index}">
-                    <svg class="card-progress" viewBox="0 0 100 100">
-                        <circle class="progress-bg" cx="50" cy="50" r="48"></circle>
-                        <circle class="progress-fill" cx="50" cy="50" r="48"></circle>
+                    <svg class="card-progress" viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path class="progress-bg" d="M50,1 L94,1 Q99,1 99,6 L99,94 Q99,99 94,99 L6,99 Q1,99 1,94 L1,6 Q1,1 6,1 Z"></path>
+                        <path class="progress-fill" d="M50,1 L94,1 Q99,1 99,6 L99,94 Q99,99 94,99 L6,99 Q1,99 1,94 L1,6 Q1,1 6,1 Z"></path>
                     </svg>
                     <div class="feature-icon">${feature.icon}</div>
                     <h3 class="feature-title">${feature.title}</h3>
@@ -1045,7 +1045,7 @@ class Tornado3GamePage {
     }
     
     /**
-     * Start autoplay with circular progress
+     * Start autoplay with border progress
      */
     startAutoPlay() {
         this.pauseAutoPlay(); // Clear any existing intervals
@@ -1053,9 +1053,9 @@ class Tornado3GamePage {
         this.progressStart = Date.now();
         this.pausedProgress = 0;
         
-        const circumference = 301.59; // 2 * PI * 48
+        const perimeter = 390; // Perimeter of rounded rect path
         
-        // Update circular progress
+        // Update border progress
         this.progressInterval = setInterval(() => {
             const elapsed = Date.now() - this.progressStart;
             const progress = elapsed / this.autoPlayDuration;
@@ -1065,7 +1065,7 @@ class Tornado3GamePage {
             if (centerCard) {
                 const progressFill = centerCard.querySelector('.progress-fill');
                 if (progressFill) {
-                    const offset = circumference - (progress * circumference);
+                    const offset = perimeter - (progress * perimeter);
                     progressFill.style.strokeDashoffset = Math.max(0, offset);
                 }
             }
@@ -1099,12 +1099,12 @@ class Tornado3GamePage {
     resumeAutoPlay() {
         if (this.progressInterval) return; // Already running
         
-        const circumference = 301.59;
+        const perimeter = 390;
         
         // Adjust start time to account for paused duration
         this.progressStart = Date.now() - this.pausedProgress;
         
-        // Resume circular progress updates
+        // Resume border progress updates
         this.progressInterval = setInterval(() => {
             const elapsed = Date.now() - this.progressStart;
             const progress = elapsed / this.autoPlayDuration;
@@ -1114,7 +1114,7 @@ class Tornado3GamePage {
             if (centerCard) {
                 const progressFill = centerCard.querySelector('.progress-fill');
                 if (progressFill) {
-                    const offset = circumference - (progress * circumference);
+                    const offset = perimeter - (progress * perimeter);
                     progressFill.style.strokeDashoffset = Math.max(0, offset);
                 }
             }
@@ -1139,17 +1139,17 @@ class Tornado3GamePage {
     }
     
     /**
-     * Reset circular progress
+     * Reset border progress
      */
     resetProgress() {
         this.progressStart = Date.now();
         this.pausedProgress = 0;
         
-        const circumference = 301.59;
+        const perimeter = 390;
         
-        // Reset all progress circles
-        document.querySelectorAll('.progress-fill').forEach(circle => {
-            circle.style.strokeDashoffset = circumference;
+        // Reset all progress borders
+        document.querySelectorAll('.progress-fill').forEach(path => {
+            path.style.strokeDashoffset = perimeter;
         });
     }
 

@@ -746,22 +746,19 @@ section {
 
 .progress-bg {
     fill: none;
-    stroke: rgba(255, 107, 53, 0.1);
-    stroke-width: 1;
-    rx: 24;
+    stroke: rgba(255, 107, 53, 0.2);
+    stroke-width: 2;
 }
 
 .progress-fill {
     fill: none;
     stroke: url(#orangeGradient);
-    stroke-width: 2;
+    stroke-width: 4;
     stroke-linecap: round;
-    stroke-dasharray: 301.59; /* 2 * PI * 48 */
-    stroke-dashoffset: 301.59;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
+    stroke-dasharray: 390; /* Perimeter of rounded rect path */
+    stroke-dashoffset: 390;
     transition: none;
-    filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.5));
+    filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.7));
 }
 
 .feature-card.center {
