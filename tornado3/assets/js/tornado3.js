@@ -187,12 +187,14 @@ class Tornado3GamePage {
         const heroTagline = document.getElementById('hero-tagline');
         const heroDescription = document.getElementById('hero-description');
         const watchTrailerText = document.getElementById('watch-trailer-text');
+        const scrollText = document.getElementById('scroll-text');
         
         if (heroTitle) heroTitle.textContent = this.data.hero.title;
         if (heroSubtitle) heroSubtitle.textContent = this.data.hero.subtitle;
         if (heroTagline) heroTagline.textContent = this.data.hero.tagline;
         if (heroDescription) heroDescription.textContent = this.data.hero.description;
         if (watchTrailerText) watchTrailerText.textContent = this.data.hero.watchTrailerText;
+        if (scrollText) scrollText.textContent = this.data.hero.scrollText;
     }
 
     /**
@@ -210,6 +212,10 @@ class Tornado3GamePage {
         if (featuresTrack) {
             const featuresHTML = this.data.features.items.map((feature, index) => `
                 <div class="feature-card ${index === 0 ? 'center' : ''}" data-index="${index}">
+                    <svg class="card-progress" viewBox="0 0 100 100">
+                        <circle class="progress-bg" cx="50" cy="50" r="48"></circle>
+                        <circle class="progress-fill" cx="50" cy="50" r="48"></circle>
+                    </svg>
                     <div class="feature-icon">${feature.icon}</div>
                     <h3 class="feature-title">${feature.title}</h3>
                     <p class="feature-description">${feature.description}</p>
@@ -944,6 +950,33 @@ class Tornado3GamePage {
                 }
             }
         });
+        
+        // Scroll indicator click and hide on scroll
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            scrollIndicator.addEventListener('click', () => {
+                const featuresSection = document.getElementById('features');
+                if (featuresSection) {
+                    const navHeight = document.querySelector('.nav-header').offsetHeight;
+                    const targetPosition = featuresSection.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+            
+            // Hide scroll indicator when user scrolls down
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 100) {
+                    scrollIndicator.style.opacity = '0';
+                    scrollIndicator.style.pointerEvents = 'none';
+                } else {
+                    scrollIndicator.style.opacity = '1';
+                    scrollIndicator.style.pointerEvents = 'auto';
+                }
+            });
+        }
     }
     
     /**
@@ -1012,7 +1045,7 @@ class Tornado3GamePage {
     }
     
     /**
-     * Start autoplay with progress bar
+     * Start autoplay with circular progress
      */
     startAutoPlay() {
         this.pauseAutoPlay(); // Clear any existing intervals
@@ -1020,18 +1053,25 @@ class Tornado3GamePage {
         this.progressStart = Date.now();
         this.pausedProgress = 0;
         
-        // Update progress bar
+        const circumference = 301.59; // 2 * PI * 48
+        
+        // Update circular progress
         this.progressInterval = setInterval(() => {
             const elapsed = Date.now() - this.progressStart;
-            const progress = (elapsed / this.autoPlayDuration) * 100;
+            const progress = elapsed / this.autoPlayDuration;
             
-            const progressBar = document.getElementById('carousel-progress-bar');
-            if (progressBar) {
-                progressBar.style.width = `${Math.min(progress, 100)}%`;
+            // Get current center card
+            const centerCard = document.querySelector('.feature-card.center');
+            if (centerCard) {
+                const progressFill = centerCard.querySelector('.progress-fill');
+                if (progressFill) {
+                    const offset = circumference - (progress * circumference);
+                    progressFill.style.strokeDashoffset = Math.max(0, offset);
+                }
             }
             
             // Auto advance when reaching 100%
-            if (progress >= 100) {
+            if (progress >= 1) {
                 this.nextFeature();
                 this.resetProgress();
             }
@@ -1051,12 +1091,6 @@ class Tornado3GamePage {
             clearInterval(this.progressInterval);
             this.progressInterval = null;
         }
-        
-        // Visual indicator
-        const progressContainer = document.querySelector('.carousel-progress');
-        if (progressContainer) {
-            progressContainer.classList.add('paused');
-        }
     }
     
     /**
@@ -1065,30 +1099,28 @@ class Tornado3GamePage {
     resumeAutoPlay() {
         if (this.progressInterval) return; // Already running
         
-        // Remove paused indicator
-        const progressContainer = document.querySelector('.carousel-progress');
-        if (progressContainer) {
-            progressContainer.classList.remove('paused');
-        }
-        
-        // Calculate remaining time
-        const remainingTime = this.autoPlayDuration - this.pausedProgress;
+        const circumference = 301.59;
         
         // Adjust start time to account for paused duration
         this.progressStart = Date.now() - this.pausedProgress;
         
-        // Resume progress bar updates
+        // Resume circular progress updates
         this.progressInterval = setInterval(() => {
             const elapsed = Date.now() - this.progressStart;
-            const progress = (elapsed / this.autoPlayDuration) * 100;
+            const progress = elapsed / this.autoPlayDuration;
             
-            const progressBar = document.getElementById('carousel-progress-bar');
-            if (progressBar) {
-                progressBar.style.width = `${Math.min(progress, 100)}%`;
+            // Get current center card
+            const centerCard = document.querySelector('.feature-card.center');
+            if (centerCard) {
+                const progressFill = centerCard.querySelector('.progress-fill');
+                if (progressFill) {
+                    const offset = circumference - (progress * circumference);
+                    progressFill.style.strokeDashoffset = Math.max(0, offset);
+                }
             }
             
             // Auto advance when reaching 100%
-            if (progress >= 100) {
+            if (progress >= 1) {
                 this.nextFeature();
                 this.resetProgress();
                 this.startAutoPlay();
@@ -1107,15 +1139,18 @@ class Tornado3GamePage {
     }
     
     /**
-     * Reset progress bar
+     * Reset circular progress
      */
     resetProgress() {
         this.progressStart = Date.now();
         this.pausedProgress = 0;
-        const progressBar = document.getElementById('carousel-progress-bar');
-        if (progressBar) {
-            progressBar.style.width = '0%';
-        }
+        
+        const circumference = 301.59;
+        
+        // Reset all progress circles
+        document.querySelectorAll('.progress-fill').forEach(circle => {
+            circle.style.strokeDashoffset = circumference;
+        });
     }
 
     /**

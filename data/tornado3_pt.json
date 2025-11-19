@@ -14,7 +14,8 @@
     "trailerUrl": "https://www.youtube.com/embed/OJDynpSvKDU?si=3WB9bbaObvCCGSFe",
     "appStoreUrl": "https://apps.apple.com/us/app/tornado-io-3/id6753775427",
     "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.CrossBlack.Tornado3",
-    "watchTrailerText": "Ver Trailer"
+    "watchTrailerText": "Ver Trailer",
+    "scrollText": "Role para Baixo"
   },
   "features": {
     "title": "Recursos Explosivos",

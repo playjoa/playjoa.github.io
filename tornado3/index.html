@@ -41,6 +41,16 @@
     <link rel="preload" href="assets/images/Main.jpg" as="image">
 </head>
 <body>
+    <!-- SVG Definitions for Gradients -->
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#F7931E;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+    
     <!-- Navigation Header -->
     <header class="nav-header">
         <div class="nav-container">
@@ -128,6 +138,7 @@
         </div>
         <div class="scroll-indicator">
             <span class="scroll-icon">↓</span>
+            <span class="scroll-text" id="scroll-text">Scroll Down</span>
         </div>
     </section>
     
@@ -167,9 +178,6 @@
             </div>
             <div class="carousel-indicators" id="features-indicators">
                 <!-- Indicators will be populated by JavaScript -->
-            </div>
-            <div class="carousel-progress">
-                <div class="carousel-progress-bar" id="carousel-progress-bar"></div>
             </div>
         </div>
     </section>

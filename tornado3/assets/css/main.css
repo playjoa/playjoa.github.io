@@ -604,15 +604,47 @@ button {
 
 .scroll-indicator {
     position: absolute;
-    bottom: var(--spacing-xl);
+    bottom: var(--spacing-2xl);
     left: 50%;
     transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
     animation: bounce 2s infinite;
+    cursor: pointer;
+    z-index: 5;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-indicator:hover .scroll-icon {
+    color: var(--color-primary);
+    transform: scale(1.2);
 }
 
 .scroll-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+    transition: all var(--transition-normal);
+}
+
+.scroll-text {
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     color: var(--text-secondary);
+    margin-top: var(--spacing-xs);
 }
 
 @keyframes bounce {
@@ -620,10 +652,10 @@ button {
         transform: translateX(-50%) translateY(0);
     }
     40% {
-        transform: translateX(-50%) translateY(-10px);
+        transform: translateX(-50%) translateY(-15px);
     }
     60% {
-        transform: translateX(-50%) translateY(-5px);
+        transform: translateX(-50%) translateY(-8px);
     }
 }
 
@@ -695,6 +727,43 @@ section {
     transform: scale(0.9);
 }
 
+/* Circular Progress Around Card */
+.card-progress {
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: calc(100% + 12px);
+    height: calc(100% + 12px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 1;
+}
+
+.feature-card.center .card-progress {
+    opacity: 1;
+}
+
+.progress-bg {
+    fill: none;
+    stroke: rgba(255, 107, 53, 0.1);
+    stroke-width: 1;
+    rx: 24;
+}
+
+.progress-fill {
+    fill: none;
+    stroke: url(#orangeGradient);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 301.59; /* 2 * PI * 48 */
+    stroke-dashoffset: 301.59;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: none;
+    filter: drop-shadow(0 0 6px rgba(255, 107, 53, 0.5));
+}
+
 .feature-card.center {
     opacity: 1;
     transform: scale(1);
@@ -723,6 +792,8 @@ section {
     font-size: 3.5rem;
     margin-bottom: var(--spacing-lg);
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    position: relative;
+    z-index: 2;
 }
 
 .feature-title {
@@ -732,47 +803,19 @@ section {
     color: var(--text-primary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    position: relative;
+    z-index: 2;
 }
 
 .feature-description {
     color: var(--text-muted);
     line-height: 1.7;
     font-size: 1rem;
-}
-
-/* Progress Bar for Carousel */
-.carousel-progress {
     position: relative;
-    width: 100%;
-    max-width: 600px;
-    height: 4px;
-    background: var(--bg-elevated);
-    border-radius: var(--radius-pill);
-    margin: var(--spacing-sm) auto 0 auto;
-    overflow: hidden;
+    z-index: 2;
 }
 
-.carousel-progress-bar {
-    height: 100%;
-    background: var(--gradient-hero);
-    width: 0;
-    transition: none;
-    border-radius: var(--radius-pill);
-}
-
-.carousel-progress.paused .carousel-progress-bar {
-    background: var(--color-primary-light);
-    animation: pulse-bar 1s ease-in-out infinite;
-}
-
-@keyframes pulse-bar {
-    0%, 100% {
-        opacity: 0.8;
-    }
-    50% {
-        opacity: 1;
-    }
-}
+/* Circular Progress SVG removed - integrated into cards */
 
 /* Carousel Navigation */
 .carousel-nav {
@@ -1577,6 +1620,20 @@ section {
     
     .brand-name {
         font-size: 1rem;
+    }
+    
+    .scroll-indicator {
+        bottom: var(--spacing-xl);
+    }
+    
+    .scroll-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 2rem;
+    }
+    
+    .scroll-text {
+        font-size: 0.75rem;
     }
     
     .hero-title-main {
