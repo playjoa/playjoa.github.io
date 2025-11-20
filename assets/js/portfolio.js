@@ -247,9 +247,10 @@ class ModernPortfolioManager {
         const icons = {
             'fa-linkedin': '💼',
             'fa-github': '🐙',
+            'fa-gamepad': '🎮',
             'fa-app-store': '📱',
-            'fa-google-play': '🎮',
-            'fa-itch-io': '🎯',
+            'fa-google-play': '🎯',
+            'fa-itch-io': '🕹️',
             'fa-file-code': '💻',
             'fa-envelope': '✉️'
         };
