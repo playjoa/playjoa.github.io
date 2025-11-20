@@ -196,7 +196,7 @@ All planned features have been successfully implemented for the official Tornado
 - ✅ Google Play: https://play.google.com/store/apps/details?id=com.CrossBlack.Tornado3
 - ✅ YouTube Trailer: https://youtu.be/OJDynpSvKDU
 - ✅ Instagram: https://www.instagram.com/crossblackstudios/
-- ✅ YouTube Channel: https://www.youtube.com/@CrossBlackStudios
+- ✅ YouTube Channel: https://www.youtube.com/@JCMStudiosOfficial
 
 ### Internal Links
 - ✅ Privacy Policy: /privacy-tornado-io-3.html

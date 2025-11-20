@@ -159,7 +159,7 @@ Features:
 
 - **Email**: crossblackstudios@gmail.com
 - **Instagram**: https://www.instagram.com/crossblackstudios/
-- **YouTube**: https://www.youtube.com/@CrossBlackStudios
+- **YouTube**: https://www.youtube.com/@JCMStudiosOfficial
 
 ## 🛠️ Maintenance
 
