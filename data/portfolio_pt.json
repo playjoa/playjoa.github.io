@@ -202,13 +202,20 @@
   ],
   "experience": [
     {
-      "company": "Series Entretainment Inc.",
+      "company": "Series Entertainment Inc.",
       "url": "https://www.series.inc/",
       "title": "Senior Game Engineer",
-      "period": "Jan/2025 - Current",
+      "period": "Jan/2025 - Atual",
       "location": "San Francisco - USA (Remoto)",
-      "description": "Trabalhando em um novo título junto com a Netflix com LLMs e Unity para criar histórias imersivas e interativas em tempo real com personagens envolventes.",
-      "achievements": []
+      "description": "Atuando como Senior Game Engineer em múltiplos títulos Unity (C#), incluindo um jogo de simulação inovador em parceria com a Netflix utilizando LLMs para interações em tempo real com personagens, e o <a href=\"https://www.evergroveidle.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Evergrove Idle: Grow Magic</a>, um jogo idle cozy publicado no <a href=\"https://apps.apple.com/us/app/evergrove-idle-grow-magic/id6754113874\" target=\"_blank\" rel=\"noopener noreferrer\">iOS</a> e <a href=\"https://play.google.com/store/apps/details?id=ai.series.echo\" target=\"_blank\" rel=\"noopener noreferrer\">Android</a>. Foco em arquitetura de sistemas core de gameplay, funcionalidades de monetização e entrega multiplataforma utilizando Unity, Firebase e Unity Gaming Services (UGS).",
+      "achievements": [
+        "Arquitetura e desenvolvimento de sistemas core para um título de simulação em parceria com a Netflix, incluindo sistemas de relacionamento, gerenciador de telas, sistema de modal views, carregamento de mapas e framework de animações de UI, todos integrados com interações de personagens geradas por LLM",
+        "Criação de ferramentas de localização para agilizar o suporte a múltiplos idiomas e acelerar o fluxo de entrega de conteúdo",
+        "Desenvolvimento do sistema de ofertas e promoções personalizadas para o Evergrove Idle: Grow Magic, contribuindo diretamente para a melhoria dos KPIs de monetização através de ofertas personalizadas para jogadores",
+        "Liderança no porting para iOS do Evergrove, configuração da pipeline de build e garantia de um lançamento multiplataforma na App Store",
+        "Implementação do sistema de relacionamento e presentes para personagens, incluindo mecânicas de gacha e presentes craftáveis, criando novos pontos de monetização através de recompensas por anúncios e consumo de moeda premium",
+        "Utilização do Unity Gaming Services (UGS) para configuração remota e balanceamento ao vivo, permitindo ao time ajustar a economia do jogo em tempo real sem necessidade de atualizações no cliente"
+      ]
     },
     {
       "company": "Playgig",

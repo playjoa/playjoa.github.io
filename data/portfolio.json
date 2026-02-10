@@ -202,13 +202,20 @@
   ],
   "experience": [
     {
-      "company": "Series Entretainment Inc.",
+      "company": "Series Entertainment Inc.",
       "url": "https://www.series.inc/",
       "title": "Senior Game Engineer",
       "period": "Jan/2025 - Current",
       "location": "San Francisco - USA (Remote)",
-      "description": "Working in a new title along side Netflix with LLMs and Unity to create immersive and interactive storie in realtime with engaging characters.",
-      "achievements": []
+      "description": "Contributing as a Senior Game Engineer on multiple Unity (C#) titles, including an innovative Netflix-partnered simulation game leveraging LLMs for real-time character interactions, and <a href=\"https://www.evergroveidle.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Evergrove Idle: Grow Magic</a>, a live cozy idle game available on <a href=\"https://apps.apple.com/us/app/evergrove-idle-grow-magic/id6754113874\" target=\"_blank\" rel=\"noopener noreferrer\">iOS</a> and <a href=\"https://play.google.com/store/apps/details?id=ai.series.echo\" target=\"_blank\" rel=\"noopener noreferrer\">Android</a>. Focused on architecting core gameplay systems, monetization features, and cross-platform delivery using Unity, Firebase, and Unity Gaming Services (UGS).",
+      "achievements": [
+        "Architected and developed core systems for a Netflix-partnered simulation title, including relationship systems, a screens manager, modal view system, map loading, and a UI animation framework, all driven by LLM-generated character interactions",
+        "Built localization tooling to streamline multi-language support and accelerate content delivery workflows",
+        "Developed the offers and custom promotions system for Evergrove Idle: Grow Magic, directly contributing to improved monetization KPIs through personalized player offers",
+        "Led the iOS porting effort for Evergrove, setting up the build pipeline and ensuring a smooth cross-platform release on the App Store",
+        "Implemented the character relationship and gifting system, including gacha mechanics and craftable gifts, creating new monetization touchpoints through ad rewards and hard currency sinks",
+        "Leveraged Unity Gaming Services (UGS) for remote configuration and live balancing, enabling the team to tune game economy in real-time without client updates"
+      ]
     },
     {
       "company": "Playgig",

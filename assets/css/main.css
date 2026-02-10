@@ -706,6 +706,20 @@ section {
     margin-bottom: var(--spacing-md);
 }
 
+.experience-description a,
+.experience-achievements a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color 0.2s ease;
+}
+
+.experience-description a:hover,
+.experience-achievements a:hover {
+    color: var(--accent-tertiary);
+    text-decoration: underline;
+}
+
 .experience-achievements {
     list-style: none;
 }
