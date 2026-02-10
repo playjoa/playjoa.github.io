@@ -198,6 +198,19 @@ class ModernPortfolioManager {
         this.renderExperienceSection();
         this.renderSkillsSection();
         this.renderEducationSection();
+        this.updateCVLink();
+    }
+
+    /**
+     * Update the CV link to pass current language
+     */
+    updateCVLink() {
+        const cvLink = document.getElementById('cv-link');
+        if (cvLink) {
+            const langParam = this.currentLanguage === 'pt' ? '?lang=pt' : '';
+            cvLink.href = `cv.html${langParam}`;
+            cvLink.title = this.currentLanguage === 'pt' ? 'Baixar CV' : 'Download CV';
+        }
     }
 
     /**

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - João Milone - Senior Game Engineer</title>
+    <meta name="description" content="CV - Senior Game Engineer | Unity & Unreal Engine Developer">
+    <link rel="icon" href="images/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/cv.css">
+</head>
+<body>
+    <!-- Toolbar (hidden on print) -->
+    <div class="cv-toolbar" id="cv-toolbar">
+        <div class="toolbar-left">
+            <a href="index.html" class="toolbar-back" title="Back to Portfolio">&larr; Portfolio</a>
+        </div>
+        <div class="toolbar-center">
+            <span class="toolbar-label" id="toolbar-label">CV Preview</span>
+        </div>
+        <div class="toolbar-right">
+            <button class="toolbar-btn" id="settings-toggle" title="Font size settings">
+                <span>Aa</span>
+            </button>
+            <button class="toolbar-btn" id="version-toggle" title="Toggle compact/full version">
+                <span id="version-label">Full</span>
+            </button>
+            <button class="toolbar-btn" id="language-toggle" title="Toggle language">
+                <span id="language-label">PT-BR</span>
+            </button>
+            <button class="toolbar-btn toolbar-btn-primary" id="download-btn" title="Download as PDF">
+                Download PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Settings Panel (hidden on print) -->
+    <div class="settings-panel" id="settings-panel">
+        <div class="settings-grid">
+            <div class="setting-item">
+                <label for="size-name">Name</label>
+                <input type="range" id="size-name" min="14" max="28" step="0.5" value="20">
+                <span class="setting-value" id="val-name">20</span>
+            </div>
+            <div class="setting-item">
+                <label for="size-subtitle">Subtitle</label>
+                <input type="range" id="size-subtitle" min="8" max="16" step="0.5" value="11">
+                <span class="setting-value" id="val-subtitle">11</span>
+            </div>
+            <div class="setting-item">
+                <label for="size-contact">Contact</label>
+                <input type="range" id="size-contact" min="7" max="13" step="0.5" value="9.5">
+                <span class="setting-value" id="val-contact">9.5</span>
+            </div>
+            <div class="setting-item">
+                <label for="size-section-title">Section Titles</label>
+                <input type="range" id="size-section-title" min="8" max="16" step="0.5" value="11">
+                <span class="setting-value" id="val-section-title">11</span>
+            </div>
+            <div class="setting-item">
+                <label for="size-role">Job Title</label>
+                <input type="range" id="size-role" min="8" max="14" step="0.5" value="10">
+                <span class="setting-value" id="val-role">10</span>
+            </div>
+            <div class="setting-item">
+                <label for="size-description">Descriptions</label>
+                <input type="range" id="size-description" min="7" max="13" step="0.5" value="9.5">
+                <span class="setting-value" id="val-description">9.5</span>
+            </div>
+            <div class="setting-item">
+                <label for="size-achievements">Achievements</label>
+                <input type="range" id="size-achievements" min="7" max="12" step="0.5" value="9">
+                <span class="setting-value" id="val-achievements">9</span>
+            </div>
+            <div class="setting-item">
+                <label for="size-education">Education</label>
+                <input type="range" id="size-education" min="7" max="13" step="0.5" value="10">
+                <span class="setting-value" id="val-education">10</span>
+            </div>
+            <div class="setting-item setting-item-action">
+                <button class="toolbar-btn" id="settings-reset">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CV Content (A4 page) -->
+    <div class="cv-page" id="cv-page">
+
+        <!-- Header -->
+        <header class="cv-header" id="cv-header">
+            <!-- Populated by JavaScript -->
+        </header>
+
+        <!-- About -->
+        <section class="cv-section" id="cv-about">
+            <!-- Populated by JavaScript -->
+        </section>
+
+        <!-- Work Experience -->
+        <section class="cv-section" id="cv-experience">
+            <!-- Populated by JavaScript -->
+        </section>
+
+        <!-- Skills (full version only) -->
+        <section class="cv-section" id="cv-skills">
+            <!-- Populated by JavaScript -->
+        </section>
+
+        <!-- Education -->
+        <section class="cv-section" id="cv-education">
+            <!-- Populated by JavaScript -->
+        </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/cv.js"></script>
+</body>
+</html>

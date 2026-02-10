@@ -860,6 +860,7 @@ section {
     cursor: pointer;
     display: flex;
     align-items: center;
+    text-decoration: none;
     justify-content: center;
     transition: all 0.2s ease;
 }
