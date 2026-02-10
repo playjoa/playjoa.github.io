@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Thumbnails
+Thumbs.db
+ehthumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Cursor
+.cursor/
+
+# Node (if ever added)
+node_modules/
+npm-debug.log*
+
+# OS generated
+Desktop.ini
