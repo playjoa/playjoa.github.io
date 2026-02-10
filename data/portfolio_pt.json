@@ -223,14 +223,14 @@
       "title": "Senior Game Engineer",
       "period": "Março/2022 - Jan/2025",
       "location": "Los Angeles - USA (Remoto)",
-      "description": "Contribuindo como Senior Game Engineer com implementações de novas funcionalidades e mecânicas para um novo jogo multiplayer (Cross Plataform: Unity & Unreal).",
+      "description": "Atuação como Senior Game Engineer com implementações de novas funcionalidades e mecânicas de jogo para um novo MOBA multiplataforma (Android, iOS, PC & Consoles).",
       "achievements": [
-        "Mecânicas de Gameplay: Elaboração e implementação sistemas de habilidades e efeitos para diversos personagens, permitindo uma variedade de conjuntos de habilidades e estratégias de jogo",
-        "UI: Colaboração com designers e artistas para garantir a integração perfeita dos componentes de UI, melhorando a experiência do jogador",
-        "Sistemas Client/Server: Desenvolvimento e otimização de sistemas de gameplay cliente-servidor para oferecer experiências multiplayer suaves e responsivas em várias plataformas",
-        "Sistemas Meta: Criação de sistemas que impulsionam a progressão dos jogadores, recompensas no jogo e a economia, apoiando o engajamento a longo prazo",
-        "Contratação e Mentoria: Contribuição para o crescimento da equipe de engenharia, conduzindo entrevistas técnicas e orientando novos contratados",
-        "Revisão de Código"
+        "Responsável pela arquitetura e otimização do sistema de habilidades de personagens, reduzindo em 93% o tempo necessário para designers prototiparem novos personagens. Após a implementação obtivemos um sistema totalmente data driven com gameplay em rede usando Unity (C#)",
+        "Desenvolvimento de sistemas de gameplay server-authoritative (C# & Blueprints) para entregar experiências multiplayer fluidas e responsivas entre plataformas, mantendo boas práticas e código limpo",
+        "Debug e otimização de lógica complexa em sistemas existentes para garantir código de alta qualidade e ambiente livre de bugs seguindo design patterns dentro de OOP",
+        "Arquitetura e implementação de sistemas UI/UX front-end junto com designers, com ênfase em performance e uso de memória para um gameplay mais fluido",
+        "Implementação de mecânicas de gameplay baseadas em física para interação de personagens com itens in-game",
+        "Manutenção e melhoria de sistemas de IA como GOAP e Behaviour Trees"
       ]
     },
     {
