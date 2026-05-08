@@ -3,28 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>João Milone - Senior Game Engineer</title>
+    <title>João Milone — Senior Game Engineer</title>
     <meta name="description" content="Senior Game Engineer | Unity & Unreal Engine Developer">
     <link rel="icon" href="images/icon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+    <!-- Icon pack: Font Awesome 5 Free (CC BY 4.0 / SIL OFL 1.1 / MIT) -->
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+
+    <!-- App styles -->
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-    <!-- Status Bar Spacer -->
-    <div class="status-bar-spacer"></div>
-    
     <!-- Navigation Header -->
     <header class="nav-header">
         <div class="nav-container">
-            <h1 class="nav-title" id="nav-title">Joao de Carvalho Milone - Portfolio</h1>
+            <a href="#" class="nav-brand" id="nav-title">João Milone</a>
             <div class="nav-actions">
-                <a href="cv.html" class="icon-button" id="cv-link" title="Download CV">
-                    <span class="icon">📄</span>
+                <a href="cv.html" class="nav-button nav-button-primary" id="cv-link" title="Download CV">
+                    <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                    <span class="nav-button-label" id="cv-link-label">CV</span>
                 </a>
-                <button class="icon-button" id="theme-toggle" title="Toggle theme">
-                    <span class="icon">🌙</span>
+                <button class="nav-button" id="language-toggle" title="Toggle language" aria-label="Toggle language">
+                    <span class="nav-button-label" id="language-label">EN</span>
                 </button>
-                <button class="icon-button" id="language-toggle" title="Toggle language">
-                    <span class="icon">🌐</span>
+                <button class="nav-icon-button" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -38,13 +46,15 @@
             <section class="hero-section">
                 <div class="hero-card">
                     <div class="avatar-container">
-                        <img src="images/avatar.jpg" alt="João Milone" class="avatar-large">
-                        <div class="avatar-status"></div>
+                        <img src="images/avatar.jpg" alt="João Milone" class="avatar">
                     </div>
                     <div class="hero-content">
                         <h1 class="hero-name" id="hero-name">João de Carvalho Milone</h1>
-                        <p class="hero-title" id="hero-title">Senior Game Engineer | Unity & Unreal</p>
-                        <p class="hero-location" id="hero-location">São Paulo - Brazil</p>
+                        <p class="hero-title" id="hero-title">Senior Game Engineer · Unity &amp; Unreal</p>
+                        <p class="hero-location" id="hero-location">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <span>São Paulo, Brazil</span>
+                        </p>
                         <div class="hero-tags">
                             <span class="tag">Unity</span>
                             <span class="tag">Unreal Engine</span>
@@ -57,6 +67,7 @@
 
             <!-- Social Links -->
             <section class="social-section">
+                <h2 class="section-title section-title-sm" id="contact-title">Connect</h2>
                 <div class="social-grid" id="social-links">
                     <!-- Social links will be populated by JavaScript -->
                 </div>
@@ -64,12 +75,10 @@
 
             <!-- About Section -->
             <section class="about-section">
-                <div class="card">
-                    <h2 class="section-title" id="about-title">About Me</h2>
-                    <p class="about-content" id="about-content">
-                        <!-- About content will be populated by JavaScript -->
-                    </p>
-                </div>
+                <h2 class="section-title section-title-sm" id="about-title">About</h2>
+                <p class="about-content" id="about-content">
+                    <!-- About content will be populated by JavaScript -->
+                </p>
             </section>
         </aside>
 
@@ -78,7 +87,8 @@
             <!-- Projects Section -->
             <section class="projects-section">
                 <div class="section-header">
-                    <h2 class="section-title" id="projects-title">Games Portfolio</h2>
+                    <h2 class="section-title" id="projects-title">Selected Work</h2>
+                    <p class="section-subtitle" id="projects-subtitle">Shipped titles &amp; experimental builds</p>
                 </div>
                 <div class="projects-grid" id="projects-grid">
                     <!-- Projects will be populated by JavaScript -->
@@ -114,6 +124,11 @@
                     <!-- Education items will be populated by JavaScript -->
                 </div>
             </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p class="footer-text" id="footer-text">© <span id="footer-year"></span> João de Carvalho Milone. Built with care.</p>
+            </footer>
         </div>
     </main>
 
@@ -121,11 +136,17 @@
     <div class="modal" id="image-modal">
         <div class="modal-overlay" id="modal-overlay"></div>
         <div class="modal-content">
-            <button class="modal-close" id="modal-close">&times;</button>
+            <button class="modal-close" id="modal-close" aria-label="Close">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
             <img id="modal-image" src="" alt="">
             <div class="modal-nav">
-                <button class="modal-nav-btn" id="modal-prev">‹</button>
-                <button class="modal-nav-btn" id="modal-next">›</button>
+                <button class="modal-nav-btn" id="modal-prev" aria-label="Previous image">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button class="modal-nav-btn" id="modal-next" aria-label="Next image">
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -138,4 +159,4 @@
     <!-- JavaScript -->
     <script src="assets/js/portfolio.js"></script>
 </body>
-</html> 
+</html>

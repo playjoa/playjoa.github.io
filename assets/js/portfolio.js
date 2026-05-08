@@ -118,15 +118,15 @@ class ModernPortfolioManager {
      */
     updateThemeToggleIcon() {
         const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            const icon = themeToggle.querySelector('.icon');
-            if (icon) {
-                // Show moon icon in dark mode, sun icon in light mode
-                icon.textContent = this.currentTheme === 'dark' ? '🌙' : '☀️';
-                themeToggle.title = this.currentTheme === 'dark' ? 
-                    'Switch to light mode' : 'Switch to dark mode';
-            }
+        if (!themeToggle) return;
+
+        const icon = themeToggle.querySelector('i');
+        if (icon) {
+            icon.className = this.currentTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
         }
+        themeToggle.title = this.currentTheme === 'dark'
+            ? 'Switch to light mode'
+            : 'Switch to dark mode';
     }
 
     /**
@@ -211,6 +211,42 @@ class ModernPortfolioManager {
             cvLink.href = `cv.html${langParam}`;
             cvLink.title = this.currentLanguage === 'pt' ? 'Baixar CV' : 'Download CV';
         }
+
+        const cvLabel = document.getElementById('cv-link-label');
+        if (cvLabel) {
+            cvLabel.textContent = this.currentLanguage === 'pt' ? 'CV' : 'CV';
+        }
+
+        const languageLabel = document.getElementById('language-label');
+        if (languageLabel) {
+            languageLabel.textContent = this.currentLanguage.toUpperCase();
+        }
+
+        const footerYear = document.getElementById('footer-year');
+        if (footerYear) {
+            footerYear.textContent = String(new Date().getFullYear());
+        }
+
+        const footerText = document.getElementById('footer-text');
+        if (footerText && this.data?.intro?.name) {
+            const year = new Date().getFullYear();
+            const builtCopy = this.currentLanguage === 'pt'
+                ? 'Construído com cuidado.'
+                : 'Built with care.';
+            footerText.textContent = `© ${year} ${this.data.intro.name}. ${builtCopy}`;
+        }
+
+        const projectsSubtitle = document.getElementById('projects-subtitle');
+        if (projectsSubtitle) {
+            projectsSubtitle.textContent = this.currentLanguage === 'pt'
+                ? 'Títulos lançados e projetos experimentais'
+                : 'Shipped titles & experimental builds';
+        }
+
+        const contactTitle = document.getElementById('contact-title');
+        if (contactTitle) {
+            contactTitle.textContent = this.currentLanguage === 'pt' ? 'Contato' : 'Connect';
+        }
     }
 
     /**
@@ -221,53 +257,76 @@ class ModernPortfolioManager {
         const heroTitle = document.getElementById('hero-title');
         const heroLocation = document.getElementById('hero-location');
         const navTitle = document.getElementById('nav-title');
-        
+
         if (heroName) heroName.textContent = this.data.intro.name;
-        if (heroTitle) heroTitle.textContent = this.data.intro.title;
-        if (heroLocation) heroLocation.textContent = this.data.intro.location;
-        
-        // Update navigation title
-        if (navTitle) {
-            const portfolioText = this.currentLanguage === 'pt' ? 'Portfólio' : 'Portfolio';
-            navTitle.textContent = `${this.data.intro.name} - ${portfolioText}`;
+        if (heroTitle) heroTitle.textContent = this.data.intro.title.replace(/\s*\|\s*/g, ' · ');
+
+        if (heroLocation) {
+            const locationLabel = heroLocation.querySelector('span');
+            if (locationLabel) {
+                locationLabel.textContent = this.data.intro.location;
+            } else {
+                heroLocation.textContent = this.data.intro.location;
+            }
         }
-        
-        // Update page title
+
+        if (navTitle) {
+            const shortName = this.data.intro.name.split(' ').slice(0, 1).concat(this.data.intro.name.split(' ').slice(-1)).join(' ');
+            navTitle.textContent = shortName;
+        }
+
         document.title = this.data.meta.title;
     }
 
     /**
-     * Render social links
+     * Render social links as a compact branded icon grid
      */
     renderSocialLinks() {
         const socialContainer = document.getElementById('social-links');
         if (!socialContainer) return;
-        
-        const socialHTML = this.data.social.map(social => `
-            <a href="${social.url}" target="_blank" rel="noopener noreferrer" class="social-link">
-                <div class="social-icon">${this.getSocialIcon(social.icon)}</div>
-                <div class="social-name">${social.name}</div>
-            </a>
-        `).join('');
-        
+
+        const socialHTML = this.data.social.map(social => {
+            const meta = this.getSocialMeta(social);
+            const isMail = social.url.startsWith('mailto:');
+            const rel = isMail ? '' : 'rel="noopener noreferrer"';
+            const target = isMail ? '' : 'target="_blank"';
+            return `
+                <a href="${social.url}" ${target} ${rel}
+                   class="social-chip"
+                   data-brand="${meta.brand}"
+                   title="${social.name}"
+                   aria-label="${social.name}">
+                    <i class="${meta.icon}" aria-hidden="true"></i>
+                </a>
+            `;
+        }).join('');
+
         socialContainer.innerHTML = socialHTML;
     }
 
     /**
-     * Get social media icon
+     * Map a social entry to its Font Awesome class + brand identifier.
+     * The brand key drives hover color via CSS [data-brand] selectors.
      */
-    getSocialIcon(iconName) {
-        const icons = {
-            'fa-linkedin': '💼',
-            'fa-github': '🐙',
-            'fa-gamepad': '🎮',
-            'fa-app-store': '📱',
-            'fa-google-play': '🎯',
-            'fa-itch-io': '🕹️',
-            'fa-file-code': '💻',
-            'fa-envelope': '✉️'
+    getSocialMeta(social = {}) {
+        const map = {
+            'fa-linkedin':    { icon: 'fab fa-linkedin-in',    brand: 'linkedin' },
+            'fa-github':      { icon: 'fab fa-github',         brand: 'github' },
+            'fa-gamepad':     { icon: 'fas fa-gamepad',        brand: 'studio' },
+            'fa-app-store':   { icon: 'fab fa-app-store-ios',  brand: 'appstore' },
+            'fa-google-play': { icon: 'fab fa-google-play',    brand: 'playstore' },
+            'fa-itch-io':     { icon: 'fab fa-itch-io',        brand: 'itch' },
+            'fa-file-code':   { icon: 'far fa-file-code',      brand: 'unity' },
+            'fa-envelope':    { icon: 'fas fa-envelope',       brand: 'email' }
         };
-        return icons[iconName] || '🔗';
+
+        const entry = map[social.icon];
+        if (entry) return entry;
+
+        let icon = 'fas fa-link';
+        if (social.isSolid) icon = `fas ${social.icon}`;
+        else if (social.isRegular) icon = `far ${social.icon}`;
+        return { icon, brand: 'default' };
     }
 
     /**
@@ -276,8 +335,10 @@ class ModernPortfolioManager {
     renderAboutSection() {
         const aboutTitle = document.getElementById('about-title');
         const aboutContent = document.getElementById('about-content');
-        
-        if (aboutTitle) aboutTitle.textContent = this.data.about.title;
+
+        if (aboutTitle) {
+            aboutTitle.textContent = this.currentLanguage === 'pt' ? 'Sobre' : 'About';
+        }
         if (aboutContent) aboutContent.textContent = this.data.about.content;
     }
 
@@ -287,41 +348,51 @@ class ModernPortfolioManager {
     renderProjectsSection() {
         const projectsTitle = document.getElementById('projects-title');
         const projectsGrid = document.getElementById('projects-grid');
-        
+
         if (projectsTitle) {
-            projectsTitle.textContent = this.currentLanguage === 'pt' ? 'Portfólio de Jogos' : 'Games Portfolio';
+            projectsTitle.textContent = this.currentLanguage === 'pt' ? 'Trabalhos Selecionados' : 'Selected Work';
         }
-        
+
         if (!projectsGrid) return;
-        
+
+        const featuredLabel = this.currentLanguage === 'pt' ? 'Destaque' : 'Featured';
+
         const projectsHTML = this.data.projects.map((project, index) => {
             const ext = project.imageExtension || 'jpg';
             const thumbImage = project.imageThumb || project.image;
             const featuredClass = project.featured ? ' featured' : '';
-            
+            const eyebrow = project.featured
+                ? `<div class="project-eyebrow">${featuredLabel}</div>`
+                : '';
+
             return `
-                <div class="project-card${featuredClass}">
-                    <img 
-                        src="images/thumbs/${thumbImage}.${ext}" 
-                        alt="${project.title}"
-                        class="project-image"
-                        data-index="${index}"
-                    >
+                <article class="project-card${featuredClass}">
+                    <div class="project-image-wrap">
+                        <img
+                            src="images/thumbs/${thumbImage}.${ext}"
+                            alt="${project.title}"
+                            class="project-image"
+                            data-index="${index}"
+                            loading="lazy"
+                        >
+                    </div>
                     <div class="project-content">
+                        ${eyebrow}
                         <h3 class="project-title">${project.title}</h3>
                         <p class="project-description">${project.description}</p>
                         <div class="project-links">
                             ${project.links.map(link => `
                                 <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="project-link">
-                                    ${link.text}
+                                    <span>${link.text}</span>
+                                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
                                 </a>
                             `).join('')}
                         </div>
                     </div>
-                </div>
+                </article>
             `;
         }).join('');
-        
+
         projectsGrid.innerHTML = projectsHTML;
     }
 
@@ -341,10 +412,12 @@ class ModernPortfolioManager {
         const experienceHTML = this.data.experience.map(exp => `
             <div class="experience-item">
                 <div class="experience-header">
-                    <div class="experience-company">
-                        ${exp.url ? `<a href="${exp.url}" target="_blank" rel="noopener noreferrer">${exp.company}</a>` : exp.company}
+                    <div class="experience-title-group">
+                        <div class="experience-title">${exp.title}</div>
+                        <div class="experience-company">
+                            ${exp.url ? `<a href="${exp.url}" target="_blank" rel="noopener noreferrer">${exp.company}</a>` : exp.company}
+                        </div>
                     </div>
-                    <div class="experience-title">${exp.title}</div>
                     <div class="experience-meta">
                         <span class="experience-period">${exp.period}</span>
                         ${exp.location ? `<span class="experience-location">${exp.location}</span>` : ''}
@@ -375,36 +448,20 @@ class ModernPortfolioManager {
         
         if (!skillsGrid || !this.data.skills) return;
         
-        const skillsHTML = this.data.skills.map(skill => `
-            <div class="skill-item">
-                <div class="skill-icon">${this.getSkillIcon(skill.name)}</div>
-                <div class="skill-name">${skill.name}</div>
-            </div>
-        `).join('');
-        
-        skillsGrid.innerHTML = skillsHTML;
-    }
+        const skillsHTML = this.data.skills.map(skill => {
+            const levelKey = (skill.level || '').toLowerCase();
+            const levelLabel = skill.level
+                ? `<span class="skill-level" data-level="${levelKey}">${skill.level}</span>`
+                : '';
+            return `
+                <div class="skill-item">
+                    <span class="skill-name">${skill.name}</span>
+                    ${levelLabel}
+                </div>
+            `;
+        }).join('');
 
-    /**
-     * Get skill icon
-     */
-    getSkillIcon(skillName) {
-        const icons = {
-            'Unity': '🎮',
-            'Unreal Engine': '🚀',
-            'C#': '💻',
-            'C++': '⚡',
-            'JavaScript': '🌐',
-            'Python': '🐍',
-            'Git': '📦',
-            'Firebase': '🔥',
-            'Networking': '🌐',
-            'AI': '🤖',
-            'Mobile': '📱',
-            'PC': '🖥️',
-            'Console': '🎮'
-        };
-        return icons[skillName] || '⚙️';
+        skillsGrid.innerHTML = skillsHTML;
     }
 
     /**
@@ -422,13 +479,17 @@ class ModernPortfolioManager {
         
         const educationHTML = this.data.education.map(edu => `
             <div class="education-item">
-                <div class="education-school">
-                    ${edu.url ? `<a href="${edu.url}" target="_blank" rel="noopener noreferrer">${edu.institution}</a>` : edu.institution}
-                </div>
-                <div class="education-degree">${edu.degree}</div>
-                <div class="education-meta">
-                    <span class="education-period">${edu.period}</span>
-                    ${edu.location ? `<span class="education-location">${edu.location}</span>` : ''}
+                <div class="education-header">
+                    <div>
+                        <div class="education-school">
+                            ${edu.url ? `<a href="${edu.url}" target="_blank" rel="noopener noreferrer">${edu.institution}</a>` : edu.institution}
+                        </div>
+                        <div class="education-degree">${edu.degree}</div>
+                    </div>
+                    <div class="education-meta">
+                        <span class="education-period">${edu.period}</span>
+                        ${edu.location ? `<span class="education-location">${edu.location}</span>` : ''}
+                    </div>
                 </div>
             </div>
         `).join('');
@@ -463,12 +524,21 @@ class ModernPortfolioManager {
         
         // Smooth scroll for internal links
         document.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A' && e.target.getAttribute('href')?.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(e.target.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+            const anchor = e.target.closest('a');
+            const href = anchor?.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+
+            e.preventDefault();
+
+            // Bare "#" or "#top" scrolls to the top of the page
+            if (href.length <= 1 || href === '#top') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
             }
         });
     }
