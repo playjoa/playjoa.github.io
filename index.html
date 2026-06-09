@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 
     <!-- Icon pack: Font Awesome 5 Free (CC BY 4.0 / SIL OFL 1.1 / MIT) -->
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
@@ -19,135 +19,160 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-    <!-- Navigation Header -->
-    <header class="nav-header">
-        <div class="nav-container">
+    <!-- Decorative background -->
+    <div class="bg-decor" aria-hidden="true">
+        <div class="bg-grid"></div>
+        <div class="bg-glow bg-glow-a"></div>
+        <div class="bg-glow bg-glow-b"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="site-nav">
+        <div class="nav-inner">
             <a href="#" class="nav-brand" id="nav-title">João Milone</a>
+            <nav class="nav-links" aria-label="Sections">
+                <a href="#work" class="nav-link" data-section="work" id="nav-link-work">Work</a>
+                <a href="#experience" class="nav-link" data-section="experience" id="nav-link-experience">Experience</a>
+                <a href="#skills" class="nav-link" data-section="skills" id="nav-link-skills">Skills</a>
+                <a href="#education" class="nav-link" data-section="education" id="nav-link-education">Education</a>
+            </nav>
             <div class="nav-actions">
-                <a href="cv.html" class="nav-button nav-button-primary" id="cv-link" title="Download CV">
-                    <i class="fas fa-arrow-down" aria-hidden="true"></i>
-                    <span class="nav-button-label" id="cv-link-label">CV</span>
-                </a>
-                <button class="nav-button" id="language-toggle" title="Toggle language" aria-label="Toggle language">
-                    <span class="nav-button-label" id="language-label">EN</span>
+                <button class="nav-pill" id="language-toggle" title="Toggle language" aria-label="Toggle language">
+                    <i class="fas fa-globe" aria-hidden="true"></i>
+                    <span id="language-label">EN</span>
                 </button>
-                <button class="nav-icon-button" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+                <button class="nav-pill nav-pill-icon" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
                     <i class="fas fa-moon" aria-hidden="true"></i>
                 </button>
+                <a href="cv.html" class="nav-cta" id="cv-link" title="Download CV">
+                    <i class="fas fa-download" aria-hidden="true"></i>
+                    <span id="cv-link-label">CV</span>
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="container">
-        <!-- Sidebar (Desktop) -->
-        <aside class="sidebar">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="hero-card">
-                    <div class="avatar-container">
-                        <img src="images/avatar.jpg" alt="João Milone" class="avatar">
-                    </div>
-                    <div class="hero-content">
-                        <h1 class="hero-name" id="hero-name">João de Carvalho Milone</h1>
-                        <p class="hero-title" id="hero-title">Senior Game Engineer · Unity &amp; Unreal</p>
-                        <p class="hero-location" id="hero-location">
-                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                            <span>São Paulo, Brazil</span>
-                        </p>
-                        <div class="hero-tags">
-                            <span class="tag">Unity</span>
-                            <span class="tag">Unreal Engine</span>
-                            <span class="tag">C#</span>
-                            <span class="tag">C++</span>
-                        </div>
+    <main>
+        <!-- Hero -->
+        <section class="hero" id="top">
+            <div class="hero-inner">
+                <div class="hero-avatar-wrap">
+                    <div class="hero-avatar-ring">
+                        <img src="images/avatar.jpg" alt="João Milone" class="hero-avatar">
                     </div>
                 </div>
-            </section>
-
-            <!-- Social Links -->
-            <section class="social-section">
-                <h2 class="section-title section-title-sm" id="contact-title">Connect</h2>
-                <div class="social-grid" id="social-links">
-                    <!-- Social links will be populated by JavaScript -->
+                <div class="hero-text">
+                    <p class="hero-eyebrow" id="hero-eyebrow">Senior Game Engineer</p>
+                    <h1 class="hero-name" id="hero-name">João de Carvalho Milone</h1>
+                    <p class="hero-title" id="hero-title">Senior Game Engineer · Unity &amp; Unreal</p>
+                    <p class="hero-location" id="hero-location">
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                        <span>São Paulo, Brazil</span>
+                    </p>
+                    <div class="hero-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">Unreal Engine</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">C++</span>
+                    </div>
+                    <div class="hero-social" id="social-links">
+                        <!-- Social links populated by JavaScript -->
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- About Section -->
-            <section class="about-section">
-                <h2 class="section-title section-title-sm" id="about-title">About</h2>
+        <!-- About -->
+        <section class="section about-section reveal" id="about">
+            <div class="about-grid">
+                <div class="section-heading">
+                    <span class="section-index">01</span>
+                    <h2 class="section-title" id="about-title">About</h2>
+                </div>
                 <p class="about-content" id="about-content">
-                    <!-- About content will be populated by JavaScript -->
+                    <!-- About content populated by JavaScript -->
                 </p>
-            </section>
-        </aside>
+            </div>
+        </section>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Projects Section -->
-            <section class="projects-section">
-                <div class="section-header">
+        <!-- Projects -->
+        <section class="section reveal" id="work">
+            <div class="section-heading">
+                <span class="section-index">02</span>
+                <div>
                     <h2 class="section-title" id="projects-title">Selected Work</h2>
                     <p class="section-subtitle" id="projects-subtitle">Shipped titles &amp; experimental builds</p>
                 </div>
-                <div class="projects-grid" id="projects-grid">
-                    <!-- Projects will be populated by JavaScript -->
-                </div>
-            </section>
+            </div>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Projects populated by JavaScript -->
+            </div>
+        </section>
 
-            <!-- Experience Section -->
-            <section class="experience-section">
-                <div class="section-header">
-                    <h2 class="section-title" id="experience-title">Experience</h2>
-                </div>
-                <div class="experience-list" id="experience-list">
-                    <!-- Experience items will be populated by JavaScript -->
-                </div>
-            </section>
+        <!-- Experience -->
+        <section class="section reveal" id="experience">
+            <div class="section-heading">
+                <span class="section-index">03</span>
+                <h2 class="section-title" id="experience-title">Experience</h2>
+            </div>
+            <div class="timeline" id="experience-list">
+                <!-- Experience items populated by JavaScript -->
+            </div>
+        </section>
 
-            <!-- Skills Section -->
-            <section class="skills-section">
-                <div class="section-header">
-                    <h2 class="section-title" id="skills-title">Skills</h2>
-                </div>
-                <div class="skills-grid" id="skills-grid">
-                    <!-- Skills will be populated by JavaScript -->
-                </div>
-            </section>
+        <!-- Skills -->
+        <section class="section reveal" id="skills">
+            <div class="section-heading">
+                <span class="section-index">04</span>
+                <h2 class="section-title" id="skills-title">Skills</h2>
+            </div>
+            <div class="skills-grid" id="skills-grid">
+                <!-- Skills populated by JavaScript -->
+            </div>
+        </section>
 
-            <!-- Education Section -->
-            <section class="education-section">
-                <div class="section-header">
-                    <h2 class="section-title" id="education-title">Education</h2>
-                </div>
-                <div class="education-list" id="education-list">
-                    <!-- Education items will be populated by JavaScript -->
-                </div>
-            </section>
+        <!-- Education -->
+        <section class="section reveal" id="education">
+            <div class="section-heading">
+                <span class="section-index">05</span>
+                <h2 class="section-title" id="education-title">Education</h2>
+            </div>
+            <div class="education-list" id="education-list">
+                <!-- Education items populated by JavaScript -->
+            </div>
+        </section>
 
-            <!-- Footer -->
-            <footer class="footer">
-                <p class="footer-text" id="footer-text">© <span id="footer-year"></span> João de Carvalho Milone. Built with care.</p>
-            </footer>
-        </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text" id="footer-text">© <span id="footer-year"></span> João de Carvalho Milone. Built with care.</p>
+            <a href="#" class="footer-top" id="back-to-top">
+                <i class="fas fa-arrow-up" aria-hidden="true"></i>
+                <span id="back-to-top-label">Top</span>
+            </a>
+        </footer>
     </main>
 
-    <!-- Image Modal -->
-    <div class="modal" id="image-modal">
+    <!-- Image Slideshow Modal -->
+    <div class="modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Project gallery">
         <div class="modal-overlay" id="modal-overlay"></div>
-        <div class="modal-content">
-            <button class="modal-close" id="modal-close" aria-label="Close">
-                <i class="fas fa-times" aria-hidden="true"></i>
-            </button>
-            <img id="modal-image" src="" alt="">
-            <div class="modal-nav">
-                <button class="modal-nav-btn" id="modal-prev" aria-label="Previous image">
-                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
-                </button>
-                <button class="modal-nav-btn" id="modal-next" aria-label="Next image">
-                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
-                </button>
+        <button class="modal-close" id="modal-close" aria-label="Close">
+            <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+        <div class="carousel" id="carousel">
+            <div class="carousel-track" id="carousel-track">
+                <!-- Slides populated by JavaScript -->
             </div>
+        </div>
+        <button class="modal-nav-btn modal-nav-prev" id="modal-prev" aria-label="Previous image">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button class="modal-nav-btn modal-nav-next" id="modal-next" aria-label="Next image">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+        <div class="carousel-footer">
+            <div class="modal-caption" id="modal-caption"></div>
+            <div class="carousel-dots" id="carousel-dots"></div>
+            <div class="carousel-counter" id="modal-counter"></div>
         </div>
     </div>
 

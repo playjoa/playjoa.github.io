@@ -11,6 +11,7 @@ class ModernPortfolioManager {
         this.supportedLanguages = ['en', 'pt'];
         this.projectImages = [];
         this.currentImageIndex = 0;
+        this.carouselLanguage = null; // Language the carousel slides were built for
         this.currentTheme = 'dark'; // Default to dark mode
         this.scrollPosition = 0; // Store scroll position when modal opens
         
@@ -185,6 +186,53 @@ class ModernPortfolioManager {
         
         // Initialize image modal
         this.initializeImageModal();
+
+        // Initialize scroll-driven UI (reveal animations + nav scrollspy)
+        this.initializeScrollEffects();
+    }
+
+    /**
+     * Initialize scroll reveal animations and nav scrollspy.
+     * Falls back to fully-visible content when IntersectionObserver is unavailable.
+     */
+    initializeScrollEffects() {
+        const revealElements = document.querySelectorAll('.reveal');
+
+        if (!('IntersectionObserver' in window)) {
+            revealElements.forEach(el => el.classList.add('in-view'));
+            return;
+        }
+
+        // Reveal sections as they enter the viewport
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -60px 0px', threshold: 0.05 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Scrollspy: highlight the nav link of the section in view
+        const navLinks = document.querySelectorAll('.nav-link[data-section]');
+        const sections = Array.from(navLinks)
+            .map(link => document.getElementById(link.dataset.section))
+            .filter(Boolean);
+
+        if (sections.length === 0) return;
+
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.dataset.section === entry.target.id);
+                });
+            });
+        }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+        sections.forEach(section => spyObserver.observe(section));
     }
 
     /**
@@ -243,9 +291,19 @@ class ModernPortfolioManager {
                 : 'Shipped titles & experimental builds';
         }
 
-        const contactTitle = document.getElementById('contact-title');
-        if (contactTitle) {
-            contactTitle.textContent = this.currentLanguage === 'pt' ? 'Contato' : 'Connect';
+        // Localize nav section links
+        const navLabels = this.currentLanguage === 'pt'
+            ? { work: 'Trabalhos', experience: 'Experiência', skills: 'Habilidades', education: 'Educação' }
+            : { work: 'Work', experience: 'Experience', skills: 'Skills', education: 'Education' };
+
+        Object.entries(navLabels).forEach(([section, label]) => {
+            const link = document.getElementById(`nav-link-${section}`);
+            if (link) link.textContent = label;
+        });
+
+        const backToTopLabel = document.getElementById('back-to-top-label');
+        if (backToTopLabel) {
+            backToTopLabel.textContent = this.currentLanguage === 'pt' ? 'Topo' : 'Top';
         }
     }
 
@@ -254,12 +312,20 @@ class ModernPortfolioManager {
      */
     renderHeroSection() {
         const heroName = document.getElementById('hero-name');
+        const heroEyebrow = document.getElementById('hero-eyebrow');
         const heroTitle = document.getElementById('hero-title');
         const heroLocation = document.getElementById('hero-location');
         const navTitle = document.getElementById('nav-title');
 
         if (heroName) heroName.textContent = this.data.intro.name;
-        if (heroTitle) heroTitle.textContent = this.data.intro.title.replace(/\s*\|\s*/g, ' · ');
+
+        // "Senior Game Engineer | Unity & Unreal" -> eyebrow, with the tagline as supporting copy
+        const titleParts = this.data.intro.title.split('|').map(part => part.trim());
+        if (heroEyebrow) heroEyebrow.textContent = titleParts[0];
+        if (heroTitle) {
+            heroTitle.textContent = this.data.header?.tagline
+                || this.data.intro.title.replace(/\s*\|\s*/g, ' · ');
+        }
 
         if (heroLocation) {
             const locationLabel = heroLocation.querySelector('span');
@@ -367,14 +433,16 @@ class ModernPortfolioManager {
 
             return `
                 <article class="project-card${featuredClass}">
-                    <div class="project-image-wrap">
+                    <div class="project-image-wrap" data-index="${index}" role="button" tabindex="0" aria-label="${project.title} — expand image">
                         <img
                             src="images/thumbs/${thumbImage}.${ext}"
                             alt="${project.title}"
                             class="project-image"
-                            data-index="${index}"
                             loading="lazy"
                         >
+                        <div class="project-image-overlay">
+                            <i class="fas fa-expand" aria-hidden="true"></i>
+                        </div>
                     </div>
                     <div class="project-content">
                         ${eyebrow}
@@ -410,22 +478,18 @@ class ModernPortfolioManager {
         if (!experienceList || !this.data.experience) return;
         
         const experienceHTML = this.data.experience.map(exp => `
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div class="experience-title-group">
-                        <div class="experience-title">${exp.title}</div>
-                        <div class="experience-company">
-                            ${exp.url ? `<a href="${exp.url}" target="_blank" rel="noopener noreferrer">${exp.company}</a>` : exp.company}
-                        </div>
-                    </div>
-                    <div class="experience-meta">
-                        <span class="experience-period">${exp.period}</span>
-                        ${exp.location ? `<span class="experience-location">${exp.location}</span>` : ''}
-                    </div>
+            <div class="timeline-item">
+                <div class="timeline-top">
+                    <h3 class="timeline-role">${exp.title}</h3>
+                    <span class="timeline-period">${exp.period}</span>
                 </div>
-                <div class="experience-description">${exp.description}</div>
+                <div class="timeline-company">
+                    ${exp.url ? `<a href="${exp.url}" target="_blank" rel="noopener noreferrer">${exp.company}</a>` : `<span>${exp.company}</span>`}
+                    ${exp.location ? `<span class="timeline-location">${exp.location}</span>` : ''}
+                </div>
+                <p class="timeline-desc">${exp.description}</p>
                 ${exp.achievements && exp.achievements.length > 0 ? `
-                    <ul class="experience-achievements">
+                    <ul class="timeline-achievements">
                         ${exp.achievements.map(achievement => `<li>${achievement}</li>`).join('')}
                     </ul>
                 ` : ''}
@@ -449,19 +513,39 @@ class ModernPortfolioManager {
         if (!skillsGrid || !this.data.skills) return;
         
         const skillsHTML = this.data.skills.map(skill => {
-            const levelKey = (skill.level || '').toLowerCase();
-            const levelLabel = skill.level
-                ? `<span class="skill-level" data-level="${levelKey}">${skill.level}</span>`
+            const levelKey = this.normalizeSkillLevel(skill.level);
+            const filledDots = levelKey === 'advanced' ? 3 : levelKey === 'intermediate' ? 2 : 1;
+            const dots = [1, 2, 3]
+                .map(dot => `<span class="skill-dot${dot <= filledDots ? ' on' : ''}"></span>`)
+                .join('');
+            const levelMeta = skill.level
+                ? `
+                    <span class="skill-meta">
+                        <span class="skill-dots" aria-hidden="true">${dots}</span>
+                        <span class="skill-level">${skill.level}</span>
+                    </span>
+                `
                 : '';
             return `
-                <div class="skill-item">
+                <div class="skill-card" data-level="${levelKey}">
                     <span class="skill-name">${skill.name}</span>
-                    ${levelLabel}
+                    ${levelMeta}
                 </div>
             `;
         }).join('');
 
         skillsGrid.innerHTML = skillsHTML;
+    }
+
+    /**
+     * Normalize a localized skill level label ("Advanced"/"Avançado", etc.)
+     * into a language-agnostic key used for styling.
+     */
+    normalizeSkillLevel(level = '') {
+        const normalized = level.toLowerCase();
+        if (normalized.startsWith('adv') || normalized.startsWith('avan')) return 'advanced';
+        if (normalized.startsWith('inter')) return 'intermediate';
+        return normalized ? 'basic' : 'none';
     }
 
     /**
@@ -478,19 +562,13 @@ class ModernPortfolioManager {
         if (!educationList || !this.data.education) return;
         
         const educationHTML = this.data.education.map(edu => `
-            <div class="education-item">
-                <div class="education-header">
-                    <div>
-                        <div class="education-school">
-                            ${edu.url ? `<a href="${edu.url}" target="_blank" rel="noopener noreferrer">${edu.institution}</a>` : edu.institution}
-                        </div>
-                        <div class="education-degree">${edu.degree}</div>
-                    </div>
-                    <div class="education-meta">
-                        <span class="education-period">${edu.period}</span>
-                        ${edu.location ? `<span class="education-location">${edu.location}</span>` : ''}
-                    </div>
+            <div class="education-card">
+                <span class="education-period">${edu.period}</span>
+                <div class="education-school">
+                    ${edu.url ? `<a href="${edu.url}" target="_blank" rel="noopener noreferrer">${edu.institution}</a>` : edu.institution}
                 </div>
+                <div class="education-degree">${edu.degree}</div>
+                ${edu.location ? `<span class="education-location">${edu.location}</span>` : ''}
             </div>
         `).join('');
         
@@ -513,12 +591,21 @@ class ModernPortfolioManager {
             languageToggle.addEventListener('click', () => this.toggleLanguage());
         }
         
-        // Project image clicks
+        // Project image clicks (entire image area is clickable)
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('project-image')) {
-                const index = parseInt(e.target.dataset.index);
+            const imageWrap = e.target.closest('.project-image-wrap');
+            if (imageWrap) {
+                const index = parseInt(imageWrap.dataset.index);
                 console.log(`🖼️ Opening image modal for project ${index}:`, this.projectImages[index]);
                 this.openImageModal(index);
+            }
+        });
+
+        // Keyboard activation for project images (role="button")
+        document.addEventListener('keydown', (e) => {
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.classList?.contains('project-image-wrap')) {
+                e.preventDefault();
+                this.openImageModal(parseInt(e.target.dataset.index));
             }
         });
         
@@ -544,7 +631,8 @@ class ModernPortfolioManager {
     }
 
     /**
-     * Initialize image modal
+     * Initialize the slideshow modal: buttons, keyboard navigation
+     * and pointer-based drag/swipe on the carousel track.
      */
     initializeImageModal() {
         const modal = document.getElementById('image-modal');
@@ -585,43 +673,215 @@ class ModernPortfolioManager {
                 }
             }
         });
+
+        this.initializeCarouselDrag();
     }
 
     /**
-     * Open image modal
+     * Wire up pointer events so the slideshow can be dragged/swiped
+     * with mouse, touch or pen. Snaps to the nearest slide on release,
+     * with velocity-based flicking and rubber-band resistance at the edges.
+     */
+    initializeCarouselDrag() {
+        const track = document.getElementById('carousel-track');
+        if (!track) return;
+
+        const drag = {
+            active: false,
+            pointerId: null,
+            startX: 0,
+            deltaX: 0,
+            startTime: 0
+        };
+
+        track.addEventListener('pointerdown', (e) => {
+            if (e.button !== 0 && e.pointerType === 'mouse') return;
+
+            drag.active = true;
+            drag.pointerId = e.pointerId;
+            drag.startX = e.clientX;
+            drag.deltaX = 0;
+            drag.startTime = performance.now();
+
+            track.classList.add('dragging');
+            try {
+                track.setPointerCapture(e.pointerId);
+            } catch {
+                // Pointer may already be released (e.g. synthetic events) — drag still works
+            }
+        });
+
+        track.addEventListener('pointermove', (e) => {
+            if (!drag.active || e.pointerId !== drag.pointerId) return;
+
+            drag.deltaX = e.clientX - drag.startX;
+
+            // Rubber-band resistance when dragging past the first/last slide
+            const atStart = this.currentImageIndex === 0 && drag.deltaX > 0;
+            const atEnd = this.currentImageIndex === this.projectImages.length - 1 && drag.deltaX < 0;
+            const effectiveDelta = (atStart || atEnd) ? drag.deltaX / 3 : drag.deltaX;
+
+            this.setTrackPosition(this.currentImageIndex, effectiveDelta, false);
+        });
+
+        const endDrag = (e) => {
+            if (!drag.active || e.pointerId !== drag.pointerId) return;
+
+            drag.active = false;
+            track.classList.remove('dragging');
+
+            const elapsed = Math.max(performance.now() - drag.startTime, 1);
+            const velocity = drag.deltaX / elapsed; // px per ms
+            const viewportWidth = track.parentElement?.clientWidth || window.innerWidth;
+
+            // A tap (no meaningful movement) on the empty area closes the modal
+            if (Math.abs(drag.deltaX) < 6) {
+                if (e.target.classList?.contains('carousel-slide')) {
+                    this.closeImageModal();
+                } else {
+                    this.goToSlide(this.currentImageIndex);
+                }
+                return;
+            }
+
+            // Navigate when dragged past 18% of the viewport or flicked quickly
+            const passedThreshold = Math.abs(drag.deltaX) > viewportWidth * 0.18;
+            const flicked = Math.abs(velocity) > 0.45 && Math.abs(drag.deltaX) > 24;
+
+            if ((passedThreshold || flicked) && drag.deltaX < 0) {
+                this.goToSlide(this.currentImageIndex + 1);
+            } else if ((passedThreshold || flicked) && drag.deltaX > 0) {
+                this.goToSlide(this.currentImageIndex - 1);
+            } else {
+                this.goToSlide(this.currentImageIndex); // snap back
+            }
+        };
+
+        track.addEventListener('pointerup', endDrag);
+        track.addEventListener('pointercancel', endDrag);
+    }
+
+    /**
+     * Build the carousel slides and dots for the current language data.
+     * Images are lazy-loaded per slide when they come into range.
+     */
+    buildCarousel() {
+        const track = document.getElementById('carousel-track');
+        const dots = document.getElementById('carousel-dots');
+        if (!track) return;
+
+        track.innerHTML = this.projectImages.map((image, index) => `
+            <figure class="carousel-slide" data-index="${index}">
+                <div class="slide-spinner" aria-hidden="true"></div>
+                <img data-src="${image.full}" alt="${image.title}" draggable="false">
+            </figure>
+        `).join('');
+
+        if (dots) {
+            dots.innerHTML = this.projectImages.map((image, index) => `
+                <button class="carousel-dot" data-index="${index}" aria-label="${image.title}"></button>
+            `).join('');
+
+            dots.querySelectorAll('.carousel-dot').forEach(dot => {
+                dot.addEventListener('click', () => this.goToSlide(parseInt(dot.dataset.index)));
+            });
+        }
+
+        this.carouselLanguage = this.currentLanguage;
+    }
+
+    /**
+     * Position the carousel track on a given slide, optionally with
+     * an extra drag offset and with/without animation.
+     */
+    setTrackPosition(index, dragOffset = 0, animate = true) {
+        const track = document.getElementById('carousel-track');
+        if (!track) return;
+
+        track.style.transition = animate
+            ? 'transform 0.4s cubic-bezier(0.22, 0.8, 0.3, 1)'
+            : 'none';
+        track.style.transform = `translateX(calc(${-index * 100}% + ${dragOffset}px))`;
+    }
+
+    /**
+     * Navigate the slideshow to a slide index (clamped to valid range)
+     */
+    goToSlide(index, instant = false) {
+        const clamped = Math.max(0, Math.min(index, this.projectImages.length - 1));
+        this.currentImageIndex = clamped;
+
+        this.setTrackPosition(clamped, 0, !instant);
+        this.loadSlidesAround(clamped);
+        this.updateCarouselUI();
+    }
+
+    /**
+     * Lazy-load the image of the current slide and its neighbors
+     */
+    loadSlidesAround(index) {
+        const track = document.getElementById('carousel-track');
+        if (!track) return;
+
+        [index - 1, index, index + 1].forEach(i => {
+            const slide = track.querySelector(`.carousel-slide[data-index="${i}"]`);
+            const img = slide?.querySelector('img[data-src]');
+            if (!img) return;
+
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            img.addEventListener('load', () => {
+                img.classList.add('loaded');
+                slide.classList.add('slide-loaded');
+            }, { once: true });
+            img.addEventListener('error', () => {
+                console.error(`❌ Failed to load image: ${img.src}`);
+                slide.classList.add('slide-loaded');
+            }, { once: true });
+        });
+    }
+
+    /**
+     * Sync caption, counter, dots and arrow states with the current slide
+     */
+    updateCarouselUI() {
+        const image = this.projectImages[this.currentImageIndex];
+
+        const caption = document.getElementById('modal-caption');
+        if (caption) caption.textContent = image?.title || '';
+
+        const counter = document.getElementById('modal-counter');
+        if (counter) counter.textContent = `${this.currentImageIndex + 1} / ${this.projectImages.length}`;
+
+        const dots = document.querySelectorAll('.carousel-dot');
+        dots.forEach(dot => {
+            dot.classList.toggle('active', parseInt(dot.dataset.index) === this.currentImageIndex);
+        });
+
+        const modalPrev = document.getElementById('modal-prev');
+        const modalNext = document.getElementById('modal-next');
+        if (modalPrev) modalPrev.disabled = this.currentImageIndex === 0;
+        if (modalNext) modalNext.disabled = this.currentImageIndex === this.projectImages.length - 1;
+    }
+
+    /**
+     * Open the slideshow modal at a given project index
      */
     openImageModal(index) {
         const modal = document.getElementById('image-modal');
-        const modalImage = document.getElementById('modal-image');
-        
-        if (!modal || !modalImage) {
+        if (!modal) {
             console.error('❌ Modal elements not found');
             return;
         }
-        
-        this.currentImageIndex = index;
-        const image = this.projectImages[index];
-        
-        console.log(`📸 Loading full image: ${image.full}`);
-        
-        // Show loading state
-        modalImage.style.opacity = '0';
-        
-        // Load image
-        const img = new Image();
-        img.onload = () => {
-            console.log('✅ Image loaded successfully');
-            modalImage.src = img.src;
-            modalImage.alt = image.title;
-            modalImage.style.opacity = '1';
-        };
-        img.onerror = () => {
-            console.error(`❌ Failed to load image: ${image.full}`);
-        };
-        img.src = image.full;
-        
+
+        // (Re)build slides on first open or after a language switch
+        if (this.carouselLanguage !== this.currentLanguage) {
+            this.buildCarousel();
+        }
+
         modal.classList.add('active');
-        
+        this.goToSlide(index, true);
+
         // Save current scroll position
         this.scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
         
@@ -655,37 +915,14 @@ class ModernPortfolioManager {
      * Navigate to previous image
      */
     previousImage() {
-        this.currentImageIndex = (this.currentImageIndex - 1 + this.projectImages.length) % this.projectImages.length;
-        this.updateModalImage();
+        this.goToSlide(this.currentImageIndex - 1);
     }
 
     /**
      * Navigate to next image
      */
     nextImage() {
-        this.currentImageIndex = (this.currentImageIndex + 1) % this.projectImages.length;
-        this.updateModalImage();
-    }
-
-    /**
-     * Update modal image
-     */
-    updateModalImage() {
-        const modalImage = document.getElementById('modal-image');
-        if (modalImage) {
-            const image = this.projectImages[this.currentImageIndex];
-            
-            // Smooth loading transition
-            modalImage.style.opacity = '0.5';
-            
-            const img = new Image();
-            img.onload = () => {
-                modalImage.src = img.src;
-                modalImage.alt = image.title;
-                modalImage.style.opacity = '1';
-            };
-            img.src = image.full;
-        }
+        this.goToSlide(this.currentImageIndex + 1);
     }
 
     /**
@@ -764,39 +1001,6 @@ window.addEventListener('online', () => {
 window.addEventListener('offline', () => {
     console.log('📴 Gone offline');
     // Could show offline notification
-});
-
-// Add touch gesture support for mobile
-let touchStartX = 0;
-let touchStartY = 0;
-
-document.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-});
-
-document.addEventListener('touchend', (e) => {
-    const modal = document.getElementById('image-modal');
-    if (!modal?.classList.contains('active')) return;
-    
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchEndY = e.changedTouches[0].clientY;
-    
-    const deltaX = touchEndX - touchStartX;
-    const deltaY = touchEndY - touchStartY;
-    
-    // Horizontal swipe detection
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-        if (deltaX > 0) {
-            // Swipe right - previous image
-            const portfolioManager = window.portfolioManager;
-            if (portfolioManager) portfolioManager.previousImage();
-        } else {
-            // Swipe left - next image
-            const portfolioManager = window.portfolioManager;
-            if (portfolioManager) portfolioManager.nextImage();
-        }
-    }
 });
 
 // Performance monitoring
