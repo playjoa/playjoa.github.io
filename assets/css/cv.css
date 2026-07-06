@@ -374,7 +374,18 @@ body {
     color: var(--cv-text-secondary);
 }
 
-.cv-skill-category {
+.cv-skills-line {
+    font-size: var(--fs-description, 9.5px);
+    line-height: 1.45;
+    color: var(--cv-text-secondary);
+    margin-bottom: 2px;
+}
+
+.cv-skills-line:last-child {
+    margin-bottom: 0;
+}
+
+.cv-skills-category {
     font-weight: 600;
     color: var(--cv-text);
 }

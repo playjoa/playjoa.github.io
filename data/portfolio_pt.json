@@ -207,14 +207,15 @@
       "title": "Senior Game Engineer",
       "period": "Jan/2025 - Atual",
       "location": "San Francisco - USA (Remoto)",
-      "description": "Atuando como Senior Game Engineer em múltiplos títulos Unity (C#), incluindo um jogo de simulação inovador em parceria com a Netflix utilizando LLMs para interações em tempo real com personagens, e o <a href=\"https://www.evergroveidle.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Evergrove Idle: Grow Magic</a>, um jogo idle cozy publicado no <a href=\"https://apps.apple.com/us/app/evergrove-idle-grow-magic/id6754113874\" target=\"_blank\" rel=\"noopener noreferrer\">iOS</a> e <a href=\"https://play.google.com/store/apps/details?id=ai.series.echo\" target=\"_blank\" rel=\"noopener noreferrer\">Android</a>. Foco em arquitetura de sistemas core de gameplay, funcionalidades de monetização e entrega multiplataforma utilizando Unity, Firebase e Unity Gaming Services (UGS).",
+      "description": "Atuando como Senior Game Engineer em múltiplos títulos Unity (C#), incluindo um jogo de simulação inovador em parceria com a Netflix utilizando LLMs para interações em tempo real com personagens, e o <a href=\"https://www.evergroveidle.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Evergrove Idle: Grow Magic</a>, um jogo idle cozy publicado no <a href=\"https://apps.apple.com/us/app/evergrove-idle-grow-magic/id6754113874\" target=\"_blank\" rel=\"noopener noreferrer\">iOS</a> e <a href=\"https://play.google.com/store/apps/details?id=ai.series.echo\" target=\"_blank\" rel=\"noopener noreferrer\">Android</a>. Foco em arquitetura de sistemas core de gameplay, funcionalidades de monetização e entrega multiplataforma utilizando Unity, Firebase e Unity Gaming Services (UGS). Também desenvolvi e lancei o <a href=\"https://w.run/playjoa/picmon-defenders\" target=\"_blank\" rel=\"noopener noreferrer\">PicMon Defenders</a>, um jogo de defesa por ondas em Phaser 4.1 + React (TypeScript) na plataforma RUN.game, cuidando de toda a stack, da arquitetura e sistemas de gameplay ao pipeline de deploy e à geração de heróis por IA.",
       "achievements": [
-        "Arquitetura e desenvolvimento de sistemas core para um título de simulação em parceria com a Netflix, incluindo sistemas de relacionamento, gerenciador de telas, sistema de modal views, carregamento de mapas e framework de animações de UI, todos integrados com interações de personagens geradas por LLM",
-        "Criação de ferramentas de localização para agilizar o suporte a múltiplos idiomas e acelerar o fluxo de entrega de conteúdo",
-        "Desenvolvimento do sistema de ofertas e promoções personalizadas para o Evergrove Idle: Grow Magic, contribuindo diretamente para a melhoria dos KPIs de monetização através de ofertas personalizadas para jogadores",
-        "Liderança no porting para iOS do Evergrove, configuração da pipeline de build e garantia de um lançamento multiplataforma na App Store",
-        "Implementação do sistema de relacionamento e presentes para personagens, incluindo mecânicas de gacha e presentes craftáveis, criando novos pontos de monetização através de recompensas por anúncios e consumo de moeda premium",
-        "Utilização do Unity Gaming Services (UGS) para configuração remota e balanceamento ao vivo, permitindo ao time ajustar a economia do jogo em tempo real sem necessidade de atualizações no cliente"
+        "Arquitetura de sistemas core para um título de simulação em parceria com a Netflix, incluindo sistemas de relacionamento, gerenciamento de telas e modais, carregamento de mapas e framework de animações de UI, todos integrados com interações de personagens geradas por LLM",
+        "Criação de ferramentas de localização para agilizar o suporte a múltiplos idiomas e acelerar a entrega de conteúdo",
+        "Desenvolvimento de funcionalidades de monetização para o Evergrove Idle: Grow Magic, incluindo o sistema de ofertas e promoções personalizadas e o sistema de presentes com mecânicas de gacha, contribuindo diretamente para a melhoria dos KPIs de monetização",
+        "Liderança no porting para iOS do Evergrove e uso do Unity Gaming Services para configuração remota e balanceamento ao vivo, permitindo ajustar a economia do jogo sem atualizações no cliente",
+        "Desenvolvimento e lançamento do PicMon Defenders em cerca de 7 semanas, do repositório vazio a mais de 50 releases de produção na RUN.game, com uma arquitetura de managers e services que degrada graciosamente quando um subsistema falha",
+        "Integração do RUN SDK atrás de uma camada de serviço à prova de exceções, com cloud save confiável, e automação do fluxo de release com builds por ambiente e deploy em um comando através do RUN CLI (rundot)",
+        "Criação de um gerador de heróis por IA em tempo de execução usando as APIs de geração de imagem e LLM da plataforma, apoiado por um pipeline de conteúdo data-driven com quase 1.800 definições em JSON e uma ferramenta de design em React"
       ]
     },
     {
@@ -272,32 +273,110 @@
   ],
   "skills": [
     {
-      "name": "Programação (C#/Java/SQL)",
-      "level": "Avançado"
+      "category": "Engines & Linguagens",
+      "icon": "fas fa-code",
+      "items": [
+        "Unity (2D, 3D e AR)",
+        "Unreal Engine 5",
+        "C#",
+        "C++",
+        "Blueprints",
+        "TypeScript",
+        "Git & Perforce"
+      ]
     },
     {
-      "name": "Desenvolvimento de Games (Unity & Unreal)",
-      "level": "Avançado"
+      "category": "Arquitetura & Padrões",
+      "icon": "fas fa-sitemap",
+      "items": [
+        "Arquitetura modular de managers",
+        "Pipeline de boot assíncrono em fases",
+        "Event bus com ScriptableObjects",
+        "Máquinas de estado baseadas em classes",
+        "Abstração em camada de serviços",
+        "Design data-driven com ScriptableObjects",
+        "Padrões Factory & Builder",
+        "Framework de object pooling"
+      ]
     },
     {
-      "name": "Publicação Apps & Games (iOS e Android)",
-      "level": "Avançado"
+      "category": "IA de Jogos",
+      "icon": "fas fa-brain",
+      "items": [
+        "IA de bots com GOAP",
+        "Planner próprio com backward-chaining",
+        "Behavior Trees",
+        "Percepção baseada em sensores",
+        "Pontuação dinâmica de objetivos",
+        "Personalidades de bots data-driven",
+        "Dificuldade adaptativa",
+        "Steering e pathfinding com NavMesh"
+      ]
     },
     {
-      "name": "Plataformas de Versionamento (Git & Perforce)",
-      "level": "Avançado"
+      "category": "Backend & Serviços",
+      "icon": "fas fa-cloud",
+      "items": [
+        "Integração com Firebase Auth",
+        "Cloud save com Firestore",
+        "Arquitetura de save offline-first",
+        "Pipeline de Firebase Analytics",
+        "Relatório de crashes com Crashlytics",
+        "Monetização com AdMob",
+        "Loja com Unity IAP",
+        "Play Games / Game Center"
+      ]
     },
     {
-      "name": "Metodologia Ágil",
-      "level": "Avançado"
+      "category": "Sistemas de Gameplay",
+      "icon": "fas fa-gamepad",
+      "items": [
+        "Arquitetura de entidades por componentes",
+        "Sistema de habilidades data-driven",
+        "Economia meta multi-moeda",
+        "Framework configurável de modos de jogo",
+        "Missões e conteúdo sazonal",
+        "Sistema de ambiente destrutível",
+        "Ferramentas de editor para designers"
+      ]
     },
     {
-      "name": "Mixagem de Som",
-      "level": "Intermediário"
+      "category": "Sistemas de UI/UX",
+      "icon": "fas fa-window-restore",
+      "items": [
+        "Gerenciamento de telas em pilha",
+        "Sistema de fila de modais",
+        "Framework de animação com DOTween",
+        "Pipeline próprio de localização",
+        "Temas de UI com style sheets",
+        "Layout responsivo com safe area",
+        "Feedback de HUD com pooling"
+      ]
     },
     {
-      "name": "Edição de Vídeo",
-      "level": "Intermediário"
+      "category": "Performance & Mobile",
+      "icon": "fas fa-tachometer-alt",
+      "items": [
+        "Object pooling extensivo",
+        "Consultas de física sem alocação",
+        "Sistema de qualidade URP em níveis",
+        "Gerenciamento de frame rate",
+        "Higiene de memória em cenas",
+        "Agendamento determinístico de updates"
+      ]
+    },
+    {
+      "category": "Engenharia de Release",
+      "icon": "fas fa-rocket",
+      "items": [
+        "Pipeline de build Unity próprio",
+        "Pós-processamento automatizado de iOS",
+        "Configuração de release Android",
+        "Separação de ambientes dev/prod",
+        "Conformidade com ATT no iOS",
+        "Fluxo nativo de avaliação na loja",
+        "Eventos live-ops por hora de servidor"
+      ]
     }
   ],
   "education": [

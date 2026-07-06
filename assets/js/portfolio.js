@@ -511,41 +511,33 @@ class ModernPortfolioManager {
         }
         
         if (!skillsGrid || !this.data.skills) return;
-        
-        const skillsHTML = this.data.skills.map(skill => {
-            const levelKey = this.normalizeSkillLevel(skill.level);
-            const filledDots = levelKey === 'advanced' ? 3 : levelKey === 'intermediate' ? 2 : 1;
-            const dots = [1, 2, 3]
-                .map(dot => `<span class="skill-dot${dot <= filledDots ? ' on' : ''}"></span>`)
+
+        const skillsHTML = this.data.skills.map(group => {
+            // Guard against stale flat-format data ({name, level}) so the page never breaks
+            if (!group.items) {
+                return `<div class="skill-category-card"><span class="skill-chip">${group.name || ''}</span></div>`;
+            }
+
+            const chips = group.items
+                .map(item => `<span class="skill-chip">${item}</span>`)
                 .join('');
-            const levelMeta = skill.level
-                ? `
-                    <span class="skill-meta">
-                        <span class="skill-dots" aria-hidden="true">${dots}</span>
-                        <span class="skill-level">${skill.level}</span>
-                    </span>
-                `
+
+            const icon = group.icon
+                ? `<span class="skill-category-icon"><i class="${group.icon}" aria-hidden="true"></i></span>`
                 : '';
+
             return `
-                <div class="skill-card" data-level="${levelKey}">
-                    <span class="skill-name">${skill.name}</span>
-                    ${levelMeta}
+                <div class="skill-category-card">
+                    <div class="skill-category-header">
+                        ${icon}
+                        <h3 class="skill-category-title">${group.category}</h3>
+                    </div>
+                    <div class="skill-chips">${chips}</div>
                 </div>
             `;
         }).join('');
 
         skillsGrid.innerHTML = skillsHTML;
-    }
-
-    /**
-     * Normalize a localized skill level label ("Advanced"/"Avançado", etc.)
-     * into a language-agnostic key used for styling.
-     */
-    normalizeSkillLevel(level = '') {
-        const normalized = level.toLowerCase();
-        if (normalized.startsWith('adv') || normalized.startsWith('avan')) return 'advanced';
-        if (normalized.startsWith('inter')) return 'intermediate';
-        return normalized ? 'basic' : 'none';
     }
 
     /**

@@ -207,14 +207,15 @@
       "title": "Senior Game Engineer",
       "period": "Jan/2025 - Current",
       "location": "San Francisco - USA (Remote)",
-      "description": "Contributing as a Senior Game Engineer on multiple Unity (C#) titles, including an innovative Netflix-partnered simulation game leveraging LLMs for real-time character interactions, and <a href=\"https://www.evergroveidle.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Evergrove Idle: Grow Magic</a>, a live cozy idle game available on <a href=\"https://apps.apple.com/us/app/evergrove-idle-grow-magic/id6754113874\" target=\"_blank\" rel=\"noopener noreferrer\">iOS</a> and <a href=\"https://play.google.com/store/apps/details?id=ai.series.echo\" target=\"_blank\" rel=\"noopener noreferrer\">Android</a>. Focused on architecting core gameplay systems, monetization features, and cross-platform delivery using Unity, Firebase, and Unity Gaming Services (UGS).",
+      "description": "Contributing as a Senior Game Engineer on multiple Unity (C#) titles, including an innovative Netflix-partnered simulation game leveraging LLMs for real-time character interactions, and <a href=\"https://www.evergroveidle.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Evergrove Idle: Grow Magic</a>, a live cozy idle game available on <a href=\"https://apps.apple.com/us/app/evergrove-idle-grow-magic/id6754113874\" target=\"_blank\" rel=\"noopener noreferrer\">iOS</a> and <a href=\"https://play.google.com/store/apps/details?id=ai.series.echo\" target=\"_blank\" rel=\"noopener noreferrer\">Android</a>. Focused on architecting core gameplay systems, monetization features, and cross-platform delivery using Unity, Firebase, and Unity Gaming Services (UGS). Also built and shipped <a href=\"https://w.run/playjoa/picmon-defenders\" target=\"_blank\" rel=\"noopener noreferrer\">PicMon Defenders</a>, a Phaser 4.1 + React (TypeScript) wave-defense game on the RUN.game platform, covering everything from architecture and gameplay systems to the deploy pipeline and runtime AI hero generation.",
       "achievements": [
-        "Architected and developed core systems for a Netflix-partnered simulation title, including relationship systems, a screens manager, modal view system, map loading, and a UI animation framework, all driven by LLM-generated character interactions",
-        "Built localization tooling to streamline multi-language support and accelerate content delivery workflows",
-        "Developed the offers and custom promotions system for Evergrove Idle: Grow Magic, directly contributing to improved monetization KPIs through personalized player offers",
-        "Led the iOS porting effort for Evergrove, setting up the build pipeline and ensuring a smooth cross-platform release on the App Store",
-        "Implemented the character relationship and gifting system, including gacha mechanics and craftable gifts, creating new monetization touchpoints through ad rewards and hard currency sinks",
-        "Leveraged Unity Gaming Services (UGS) for remote configuration and live balancing, enabling the team to tune game economy in real-time without client updates"
+        "Architected core systems for a Netflix-partnered simulation title, including relationship systems, screen and modal management, map loading, and a UI animation framework, all driven by LLM-generated character interactions",
+        "Built localization tooling to streamline multi-language support and speed up content delivery",
+        "Developed monetization features for Evergrove Idle: Grow Magic, including the offers and custom promotions system and the character gifting system with gacha mechanics, directly improving monetization KPIs",
+        "Led the iOS port of Evergrove and used Unity Gaming Services for remote configuration and live balancing, letting the team tune the game economy without client updates",
+        "Built and shipped PicMon Defenders in about 7 weeks, going from an empty repo to over 50 production releases live on RUN.game, with a manager/service architecture that degrades gracefully when a subsystem fails",
+        "Integrated the RUN SDK behind an exception-safe service layer with reliable cloud saves, and automated the release flow with environment-matched builds and one-command deploys through the RUN CLI (rundot)",
+        "Created a runtime AI hero generator using the platform's image generation and LLM APIs, backed by a data-driven content pipeline of nearly 1,800 JSON definitions and a custom React design tool"
       ]
     },
     {
@@ -280,32 +281,110 @@
   ],
   "skills": [
     {
-      "name": "Programming (C#/Java/SQL)",
-      "level": "Advanced"
+      "category": "Engines & Languages",
+      "icon": "fas fa-code",
+      "items": [
+        "Unity (2D, 3D & AR)",
+        "Unreal Engine 5",
+        "C#",
+        "C++",
+        "Blueprints",
+        "TypeScript",
+        "Git & Perforce"
+      ]
     },
     {
-      "name": "Game Development (Unity & Unreal)",
-      "level": "Advanced"
+      "category": "Architecture & Patterns",
+      "icon": "fas fa-sitemap",
+      "items": [
+        "Modular manager architecture",
+        "Phased async boot pipeline",
+        "ScriptableObject event bus",
+        "Class-based state machines",
+        "Service-layer abstraction",
+        "Data-driven ScriptableObject design",
+        "Factory & builder patterns",
+        "Object pooling framework"
+      ]
     },
     {
-      "name": "Publishing Apps & Games (iOS and Android)",
-      "level": "Advanced"
+      "category": "Game AI",
+      "icon": "fas fa-brain",
+      "items": [
+        "GOAP-driven bot AI",
+        "Custom backward-chaining planner",
+        "Behavior Trees",
+        "Sensor-based perception",
+        "Dynamic goal utility scoring",
+        "Data-driven bot personalities",
+        "Adaptive difficulty scaling",
+        "NavMesh steering & pathfinding"
+      ]
     },
     {
-      "name": "Version Control (Git & Perforce)",
-      "level": "Advanced"
+      "category": "Backend & Services",
+      "icon": "fas fa-cloud",
+      "items": [
+        "Firebase Auth integration",
+        "Firestore cloud save",
+        "Offline-first save architecture",
+        "Firebase Analytics pipeline",
+        "Crashlytics crash reporting",
+        "AdMob ads monetization",
+        "Unity IAP store",
+        "Play Games / Game Center"
+      ]
     },
     {
-      "name": "Agile Methodology",
-      "level": "Advanced"
+      "category": "Gameplay Systems",
+      "icon": "fas fa-gamepad",
+      "items": [
+        "Component-based entity architecture",
+        "Data-driven ability system",
+        "Multi-currency meta economy",
+        "Configurable game mode framework",
+        "Missions & seasonal content",
+        "Destructible environment system",
+        "Custom designer editor tools"
+      ]
     },
     {
-      "name": "Sound Mixing",
-      "level": "Intermediate"
+      "category": "UI/UX Systems",
+      "icon": "fas fa-window-restore",
+      "items": [
+        "Stack-based screen management",
+        "Modal queue system",
+        "DOTween animation framework",
+        "Custom localization pipeline",
+        "UI theming style sheets",
+        "Safe-area responsive layout",
+        "Pooled HUD feedback"
+      ]
     },
     {
-      "name": "Video Editing",
-      "level": "Intermediate"
+      "category": "Performance & Mobile",
+      "icon": "fas fa-tachometer-alt",
+      "items": [
+        "Extensive object pooling",
+        "Zero-alloc physics queries",
+        "Tiered URP quality system",
+        "Frame-rate management",
+        "Scene-load memory hygiene",
+        "Deterministic update scheduling"
+      ]
+    },
+    {
+      "category": "Release Engineering",
+      "icon": "fas fa-rocket",
+      "items": [
+        "Custom Unity build pipeline",
+        "Automated iOS post-processing",
+        "Android release configuration",
+        "Dev/prod environment separation",
+        "iOS ATT compliance",
+        "Native store review flow",
+        "Server-time live-ops events"
+      ]
     }
   ],
   "education": [

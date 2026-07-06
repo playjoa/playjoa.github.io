@@ -224,11 +224,22 @@ class CVManager {
 
         section.style.display = '';
         const skillsTitle = this.currentLanguage === 'pt' ? 'Habilidades' : 'Skills';
-        const skillNames = this.data.skills.map(s => s.name).join(' | ');
+
+        // One line per category keeps the CV dense, keyword-rich and ATS-friendly.
+        // Falls back to a flat pipe-joined list if data still uses the old {name} format.
+        const groups = this.data.skills.filter(s => s.items && s.items.length > 0);
+
+        const skillsHTML = groups.length > 0
+            ? groups.map(group => `
+                <p class="cv-skills-line">
+                    <strong class="cv-skills-category">${group.category}:</strong> ${group.items.join(', ')}
+                </p>
+              `).join('')
+            : `<p class="cv-skills-list">${this.data.skills.map(s => s.name).join(' | ')}</p>`;
 
         section.innerHTML = `
             <h2 class="cv-section-title">${skillsTitle}</h2>
-            <p class="cv-skills-list">${skillNames}</p>
+            ${skillsHTML}
         `;
     }
 
