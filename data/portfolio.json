@@ -90,6 +90,25 @@
       ]
     },
     {
+      "title": "Word Hunt",
+      "description": "A cozy word search with fresh grids daily. Slip into Story, unwind in Zen, catch seasonal events, and hunt in five languages — with friendly perks and power-ups when a board gets sticky.",
+      "image": "02",
+      "links": [
+        {
+          "text": "Official Website",
+          "url": "https://jcmstudios.com.br/games/word-hunt/"
+        },
+        {
+          "text": "AppStore",
+          "url": "https://apps.apple.com/us/app/id6808779193"
+        },
+        {
+          "text": "PlayStore",
+          "url": "https://play.google.com/store/apps/details?id=com.JCMStudios.WordHunt"
+        }
+      ]
+    },
+    {
       "title": "Mystic Kingdoms - 5v5 MOBA",
       "description": "5v5 crossplatform (Mobile, Console and PC) MOBA, 10-minute matches and strategic action. Team up, summon defenders, build power and take control of the Mystic Kingdoms!",
       "image": "01",
@@ -158,25 +177,6 @@
         {
           "text": "iOS",
           "url": "https://apps.apple.com/app/id1452749256"
-        }
-      ]
-    },
-    {
-      "title": "Motor Mayhem! - Vehicle Warfare",
-      "description": "Arena style arcade game where your mission is to survive the different types of enemies. As the days go by, enemies get stronger and stronger.",
-      "image": "02",
-      "links": [
-        {
-          "text": "Trailer",
-          "url": "https://youtu.be/U3Yrm-fj4Gc"
-        },
-        {
-          "text": "Android",
-          "url": "https://play.google.com/store/apps/details?id=com.CrossBlack.MotorMayhem"
-        },
-        {
-          "text": "iOS",
-          "url": "https://apps.apple.com/app/id1538345518"
         }
       ]
     },
